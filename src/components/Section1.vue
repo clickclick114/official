@@ -243,6 +243,7 @@ position: fixed;
   text-align: left;
   color: white;
   line-height: 1.2;
+  width: 100%;
   height: 100%; /* 保持高度自適應 */
 }
 
@@ -259,7 +260,7 @@ position: fixed;
   background-size: contain; /* 圖片完整顯示在按鈕範圍內 */
   background-repeat: no-repeat; /* 防止圖片重複 */  
   background-position: center; /* 圖片置中 */
-
+  padding-bottom: 10px;
   height: 300px; /* 按鈕高度 */
   border-radius: 5%; /* 圓角按鈕 */
   display: flex; /* 使用 Flex 排列內容 */
