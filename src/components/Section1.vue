@@ -2,7 +2,7 @@
   <v-app>
 <!--toolbar-->
     <div class="t">
-    <v-app-bar color="#001ded" class="custom-toolbar" density="prominent" app fixed>
+      <v-app-bar color="#001ded" class="custom-toolbar"     :density="computedDensity" :style="dynamicStyles"  app fixed>
       <div class="custom-title">
         DEPARTMENT<br>
         OF<br>
@@ -12,10 +12,11 @@
       </div>
 
       <div class="image-container">
-        <v-img src="@/assets/click_title.png" max-height="80%" />
+        <v-img src="@/assets/click_title.png" max-height="80%" min-height="20%" min-width="20%"/>
       </div>
 
       <template v-slot:append>
+        <!-- 各組介紹選單 -->
         <v-menu transition="scroll-y-transition" open-on-hover>
           <template v-slot:activator="{ props }">
             <v-col cols="auto">
@@ -29,6 +30,7 @@
           </v-list>
         </v-menu>
 
+        <!-- 角色履歷選單 -->
         <v-menu transition="scroll-y-transition" open-on-hover>
           <template v-slot:activator="{ props }">
             <v-col cols="auto">
@@ -42,6 +44,7 @@
           </v-list>
         </v-menu>
 
+        <!-- 關於我們選單 -->
         <v-menu transition="scroll-y-reverse-transition" open-on-hover>
           <template v-slot:activator="{ props }">
             <v-col cols="auto">
@@ -119,6 +122,7 @@
   
   </v-main>
 
+  <!-- 頁腳 -->
   <v-footer class="page-footer">
   <div class="footer-content">
     <p class="footer-text">CLICK</p>
@@ -130,6 +134,28 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { computed } from 'vue';
+import { useDisplay } from 'vuetify';
+
+
+// 解構 mdAndDown，偵測螢幕尺寸
+const { mdAndDown } = useDisplay();
+
+
+// 為每個屬性創建 computed 變數
+const computedDensity = computed<'default' | 'prominent' | 'comfortable' | 'compact'>(() => {
+  // 你可以根據需要設置不同的值，這裡我假設 mdAndDown 顯示較小的 density
+  return mdAndDown.value ? 'default' : 'prominent';
+});
+const computedFontSize = computed<string>(() => (mdAndDown.value ? '12px' : '18px'));
+const computedLineHeight = computed<string>(() => (mdAndDown.value ? '1.1' : '1.2'));
+
+
+// 組合動態樣式
+const dynamicStyles = computed(() => ({
+  fontSize: computedFontSize.value,
+  lineHeight: computedLineHeight.value,
+}));
 
 // 群組項目
 const groupItems = [
@@ -238,7 +264,7 @@ position: fixed;
 }
 
 .custom-title {
-  font-size: 18px;
+  font-size: normal;
   font-weight: normal;
   text-align: left;
   color: white;
@@ -250,9 +276,11 @@ position: fixed;
 .image-container {
   display: flex;
   justify-content: center; /* 水平置中 */
-  align-items: center; /* 可選，讓內容垂直居中 */
   width: 100%; /* 確保容器寬度 */
   height: 100%;
+  min-height: 100%;
+  min-width: 50%;
+  max-width: 50%;
 }
 
 .custom-button {
@@ -332,6 +360,7 @@ position: fixed;
   display: flex;
   justify-content: flex-end; /* 讓內容靠右 */
   align-items: center;
+  position: fixed;
 }
 
 .footer-text {
