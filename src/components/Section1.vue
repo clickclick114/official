@@ -15,8 +15,9 @@
         <v-img src="@/assets/click_title.png" height="80%"/>
       </div>
 
-      <template v-slot:append width="100%">
-        <v-row :gap="computedGap" class="button-row" no-wrap>
+      <template v-slot:append style="background: yellow; width: 100%;">
+        <div :style="dynamicWidth" style="height: 100%; background: red;">
+      <v-row :gap="computedGap" class="button-row" no-wrap>
         <!-- 各組介紹選單 -->
         <v-menu transition="scroll-y-transition" open-on-hover>
           <template v-slot:activator="{ props }">
@@ -59,6 +60,7 @@
           </v-list>
         </v-menu>
       </v-row>
+        </div>
       </template>
     </v-app-bar>
     </div>
@@ -116,6 +118,27 @@
         </v-carousel-item>
       </v-carousel>
     </v-container>
+
+    <template>
+  <div>
+    <!-- 以橫向顯示圖片的輪播 -->
+    <v-carousel>
+      <v-carousel-item v-for="(image, index) in images" :key="index">
+        <img :src="image" :alt="'image-' + index" />
+      </v-carousel-item>
+    </v-carousel>
+
+    <!-- 垂直排列的圖片 -->
+    <div class="vertical-gallery">
+      <v-card v-for="(image, index) in images" :key="index" class="my-3">
+        <img :src="image" :alt="'vertical-image-' + index" />
+      </v-card>
+    </div>
+  </div>
+</template>
+
+
+
 </v-sheet>
 </v-container>
   </v-main>
@@ -140,18 +163,19 @@ import { useDisplay } from 'vuetify';
 const { mdAndDown } = useDisplay();
 
 
-// 為每個屬性創建 computed 變數
+// appbar高度
 const computedDensity = computed<'default' | 'prominent' | 'comfortable' | 'compact'>(() => {
-  // 你可以根據需要設置不同的值，這裡我假設 mdAndDown 顯示較小的 density
   return mdAndDown.value ? 'default' : 'prominent';
 });
 
+// appbar按鈕區div寬度
+const dynamicWidth = computed(() => ({width: mdAndDown.value ? '25%' : '100%',}));
+
 // 根據螢幕尺寸動態設置 v-btn size
 const computedSize = computed<'x-small' | 'small' | 'default' | 'large' | 'x-large'>(() => {
-  // 當螢幕為 mdAndDown 時設置較小的 size，否則設置預設或較大的 size
   return mdAndDown.value ? 'small' : 'x-large';
 });
-const computedGap = computed(() => (mdAndDown.value ? "8px" : "24px")); // 手機按鈕間距 8px，桌面 24px
+const computedGap = computed(() => (mdAndDown.value ? "1px" : "24px")); // 手機按鈕間距 8px，桌面 24px
 
 const computedFontSize = computed<string>(() => (mdAndDown.value ? '8px' : '18px'));
 const computedLineHeight = computed<string>(() => (mdAndDown.value ? '1.6' : '1.4'));
@@ -305,6 +329,25 @@ const pages = ref([
     description: "台灣的街道展現著獨特的混亂與雜亂，從路、街、巷到弄，處處可見。在這款遊戲中，玩家將化身為機車騎士，穿梭在繁忙城市的巷弄間。面對道路上的各種障礙，讓玩家當自以為的正義使者。遊戲中的道路環境不僅模擬了台灣的交通情況與各種危險路況，更讓玩家在體驗本土交通文化時，學習如何成為一位懂得防衛的騎士。"
   },
 ]);
+
+
+
+//組別介紹
+const images = ref([
+  new URL('@/assets/img/2.jpg', import.meta.url).href,
+  new URL('@/assets/img/3.png', import.meta.url).href,
+  new URL('@/assets/img/4.JPG', import.meta.url).href,
+  new URL('@/assets/img/5.png', import.meta.url).href,
+  new URL('@/assets/img/14.PNG', import.meta.url).href,
+  new URL('@/assets/img/11.jpg', import.meta.url).href,
+  new URL('@/assets/img/7.png', import.meta.url).href,
+  new URL('@/assets/img/8.png', import.meta.url).href,
+  new URL('@/assets/img/10.png', import.meta.url).href,
+  new URL('@/assets/img/9.png', import.meta.url).href,
+  new URL('@/assets/img/12.jpg', import.meta.url).href,
+  new URL('@/assets/img/13.png', import.meta.url).href,
+  new URL('@/assets/img/6.png', import.meta.url).href,
+]);
 </script>
 
 <style scoped>
@@ -340,8 +383,12 @@ position: fixed;
 }
 
 .button-row {
-  justify-content: space-between; /* 按鈕均分橫向空間 */
-  align-items: center;           /* 按鈕垂直置中 */
+  display: flex;
+  justify-content: space-between; /* 水平排列 */
+  align-items: center; /* 垂直置中 */
+  flex-wrap: nowrap; /* 禁止換行 */
+  min-width: 33%;
+  max-width: 33%;
 }
 
 .custom-button {
@@ -392,6 +439,29 @@ position: fixed;
   height: 100%;
 }
 
+/* 響應式調整箭頭圖標大小 */
+.v-carousel .v-carousel-control__prev,
+.v-carousel .v-carousel-control__next {
+  font-size: 24px; /* 預設大小 */
+}
+
+@media (max-width: 960px) {
+  .v-carousel .v-carousel-control__prev,
+  .v-carousel .v-carousel-control__next {
+    font-size: 2px; /* 小螢幕時圖標大小 */
+  }
+}
+
+
+
+.vertical-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
 
 .page-footer {
   background-color: #001ded;
@@ -407,21 +477,7 @@ position: fixed;
 
 .footer-text {
   color: #ffffff; /* 設定文字顏色為#001ded */
-  font-size: 20px; /* 可以根據需要調整字體大小 */
+  font-size: 16px; /* 可以根據需要調整字體大小 */
   margin: 0;
-}
-
-
-/* 響應式調整箭頭圖標大小 */
-.v-carousel .v-carousel-control__prev,
-.v-carousel .v-carousel-control__next {
-  font-size: 24px; /* 預設大小 */
-}
-
-@media (max-width: 960px) {
-  .v-carousel .v-carousel-control__prev,
-  .v-carousel .v-carousel-control__next {
-    font-size: 2px; /* 小螢幕時圖標大小 */
-  }
 }
 </style>
