@@ -1,8 +1,8 @@
 <template>
   <v-app>
 <!--toolbar-->
-    <div class="t">
-      <v-app-bar color="#001ded" class="custom-toolbar"     :density="computedDensity" :style="dynamicStyles"  app fixed>
+    <div class="toolbar-div">
+      <v-app-bar color="#001ded" class="custom-toolbar"     :density="computedDensity" :style="dynamicStyles"  app fixed> 
       <div class="custom-title">
         DEPARTMENT<br>
         OF<br>
@@ -12,15 +12,16 @@
       </div>
 
       <div class="image-container">
-        <v-img src="@/assets/click_title.png" max-height="80%" min-height="20%" min-width="20%"/>
+        <v-img src="@/assets/click_title.png" height="80%"/>
       </div>
 
-      <template v-slot:append>
+      <template v-slot:append width="100%">
+        <v-row :gap="computedGap" class="button-row" no-wrap>
         <!-- 各組介紹選單 -->
         <v-menu transition="scroll-y-transition" open-on-hover>
           <template v-slot:activator="{ props }">
             <v-col cols="auto">
-              <v-btn size="x-large" v-bind="props" class="custom-button">各組介紹</v-btn>
+              <v-btn :size="computedSize" v-bind="props" class="custom-button">各組介紹</v-btn>
             </v-col>
           </template>
           <v-list>
@@ -34,7 +35,7 @@
         <v-menu transition="scroll-y-transition" open-on-hover>
           <template v-slot:activator="{ props }">
             <v-col cols="auto">
-              <v-btn size="x-large" v-bind="props" class="custom-button">角色履歷</v-btn>
+              <v-btn :size="computedSize" v-bind="props" class="custom-button">角色履歷</v-btn>
             </v-col>
           </template>
           <v-list>
@@ -48,7 +49,7 @@
         <v-menu transition="scroll-y-reverse-transition" open-on-hover>
           <template v-slot:activator="{ props }">
             <v-col cols="auto">
-              <v-btn size="x-large" v-bind="props" class="custom-button">關於我們</v-btn>
+              <v-btn :size="computedSize" v-bind="props" class="custom-button">關於我們</v-btn>
             </v-col>
           </template>
           <v-list>
@@ -57,12 +58,15 @@
             </v-list-item>
           </v-list>
         </v-menu>
+      </v-row>
       </template>
     </v-app-bar>
     </div>
 
-
-  <v-main style="background: linear-gradient(to bottom, #ffffff, #b1dcf9);">
+<!--頁面內容-->
+    <v-main style="background: linear-gradient(to bottom, #ffffff, #b1dcf9); height: 200vh;">
+  <v-container class="d-flex justify-center align-center" style="height: 100%; width: 100%;">
+    <v-sheet :height="'95%'" :width="'90%'" color="transparent">
 <!--主視覺影片-->
     <v-container class="video-container">
         <v-slide-item v-for="(video, index) in videos" :key="index">
@@ -82,44 +86,38 @@
 
 <!-- 組別輪播項目 -->
     <v-container class="group">
-    <v-carousel
-      height="400"
-      show-arrows="hover"
+      <v-carousel
+      :style="carouselStyles"
+      :height="carouselHeight"
+      :show-arrows="showArrows"
       cycle
-      hide-delimiter-background
+     hide-delimiter-background
       :interval="5000"
-    >
-      <!-- 自動輪播項目 -->
-      <v-carousel-item
-        v-for="(item, index) in pages"
-        :key="index"
+      :delimiter-icon="delimiterIcon"
+      :delimiter-icon-size="delimiterIconSize"
       >
-        <v-card class="mx-auto" max-width="800px" style="background-color: rgba(0, 0, 0, 0.5);">
-          <v-row no-gutters>
+        <v-carousel-item v-for="(item, index) in pages" :key="index">
+          <v-card class="mx-auto" :style="[cardStyles, { padding: '2px', border: '2px solid white' }]">
+            <v-row no-gutters class="d-flex align-center">
             <!-- 左側圖片 -->
-            <v-col cols="12" md="4">
-
-                <v-img :src="item.image" aspect-ratio="16/9"></v-img>
-
+            <v-col :cols="4" :xs="4" class="d-flex justify-center">
+              <v-img :src="item.image" :aspect-ratio="1" max-height="200px" contain></v-img>
             </v-col>
-            
 
             <!-- 右側文字 -->
-            <v-col cols="12" md="8">
-              <v-card-text :style="{ whiteSpace: 'pre-line', fontSize: '1.1rem',color:'black'}">
-                <br>
-                <h2>{{ item.title }}</h2>
-                <br>
-                <p>{{ item.description }}</p>
-              </v-card-text>
+            <v-col :cols="8" :xs="8" class="text-left">
+             <v-card-text :style="cardTextStyles">
+             <h2 :style="headerStyles">{{ item.title }}</h2>
+             <p>{{ item.description }}</p>
+             </v-card-text>
             </v-col>
-          </v-row>
-        </v-card>
-      </v-carousel-item>
-    </v-carousel>
-  </v-container>
-
-  
+            </v-row>
+          </v-card>
+        </v-carousel-item>
+      </v-carousel>
+    </v-container>
+</v-sheet>
+</v-container>
   </v-main>
 
   <!-- 頁腳 -->
@@ -147,8 +145,67 @@ const computedDensity = computed<'default' | 'prominent' | 'comfortable' | 'comp
   // 你可以根據需要設置不同的值，這裡我假設 mdAndDown 顯示較小的 density
   return mdAndDown.value ? 'default' : 'prominent';
 });
-const computedFontSize = computed<string>(() => (mdAndDown.value ? '12px' : '18px'));
-const computedLineHeight = computed<string>(() => (mdAndDown.value ? '1.1' : '1.2'));
+
+// 根據螢幕尺寸動態設置 v-btn size
+const computedSize = computed<'x-small' | 'small' | 'default' | 'large' | 'x-large'>(() => {
+  // 當螢幕為 mdAndDown 時設置較小的 size，否則設置預設或較大的 size
+  return mdAndDown.value ? 'small' : 'x-large';
+});
+const computedGap = computed(() => (mdAndDown.value ? "8px" : "24px")); // 手機按鈕間距 8px，桌面 24px
+
+const computedFontSize = computed<string>(() => (mdAndDown.value ? '8px' : '18px'));
+const computedLineHeight = computed<string>(() => (mdAndDown.value ? '1.6' : '1.4'));
+
+
+// 計算響應式的 carousel 高度(輪播模組)
+const carouselHeight = computed(() => {
+  return mdAndDown.value ? '250px' : '350px';  // 小螢幕設定 300px，高螢幕設定 400px
+});
+
+// 設定 carousel 的寬度
+const carouselStyles = computed(() => ({
+  margin: '0 auto', // 置中顯示
+}));
+
+
+// 設定是否顯示左右箭頭
+const showArrows = computed(() => !mdAndDown.value); // 當螢幕小於 md 時，隱藏箭頭
+
+// 設定 delimiter 圖標
+const delimiterIcon = computed(() => {
+  return mdAndDown.value ? 'mdi-circle' : 'mdi-circle';  // 可以自定義圖標
+});
+
+//待修改
+// 計算響應式的 delimiter 圖標大小
+/*
+const delimiterIconSize = computed<'x-small' | 'small' | 'default' | 'large' | 'x-large'>(() => {
+  // 根據螢幕大小調整圖標大小
+  return mdAndDown.value ? 'x-small' : 'x-large';
+});
+*/
+
+// 設定 delimiter 圖標大小
+const delimiterIconSize = computed(() => (mdAndDown.value ? '5px' : '30px'));
+
+// 設定卡片的樣式
+const cardStyles = computed(() => ({
+  maxWidth: mdAndDown.value ? '100%' : '80%', // 手機版顯示 100% 寬度，桌面顯示 800px
+  backgroundColor: 'rgba(0, 0, 0, 0.5)', // 設定背景色
+}));
+
+// 設定卡片文字樣式
+const cardTextStyles = computed(() => ({
+  fontSize: mdAndDown.value ? '0.8rem' : '1.1rem', // 根據螢幕調整字型大小
+  lineHeight: mdAndDown.value ? '1.5' : '1.8', // 行高設定
+  color: 'white', // 設定文字顏色
+}));
+
+// 設定標題樣式
+const headerStyles = computed(() => ({
+  fontSize: mdAndDown.value ? '1rem' : '1.5rem', // 標題字型大小
+  marginBottom: mdAndDown.value ? '10px' : '20px', // 標題底部邊距
+}));
 
 
 // 組合動態樣式
@@ -252,7 +309,7 @@ const pages = ref([
 
 <style scoped>
 
-.t {
+.toolbar-div {
 position: fixed;
   z-index: 2;
   width: 100%;
@@ -268,19 +325,23 @@ position: fixed;
   font-weight: normal;
   text-align: left;
   color: white;
-  line-height: 1.2;
-  width: 100%;
   height: 100%; /* 保持高度自適應 */
+  min-width: 33%;
+  max-width: 33%;
 }
 
 .image-container {
   display: flex;
   justify-content: center; /* 水平置中 */
-  width: 100%; /* 確保容器寬度 */
+  align-items: center;     /* 垂直置中 */
   height: 100%;
-  min-height: 100%;
-  min-width: 50%;
-  max-width: 50%;
+  min-width: 33%;
+  max-width: 33%;
+}
+
+.button-row {
+  justify-content: space-between; /* 按鈕均分橫向空間 */
+  align-items: center;           /* 按鈕垂直置中 */
 }
 
 .custom-button {
@@ -331,25 +392,6 @@ position: fixed;
   height: 100%;
 }
 
-.v-img {
-  display: flex;
-  justify-content: center; /* 水平居中 */
-  top: 10%;
-  height: 100%; /* 確保容器高度充滿父元素 */
-}
-
-.v-card-text {
-  padding: 18px;
-  text-align: left;  /* 調整文字對齊方式 */
-}
-
-.v-card-image-container {
-  
-  display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
-  height: 100%; /* 確保容器高度充滿父元素 */
-}
 
 .page-footer {
   background-color: #001ded;
@@ -367,5 +409,19 @@ position: fixed;
   color: #ffffff; /* 設定文字顏色為#001ded */
   font-size: 20px; /* 可以根據需要調整字體大小 */
   margin: 0;
+}
+
+
+/* 響應式調整箭頭圖標大小 */
+.v-carousel .v-carousel-control__prev,
+.v-carousel .v-carousel-control__next {
+  font-size: 24px; /* 預設大小 */
+}
+
+@media (max-width: 960px) {
+  .v-carousel .v-carousel-control__prev,
+  .v-carousel .v-carousel-control__next {
+    font-size: 2px; /* 小螢幕時圖標大小 */
+  }
 }
 </style>
