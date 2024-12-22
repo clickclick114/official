@@ -133,6 +133,7 @@ const characters = [
   CodeGardenEel,
   CircuitCoral,
   LensCrab,
+  BlankKeycap,
 ];
 const currentIndex = ref(0);
 const currentCharacter = computed(() => characters[currentIndex.value]);
@@ -251,6 +252,20 @@ const characterStats = {
     datasets: [
       {
         label: "鏡頭蟹",
+        data: [90, 85, 75, 85, 80, 85],
+        backgroundColor: "rgba(255, 102, 102, 0.2)",
+        borderColor: "rgba(255, 102, 102, 1)",
+        pointBackgroundColor: "rgba(255, 102, 102, 1)",
+        pointBorderColor: "#fff",
+        description: "x",
+      },
+    ],
+  },
+  BlankKeycap: {
+    labels: statsLabels,
+    datasets: [
+      {
+        label: "空鍵帽",
         data: [90, 85, 75, 85, 80, 85],
         backgroundColor: "rgba(255, 102, 102, 0.2)",
         borderColor: "rgba(255, 102, 102, 1)",

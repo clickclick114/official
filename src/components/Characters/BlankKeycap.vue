@@ -17,9 +17,9 @@
         />
       </Suspense>
       <TresDirectionalLight
-        color="#F78B3D"
+        color="#FFFFFF"
         :position="[3, 3, 3]"
-        :intensity="1"
+        :intensity="10"
       />
       <TresAmbientLight :intensity="2" />
     </TresCanvas>

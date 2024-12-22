@@ -11,6 +11,6 @@ import { watch } from "vue";
 import { useRenderLoop } from "@tresjs/core";
 
 const { scene, animations } = await useGLTF(
-  "./src/assets/models/jellyfish.glb"
+  "./src/assets/models/empty keycap.glb"
 );
 </script> 
