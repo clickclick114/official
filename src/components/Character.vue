@@ -87,7 +87,7 @@
           density="comfortable"
         >
           <v-img
-            :src="`./src/assets/thumbnails/${character.__name.toLowerCase()}.png`"
+            :src="getCharacterThumbnail(character)"
             width="40"
             height="40"
             cover
@@ -123,6 +123,35 @@ import CircuitCoral from "./Characters/CircuitCoral.vue";
 import BlankKeycap from "./Characters/BlankKeycap.vue";
 import LensCrab from "./Characters/LensCrab.vue";
 import RadarChart from "./Charts/RadarChart.vue";
+
+// Import thumbnails
+import jellyfishThumb from "@/assets/thumbnails/jellyfish.png";
+import stingrayThumb from "@/assets/thumbnails/stingray.png";
+import joystickKeycapThumb from "@/assets/thumbnails/joystickjellyfishkeycap.png";
+import filmCrabThumb from "@/assets/thumbnails/filmcrab.png";
+import fountainPenSquidThumb from "@/assets/thumbnails/fountainpensquid.png";
+import codeGardenEelThumb from "@/assets/thumbnails/codegardeneel.png";
+import circuitCoralThumb from "@/assets/thumbnails/circuitcoral.png";
+import lensCrabThumb from "@/assets/thumbnails/lenscrab.png";
+import blankKeycapThumb from "@/assets/thumbnails/blankkeycap.png";
+
+// Thumbnail mapping
+const thumbnailMap = {
+  JellyFish: jellyfishThumb,
+  Stingray: stingrayThumb,
+  JoystickJellyfishKeycap: joystickKeycapThumb,
+  FilmCrab: filmCrabThumb,
+  FountainPenSquid: fountainPenSquidThumb,
+  CodeGardenEel: codeGardenEelThumb,
+  CircuitCoral: circuitCoralThumb,
+  LensCrab: lensCrabThumb,
+  BlankKeycap: blankKeycapThumb,
+};
+
+// Function to get thumbnail
+const getCharacterThumbnail = (character) => {
+  return thumbnailMap[character.__name] || "";
+};
 
 const characters = [
   JellyFish,
