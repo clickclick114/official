@@ -1,10 +1,4 @@
-/**
- * main.ts
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
-
-// Plugins
+import Tres from '@tresjs/core'
 import { registerPlugins } from '@/plugins'
 
 // Components
@@ -17,4 +11,5 @@ const app = createApp(App)
 
 registerPlugins(app)
 
+app.use(Tres)
 app.mount('#app')
