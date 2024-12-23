@@ -1,17 +1,27 @@
 <template>
-  <v-footer
-    app
-    fixed
-    height="40"
-    color="#001ded"
-    class="d-flex justify-end align-center"
-  >
-    <div>
-      <p class="text-white text-h6 ma-0">CLICK</p>
+  <!-- 頁腳 -->
+  <v-footer class="page-footer">
+    <div class="footer-content">
+      <p class="footer-text">CLICK</p>
     </div>
   </v-footer>
 </template>
 
 <style scoped>
-/* You can remove all the custom CSS since we're using Vuetify's built-in classes */
+.page-footer {
+  background-color: #001ded;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end; /* 讓內容靠右 */
+  align-items: center;
+}
+
+.footer-text {
+  color: #ffffff;
+  font-size: 16px;
+  margin: 0;
+}
 </style>
