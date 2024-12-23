@@ -87,7 +87,7 @@
           density="comfortable"
         >
           <v-img
-            :src="`./src/assets/thumbnails/${character.__name.toLowerCase()}.png`"
+            :src="getCharacterThumbnail(character)"
             width="40"
             height="40"
             cover
@@ -124,6 +124,35 @@ import BlankKeycap from "./Characters/BlankKeycap.vue";
 import LensCrab from "./Characters/LensCrab.vue";
 import RadarChart from "./Charts/RadarChart.vue";
 
+// Import thumbnails
+import jellyfishThumb from "@/assets/thumbnails/jellyfish.png";
+import stingrayThumb from "@/assets/thumbnails/stingray.png";
+import joystickKeycapThumb from "@/assets/thumbnails/joystickjellyfishkeycap.png";
+import filmCrabThumb from "@/assets/thumbnails/filmcrab.png";
+import fountainPenSquidThumb from "@/assets/thumbnails/fountainpensquid.png";
+import codeGardenEelThumb from "@/assets/thumbnails/codegardeneel.png";
+import circuitCoralThumb from "@/assets/thumbnails/circuitcoral.png";
+import lensCrabThumb from "@/assets/thumbnails/lenscrab.png";
+import blankKeycapThumb from "@/assets/thumbnails/blankkeycap.png";
+
+// Thumbnail mapping
+const thumbnailMap = {
+  JellyFish: jellyfishThumb,
+  Stingray: stingrayThumb,
+  JoystickJellyfishKeycap: joystickKeycapThumb,
+  FilmCrab: filmCrabThumb,
+  FountainPenSquid: fountainPenSquidThumb,
+  CodeGardenEel: codeGardenEelThumb,
+  CircuitCoral: circuitCoralThumb,
+  LensCrab: lensCrabThumb,
+  BlankKeycap: blankKeycapThumb,
+};
+
+// Function to get thumbnail
+const getCharacterThumbnail = (character) => {
+  return thumbnailMap[character.__name] || "";
+};
+
 const characters = [
   JellyFish,
   Stingray,
@@ -133,6 +162,7 @@ const characters = [
   CodeGardenEel,
   CircuitCoral,
   LensCrab,
+  BlankKeycap,
 ];
 const currentIndex = ref(0);
 const currentCharacter = computed(() => characters[currentIndex.value]);
@@ -251,6 +281,20 @@ const characterStats = {
     datasets: [
       {
         label: "鏡頭蟹",
+        data: [90, 85, 75, 85, 80, 85],
+        backgroundColor: "rgba(255, 102, 102, 0.2)",
+        borderColor: "rgba(255, 102, 102, 1)",
+        pointBackgroundColor: "rgba(255, 102, 102, 1)",
+        pointBorderColor: "#fff",
+        description: "x",
+      },
+    ],
+  },
+  BlankKeycap: {
+    labels: statsLabels,
+    datasets: [
+      {
+        label: "空鍵帽",
         data: [90, 85, 75, 85, 80, 85],
         backgroundColor: "rgba(255, 102, 102, 0.2)",
         borderColor: "rgba(255, 102, 102, 1)",

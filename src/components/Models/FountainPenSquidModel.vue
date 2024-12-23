@@ -1,16 +1,11 @@
-<template>
-  <primitive
-    :object="scene"
-    v-bind="$attrs"
-  />
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { useGLTF } from "@tresjs/cientos";
-import { watch } from "vue";
-import { useRenderLoop } from "@tresjs/core";
 
-const { scene, animations } = await useGLTF(
-  "./src/assets/models/jellyfish.glb"
-);
-</script> 
+const getModelPath = (path: string) =>
+  new URL(`../../assets/models/${path}`, import.meta.url).href;
+const { scene: model } = await useGLTF(getModelPath("jellyfish.glb"));
+</script>
+
+<template>
+  <primitive :object="model" />
+</template>
