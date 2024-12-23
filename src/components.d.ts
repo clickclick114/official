@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AppBar: typeof import('./components/AppBar.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     BlankKeycap: typeof import('./components/Characters/BlankKeycap.vue')['default']
     BlankKeycapModel: typeof import('./components/Models/BlankKeycapModel.vue')['default']
@@ -33,5 +34,9 @@ declare module 'vue' {
     Section2: typeof import('./components/Section2.vue')['default']
     Stingray: typeof import('./components/Characters/Stingray.vue')['default']
     StingrayModel: typeof import('./components/Models/StingrayModel.vue')['default']
+
+    ThreeScene: typeof import('./components/Models/threeScene.vue')['default']
+    VcardGroupBackup: typeof import('./components/VcardGroupBackup.vue')['default']
+
   }
 }
