@@ -2,7 +2,7 @@
   <div class="canvas-container">
     <TresCanvas v-bind="gl">
       <TresPerspectiveCamera
-        :position="[0, 0, 9]"
+        :position="[0, 2, 5]"
         :look-at="[0, 0, 0]"
       />
       <OrbitControls
@@ -13,7 +13,7 @@
       <Suspense>
         <CodeGardenEelModel
           :position="[0, 0, 0]"
-          scale="3"
+          scale="1"
         />
       </Suspense>
       <TresDirectionalLight

@@ -12,7 +12,7 @@
       />
       <Suspense>
         <JellyFishModel
-          :position="[0, 0, 0]"
+          :position="[0, 0.5, 0]"
           scale="3"
         />
       </Suspense>

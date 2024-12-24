@@ -2,7 +2,7 @@
   <div class="canvas-container">
     <TresCanvas v-bind="gl">
       <TresPerspectiveCamera
-        :position="[0, 0, 9]"
+        :position="[5, 8, 5]"
         :look-at="[0, 0, 0]"
       />
       <OrbitControls
@@ -13,15 +13,20 @@
       <Suspense>
         <JoystickJellyfishKeycapModel
           :position="[0, 0, 0]"
-          scale="3"
+          scale="2"
         />
       </Suspense>
       <TresDirectionalLight
         color="#FFFFFF"
-        :position="[3, 3, 3]"
-        :intensity="1"
+        :position="[-8, 8, 10]"
+        :intensity="3"
       />
-      <TresAmbientLight :intensity="2" />
+      <DirectionalLight
+        color="#FFFFFF"
+        :position="[8, 8, -10]"
+        :intensity="3"
+      />
+      <TresAmbientLight :intensity="1" />
     </TresCanvas>
   </div>
 </template>

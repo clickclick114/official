@@ -9,8 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppBar: typeof import('./components/AppBar.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
-    BlankKeycap: typeof import('./components/Characters/BlankKeycap.vue')['default']
-    BlankKeycapModel: typeof import('./components/Models/BlankKeycapModel.vue')['default']
     Character: typeof import('./components/Character.vue')['default']
     CharacterPhone: typeof import('./components/CharacterPhone.vue')['default']
     CircuitCoral: typeof import('./components/Characters/CircuitCoral.vue')['default']
@@ -19,6 +17,7 @@ declare module 'vue' {
     CodeGardenEelModel: typeof import('./components/Models/CodeGardenEelModel.vue')['default']
     FilmCrab: typeof import('./components/Characters/FilmCrab.vue')['default']
     FilmCrabModel: typeof import('./components/Models/FilmCrabModel.vue')['default']
+    Form: typeof import('./components/From/Form.vue')['default']
     FountainPenSquid: typeof import('./components/Characters/FountainPenSquid.vue')['default']
     FountainPenSquidModel: typeof import('./components/Models/FountainPenSquidModel.vue')['default']
     JellyFish: typeof import('./components/Characters/JellyFish.vue')['default']
@@ -33,6 +32,8 @@ declare module 'vue' {
     Section1: typeof import('./components/Section1.vue')['default']
     Section2: typeof import('./components/Section2.vue')['default']
     Stingray: typeof import('./components/Characters/Stingray.vue')['default']
+    Stingraycap: typeof import('./components/Characters/Stingraycap.vue')['default']
+    StingraycapModel: typeof import('./components/Models/StingraycapModel.vue')['default']
     StingrayModel: typeof import('./components/Models/StingrayModel.vue')['default']
     VcardGroupBackup: typeof import('./components/VcardGroupBackup.vue')['default']
   }

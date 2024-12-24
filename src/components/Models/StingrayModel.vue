@@ -3,7 +3,7 @@ import { useGLTF } from "@tresjs/cientos";
 
 const getModelPath = (path: string) =>
   new URL(`../../assets/models/${path}`, import.meta.url).href;
-const { scene: model } = await useGLTF(getModelPath("empty keycap.glb"));
+const { scene: model } = await useGLTF(getModelPath("stingray.glb"));
 </script>
 
 <template>

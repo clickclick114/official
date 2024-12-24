@@ -12,14 +12,14 @@
       />
       <Suspense>
         <StingrayModel
-          :position="[0, 0, 0]"
-          scale="3"
+          :position="[0, 0.5, 0]"
+          scale="1.5"
         />
       </Suspense>
       <TresDirectionalLight
         color="#FFFFFF"
         :position="[3, 3, 3]"
-        :intensity="1"
+        :intensity="1.5"
       />
       <TresAmbientLight :intensity="2" />
     </TresCanvas>
