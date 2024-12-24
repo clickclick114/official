@@ -1,5 +1,5 @@
 <template>
-  <v-container style="background: linear-gradient(to bottom, #b1dcf9, #ffffff);">
+  <v-container>
     <v-row
       align="center"
       justify="center"
