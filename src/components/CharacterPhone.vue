@@ -14,7 +14,7 @@
         lg="4"
         class="text-center"
       >
-        <div class="model-container mx-auto">
+        <div class="model-container-phone mx-auto">
           <component :is="currentCharacter" />
         </div>
         <v-row
@@ -287,18 +287,18 @@ const selectCharacter = (index) => {
   height: 400px;
 }
 
-.model-container {
-  width: 80%;
-  height: 80%;
+.model-container-phone {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 @media (max-width: 600px) {
-  .model-container {
-    width: 60%;
-    height: 60%;
+  .model-container-phone {
+    width: 100%;
+    height: 100%;
     margin: 0 auto;
     margin-top: -40px;
   }
