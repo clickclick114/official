@@ -91,6 +91,8 @@
             width="40"
             height="40"
             cover
+            loading="lazy"
+            :lazy-src="getCharacterThumbnail(character)"
           />
         </v-btn>
       </v-col>
