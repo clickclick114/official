@@ -32,9 +32,7 @@
                 </v-col>
               </template>
               <v-list>
-                <v-list-item v-for="(item, index) in groupItems" :key="index"
-                 @click="navigateToCategory(item.category, item.id)"
-                >
+                <v-list-item v-for="(item, index) in groupItems" :key="index">
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </v-list-item>
               </v-list>
@@ -106,20 +104,6 @@ const aboutItems = [
   { title: "作品理念", id: "click", category: "click" },
   { title: "聯絡我們" },
 ];
-
-// 接收父組件的 props
-const props = defineProps({
-  filterCategory: Function
-});
-
-// 使用父組件傳遞過來的 `filterCategory` 方法
-function navigateToCategory(category: string, id: string) {
-  props.filterCategory(category); // 切換分類
-  const element = document.getElementById(id);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" }); // 滾動到目標
-  }
-}
 
 </script>
 
