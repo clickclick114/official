@@ -2,7 +2,7 @@
   <div class="canvas-container">
     <TresCanvas v-bind="gl">
       <TresPerspectiveCamera
-        :position="[0, 0, 9]"
+        :position="[0, 0, 9.5]"
         :look-at="[0, 0, 0]"
       />
       <OrbitControls
@@ -12,14 +12,14 @@
       />
       <Suspense>
         <FilmCrabModel
-          :position="[0, 0, 0]"
-          scale="3"
+          :position="[0, -1, 0]"
+          scale="1"
         />
       </Suspense>
       <TresDirectionalLight
         color="#FFFFFF"
         :position="[3, 3, 3]"
-        :intensity="1"
+        :intensity="2"
       />
       <TresAmbientLight :intensity="2" />
     </TresCanvas>

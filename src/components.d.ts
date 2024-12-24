@@ -17,6 +17,7 @@ declare module 'vue' {
     CircuitCoralModel: typeof import('./components/Models/CircuitCoralModel.vue')['default']
     CodeGardenEel: typeof import('./components/Characters/CodeGardenEel.vue')['default']
     CodeGardenEelModel: typeof import('./components/Models/CodeGardenEelModel.vue')['default']
+    copy: typeof import('./components/Characters/Stingray copy.vue')['default']
     FilmCrab: typeof import('./components/Characters/FilmCrab.vue')['default']
     FilmCrabModel: typeof import('./components/Models/FilmCrabModel.vue')['default']
     FountainPenSquid: typeof import('./components/Characters/FountainPenSquid.vue')['default']
@@ -33,6 +34,8 @@ declare module 'vue' {
     Section1: typeof import('./components/Section1.vue')['default']
     Section2: typeof import('./components/Section2.vue')['default']
     Stingray: typeof import('./components/Characters/Stingray.vue')['default']
+    Stingraycap: typeof import('./components/Characters/Stingraycap.vue')['default']
+    StingraycapModel: typeof import('./components/Models/StingraycapModel.vue')['default']
     StingrayModel: typeof import('./components/Models/StingrayModel.vue')['default']
     VcardGroupBackup: typeof import('./components/VcardGroupBackup.vue')['default']
   }

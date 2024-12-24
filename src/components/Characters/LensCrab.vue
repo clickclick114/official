@@ -13,13 +13,13 @@
       <Suspense>
         <LensCrabModel
           :position="[0, 0, 0]"
-          scale="3"
+          scale="1.5"
         />
       </Suspense>
       <TresDirectionalLight
         color="#FFFFFF"
         :position="[3, 3, 3]"
-        :intensity="1"
+        :intensity="2"
       />
       <TresAmbientLight :intensity="2" />
     </TresCanvas>

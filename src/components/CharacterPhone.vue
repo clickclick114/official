@@ -91,19 +91,20 @@ import FilmCrab from "./Characters/FilmCrab.vue";
 import FountainPenSquid from "./Characters/FountainPenSquid.vue";
 import CodeGardenEel from "./Characters/CodeGardenEel.vue";
 import CircuitCoral from "./Characters/CircuitCoral.vue";
-import BlankKeycap from "./Characters/BlankKeycap.vue";
+import Stingraycap from "./Characters/Stingraycap.vue";
 import LensCrab from "./Characters/LensCrab.vue";
 import RadarChart from "./Charts/RadarChart.vue";
 
 const characters = [
   JellyFish,
   Stingray,
-  JoystickJellyfishKeycap,
   FilmCrab,
-  FountainPenSquid,
-  CodeGardenEel,
-  CircuitCoral,
   LensCrab,
+  CodeGardenEel,
+  JoystickJellyfishKeycap,
+  Stingraycap,
+  FountainPenSquid,
+  CircuitCoral,
 ];
 const currentIndex = ref(0);
 const currentCharacter = computed(() => characters[currentIndex.value]);
@@ -227,7 +228,21 @@ const characterStats = {
         borderColor: "rgba(255, 102, 102, 1)",
         pointBackgroundColor: "rgba(255, 102, 102, 1)",
         pointBorderColor: "#fff",
-        description: "x",
+        description: "底片蟹的「雙胞胎」兄弟，但性格截然不同。熱衷於捕捉最鮮活的影像，尤其喜歡拍攝可立可生物。他的「鏡頭軀幹」擁有超高畫質拍攝能力，能記錄每個動作的細節。他與底片蟹雖然經常爭論傳統與現代的優劣，但兩人深知彼此的作品缺一不可，正因如此，他們形成了一種微妙而有趣的合作關係。",
+      },
+    ],
+  },
+  Stingraycap: {
+    labels: statsLabels,
+    datasets: [
+      {
+        label: "電繪魟魚(鍵帽)",
+        data: [90, 85, 75, 85, 80, 85],
+        backgroundColor: "rgba(255, 102, 102, 0.2)",
+        borderColor: "rgba(255, 102, 102, 1)",
+        pointBackgroundColor: "rgba(255, 102, 102, 1)",
+        pointBorderColor: "#fff",
+        description: "鍵帽版本電繪魟魚",
       },
     ],
   },

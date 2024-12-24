@@ -13,7 +13,7 @@
       <Suspense>
         <FountainPenSquidModel
           :position="[0, 0, 0]"
-          scale="3"
+          scale="2"
         />
       </Suspense>
       <TresDirectionalLight
