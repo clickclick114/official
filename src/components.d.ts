@@ -17,6 +17,7 @@ declare module 'vue' {
     CodeGardenEelModel: typeof import('./components/Models/CodeGardenEelModel.vue')['default']
     FilmCrab: typeof import('./components/Characters/FilmCrab.vue')['default']
     FilmCrabModel: typeof import('./components/Models/FilmCrabModel.vue')['default']
+    Form: typeof import('./components/From/Form.vue')['default']
     FountainPenSquid: typeof import('./components/Characters/FountainPenSquid.vue')['default']
     FountainPenSquidModel: typeof import('./components/Models/FountainPenSquidModel.vue')['default']
     JellyFish: typeof import('./components/Characters/JellyFish.vue')['default']

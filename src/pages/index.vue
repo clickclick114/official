@@ -7,6 +7,8 @@
   <Character class="d-none d-md-block" />
     <!-- Show only on mobile screens (xs and sm breakpoints) -->
     <CharacterPhone class="d-block d-md-none" />
+    <v-divider />
+    <Form />
   </div>
   </v-app>
 </template>
