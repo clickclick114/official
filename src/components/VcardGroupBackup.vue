@@ -163,7 +163,7 @@ const pages = ref([
   },
   {
     majorCategory: "game",
-    image: new URL('@/assets/img/12.jpg', import.meta.url).href,
+    image: new URL('@/assets/img/12.png', import.meta.url).href,
     groupName: "苜隆車站",
     category: "3D｜遊戲",
     categoryEnglish: "3D｜Game",

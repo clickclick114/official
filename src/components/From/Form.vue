@@ -1,8 +1,6 @@
 <template>
   <div
-    class="form-container"
-    style="background: linear-gradient(to bottom, #ffffff,#b1dcf9 );"
-  >
+    class="form-container">
     <h2 class="text-center">想和我們說的話</h2>
     <div style="margin-top: 20px;"></div>
     <v-row justify="center">
@@ -45,7 +43,7 @@
             <v-btn
               :disabled="!valid"
               type="submit"
-              style="background-color: #878787; color: white;"
+              style="background-color: #4F4F4F; color: white;"
             >Submit</v-btn>
           </div>
         </v-form>
@@ -109,7 +107,7 @@ export default {
 
 <style scoped>
 .form-container {
-  color: #878787;
+  color:#4F4F4F;
   padding-top: 30px;
   padding-bottom: 30px;
 }

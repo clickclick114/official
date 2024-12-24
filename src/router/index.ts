@@ -12,6 +12,15 @@ import { routes } from 'vue-router/auto-routes'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: setupLayouts(routes),
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth', // 平滑滾動效果
+      }
+    }
+    return savedPosition || { top: 0 } // 回到儲存位置或頂部
+  },
 })
 
 // Workaround for https://github.com/vitejs/vite/issues/11804

@@ -15,39 +15,37 @@
   
         <template v-slot:append style="background: yellow; width: 100%;">
           <v-row class="button-row" no-wrap justify="start">
+            <!-- 角色履歷選單 -->
+            <v-menu transition="scroll-y-transition" open-on-hover>
+              <template v-slot:activator="{ props }">
+                <v-col :cols="computedCols">
+                  <v-btn v-bind="props" class="custom-button" :style="appbarButton">角色履歷</v-btn>
+                </v-col>
+              </template>
+            </v-menu>
+
             <!-- 各組介紹選單 -->
             <v-menu transition="scroll-y-transition" open-on-hover>
               <template v-slot:activator="{ props }">
                 <v-col :cols="computedCols">
-                  <v-btn :size="computedSize" v-bind="props" class="custom-button" :style="appbarButton">各組介紹</v-btn>
+                  <v-btn v-bind="props" class="custom-button" :style="appbarButton">各組介紹</v-btn>
                 </v-col>
               </template>
               <v-list>
-                <v-list-item v-for="(item, index) in groupItems" :key="index">
+                <v-list-item v-for="(item, index) in groupItems" :key="index"
+                 @click="navigateToCategory(item.category, item.id)"
+                >
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-menu>
 
-            <!-- 角色履歷選單 -->
-            <v-menu transition="scroll-y-transition" open-on-hover>
-              <template v-slot:activator="{ props }">
-                <v-col :cols="computedCols">
-                  <v-btn :size="computedSize" v-bind="props" class="custom-button" :style="appbarButton">角色履歷</v-btn>
-                </v-col>
-              </template>
-              <v-list>
-                <v-list-item v-for="(item, index) in roleItems" :key="index">
-                  <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
 
             <!-- 關於我們選單 -->
             <v-menu transition="scroll-y-reverse-transition" open-on-hover>
               <template v-slot:activator="{ props }">
                 <v-col :cols="computedCols">
-                  <v-btn :size="computedSize" v-bind="props" class="custom-button" :style="appbarButton">關於我們</v-btn>
+                  <v-btn v-bind="props" class="custom-button" :style="appbarButton">關於我們</v-btn>
                 </v-col>
               </template>
               <v-list>
@@ -66,7 +64,6 @@
 import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 
-
 // 解構 mdAndDown，偵測螢幕尺寸
 const { mdAndDown } = useDisplay();
 // appbar高度
@@ -74,14 +71,8 @@ const computedDensity = computed<'default' | 'prominent' | 'comfortable' | 'comp
   return mdAndDown.value ? 'default' : 'prominent';
 });
 
-
-// 根據螢幕尺寸動態設置 v-btn size
-const computedSize = computed<'x-small' | 'small' | 'default' | 'large' | 'x-large'>(() => {
-  return mdAndDown.value ? 'small' : 'x-large';
-});
-
 // AppBar按鈕間距
-const computedCols = computed(() => (mdAndDown.value ? 8 : 12));
+const computedCols = computed(() => (mdAndDown.value ? 5 : 12));
 
 // AppBar按鈕文字
 const buttonFontSize = computed(() => (mdAndDown.value ? '8px' : '18px'));
@@ -91,6 +82,8 @@ const computedPaddingBottom = computed(() => (mdAndDown.value ? '5px' : '10px'))
 const appbarButton = computed(() => ({
   fontSize: buttonFontSize.value,
   paddingBottom: computedPaddingBottom.value,
+  width: mdAndDown.value ? '80px' : '100%',
+  height: mdAndDown.value ? '20px' : '100%',
 }));
 
 // 組合動態樣式toolbar左側校名
@@ -104,22 +97,30 @@ const dynamicStyles = computed(() => ({
 
 // 群組項目
 const groupItems = [
-  { title: "GAMES" },
-  { title: "ANIMATIONS" },
-  { title: "SHORT FILM" },
-];
-
-const roleItems = [
-  { title: "角色一" },
-  { title: "角色二" },
-  { title: "角色三" },
+{ title: "GAMES", id: "games", category: "game" },
+  { title: "ANIMATIONS", id: "animations", category: "animation" },
+  { title: "SHORT FILM", id: "short-film", category: "short film" },
 ];
 
 const aboutItems = [
-  { title: "團隊介紹" },
-  { title: "作品理念" },
+  { title: "作品理念", id: "click", category: "click" },
   { title: "聯絡我們" },
 ];
+
+// 接收父組件的 props
+const props = defineProps({
+  filterCategory: Function
+});
+
+// 使用父組件傳遞過來的 `filterCategory` 方法
+function navigateToCategory(category: string, id: string) {
+  props.filterCategory(category); // 切換分類
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" }); // 滾動到目標
+  }
+}
+
 </script>
 
 <style scoped>

@@ -1,22 +1,35 @@
 <template>
     <!--主視覺影片-->
     <v-container class="video-container">
-        <v-slide-item v-for="(video, index) in videos" :key="index">
-          <div>
-            <iframe
-              :src="video"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-              class="responsive-video"
-              style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);"
-            ></iframe>
-          </div>
-        </v-slide-item>
+      <v-slide-item v-for="(video, index) in videos" :key="index">
+        <div>
+          <iframe
+            :src="video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            class="responsive-video"
+            :style="[ { boxShadow: '0 2px 8px rgba(0, 0, 0, 0.4)' }, Video ]"
+          ></iframe>
+        </div>
+      </v-slide-item>
     </v-container>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+import { computed } from 'vue';
+import { useDisplay } from 'vuetify';
+
+
+// 解構 mdAndDown，偵測螢幕尺寸
+const { mdAndDown } = useDisplay();
+
+//各組介紹title
+const Video = computed(() => ({
+  width: mdAndDown.value ? '100%' : '80%',
+  height: mdAndDown.value ? '100%' : '80%',
+}));
 const videos = ref([
   "https://www.youtube.com/embed/xWKHN5Rf838?si=n2gEaq_iiGY5pamw",
 ]);
@@ -38,8 +51,6 @@ const videos = ref([
   top: 50%;           /* 容器內垂直居中 */
   left: 50%;          /* 容器內水平居中 */
   transform: translate(-50%, -50%); /* 偏移，讓元素中心對齊父容器中心 */
-  width: 80%;        /* 設定寬度 */
-  height: 80%;       /* 設定高度 */
   border-radius: 10px; /* 圓角效果 (可選) */
 }
 </style>

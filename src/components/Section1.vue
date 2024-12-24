@@ -1,9 +1,9 @@
 <template>
-      <!--Click-->
+      <!--CLICK-->
       <v-container>
         <v-row no-gutters>
     <!-- 正確使用 click -->
-    <v-col v-for="(item, index) in click" :key="index" cols="12">
+    <v-col id="click" v-for="(item, index) in click" :key="index" cols="12">
       <v-card class="mx-auto group-vcard" :style="[cardStyles, { padding: '2px', paddingTop: '10px', paddingBottom: '10px'}]">
         <!-- 上方區域 -->
         <v-row no-gutters class="d-flex align-center">
@@ -24,7 +24,7 @@
         <!-- 下方區域 -->
         <v-row no-gutters>
           <!-- 左側圖片，讓圖片垂直置中 -->
-          <v-col cols="4" class="d-flex justify-center align-start" :style="cardImgStyles">
+          <v-col cols="12" sm="4" class="d-flex justify-center align-start" :style="cardImgStyles">
             <v-container>
               <v-row justify="center" align="center" style="height: 100%;">
                 <v-img :src="item.image" :aspect-ratio="1" max-height="200px" contain></v-img>
@@ -33,7 +33,7 @@
           </v-col>
 
           <!-- 右側描述文字 -->
-          <v-col cols="8" class="text-left" :style="cardTextStyles">
+          <v-col cols="12" sm="8" class="text-left" :style="cardTextStyles">
             <p v-html="replaceNewlines(item.description)"></p>
           </v-col>
         </v-row>
@@ -86,7 +86,7 @@
           <!-- 下方區域 -->
           <v-row no-gutters>
             <!-- 左側圖片，讓圖片垂直置中 -->
-            <v-col cols="4" class="d-flex justify-center align-start" :style="cardImgStyles">
+            <v-col cols="12" sm="4" class="d-flex justify-center align-start" :style="cardImgStyles">
               <v-container>
                 <v-row justify="center" align="center" style="height: 100%;">
                   <v-img :src="item.image" :aspect-ratio="1" max-height="200px" contain></v-img>
@@ -95,7 +95,7 @@
             </v-col>
 
             <!-- 右側描述文字 -->
-            <v-col cols="8" class="text-left" :style="cardTextStyles">
+            <v-col cols="12" sm="8" class="text-left" :style="cardTextStyles">
               <p v-html="replaceNewlines(item.description)"></p>
             </v-col>
           </v-row>
@@ -119,65 +119,65 @@
 </div>
 
 
-<!--組別介紹-->
-    <v-container cols="12" :style="{ color: 'red' }" weith="100%">
-    <!-- 顯示分類按鈕 -->
-    <v-row cols="12" no-wrap justify="center"  weith="100%">
-      <v-btn v-for="category in categories" :key="category" @click="filterCategory(category)" class="button-row" :style="buttonRow">
-        {{ category }}
-      </v-btn>
-    </v-row>
+  <!-- 組別介紹 -->
+  <v-container id="all" cols="12" style="color: red;">
+  <!-- 顯示分類按鈕 -->
+  <v-row cols="12" no-wrap justify="center" style="width: 100%;">
+    <v-btn v-for="category in categories" :key="category" @click="filterCategory(category)" class="button-row" :style="buttonRow">
+      {{ category }}
+    </v-btn>
+  </v-row>
 
-    <!-- 顯示篩選後的v-card -->
-    <v-row>
-      <v-col v-for="(page, index) in filteredPages" :key="index" cols="12">
-        <v-card class="mx-auto group-vcard"
-        :id="'card-' + page.groupName.replace(/\s+/g, '')"
-        :style="[cardStyles, { padding: '2px', paddingTop: '10px', paddingBottom: '10px'}]"
-        >
-          <!-- 上方區域 -->
-          <v-row no-gutters class="d-flex align-center">
-            <!-- 右上角內容 -->
-            <v-col cols="2">
-              <!-- 左側空著，可以將空白部分放在這 -->
-            </v-col>
-            <v-col cols="10">
-              <div style="position: absolute; top: 0; right: 0; padding-top: 12px; padding-right: 8px; display: flex; align-items: flex-end; gap: 10px;">
-                <!-- 組別名稱 -->
-                <span :style="{ fontSize: '26px', color: '#001ded',fontWeight: '500'}">{{ page.groupName }}</span>
+  <!-- 顯示篩選後的v-card -->
+  <v-row>
+    <v-col v-for="(page, index) in filteredPages" :key="index" cols="12" class="d-flex justify-center">
+      <v-card class="mx-auto group-vcard"
+              :id="'card-' + page.groupName.replace(/\s+/g, '')"
+              :style="[cardStyles, { padding: '2px', paddingTop: '10px', paddingBottom: '10px', width: '100%'}]"
+      >
+        <!-- 上方區域 -->
+        <v-row no-gutters class="d-flex align-center">
+          <!-- 右上角內容 -->
+          <v-col cols="2">
+            <!-- 左側空著，可以將空白部分放在這 -->
+          </v-col>
+          <v-col cols="10">
+            <div style="position: absolute; top: 0; right: 0; padding-top: 12px; padding-right: 8px; display: flex; align-items: flex-end; gap: 10px;">
+              <!-- 組別名稱 -->
+              <span :style="{ fontSize: '26px', color: '#001ded', fontWeight: '500'}">{{ page.groupName }}</span>
 
-                <!-- 作品分類 -->
-                <div style="display: flex; flex-direction: column; text-align: right;">
-                  <span :style="{ fontSize: '12px', color: '#001ded' }">{{ page.category }}</span>
-                  <span :style="{ fontSize: '10px', color: '#001ded' }">{{ page.categoryEnglish }}</span>
-                </div>
-
-                <!-- 藍色方塊 -->
-                <div :style="{ backgroundColor: '#001ded', width: '15px', height: '40px' }"></div>
+              <!-- 作品分類 -->
+              <div style="display: flex; flex-direction: column; text-align: right;">
+                <span :style="{ fontSize: '12px', color: '#001ded' }">{{ page.category }}</span>
+                <span :style="{ fontSize: '10px', color: '#001ded' }">{{ page.categoryEnglish }}</span>
               </div>
-            </v-col>
-          </v-row>
 
-          <!-- 下方區域 -->
-          <v-row no-gutters>
-  <!-- 左側圖片，讓圖片垂直置中 -->
-  <v-col cols="12" sm="4" class="d-flex justify-center align-start" :style="cardImgStyles">
-    <v-container>
-      <v-row justify="center" align="center" style="height: 100%;">
-        <v-img :src="page.image" :aspect-ratio="1" max-height="200px" contain></v-img>
-      </v-row>
-    </v-container>
-  </v-col>
+              <!-- 藍色方塊 -->
+              <div :style="{ backgroundColor: '#001ded', width: '15px', height: '40px' }"></div>
+            </div>
+          </v-col>
+        </v-row>
 
-  <!-- 右側描述文字 -->
-  <v-col cols="12" sm="8" class="text-left" :style="cardTextStyles">
-    <p v-html="replaceNewlines(page.description)"></p>
-  </v-col>
-</v-row>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+        <!-- 下方區域 -->
+        <v-row no-gutters>
+          <!-- 左側圖片，讓圖片垂直置中 -->
+          <v-col cols="12" sm="4" class="d-flex justify-center align-start" :style="cardImgStyles">
+            <v-container>
+              <v-row justify="center" align="center" style="height: 100%;">
+                <v-img :src="page.image" :aspect-ratio="1" max-height="200px" contain></v-img>
+              </v-row>
+            </v-container>
+          </v-col>
+
+          <!-- 右側描述文字 -->
+          <v-col cols="12" sm="8" class="text-left" :style="cardTextStyles">
+            <p v-html="replaceNewlines(page.description)"></p>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-col>
+  </v-row>
+</v-container>
 </template>
 
 
@@ -202,7 +202,7 @@ const grouptitlebutton = computed(() => ({
 
 // 計算響應式的 carousel 高度(輪播模組)
 const carouselHeight = computed(() => {
-  return mdAndDown.value ? '350px' : '350px';  // 小螢幕設定 300px，高螢幕設定 400px
+  return mdAndDown.value ? '600px' : '350px';  // 小螢幕設定 300px，高螢幕設定 400px
 });
 
 // 設定 carousel 的寬度(輪播模組)
@@ -271,14 +271,18 @@ const buttonRow = computed(() => ({
 const categories = ['all', 'game', 'animation', 'short film'];
 
 // 設定當前選擇的分類
-const selectedCategory = ref<string>('all');//設定頁面載入時的分類
+const selectedCategory = ref<string>('all'); // 設定頁面載入時的分類
 
 // 根據選擇的分類來篩選圖片
 const filteredPages = computed(() => {
-  if (selectedCategory.value === 'all') {
-    return pages.value; // 顯示所有的v-card
+  if (!pages.value) {
+    console.error("Pages data is not available");
+    return [];
   }
-  return pages.value.filter(page => page.majorCategory === selectedCategory.value); // 根據選擇的分類篩選
+  if (selectedCategory.value === 'all') {
+    return pages.value; // 顯示所有的 v-card
+  }
+  return pages.value.filter(page => page.majorCategory === selectedCategory.value);
 });
 
 // 用於切換分類的函數
@@ -286,36 +290,36 @@ const filterCategory = (category: string) => {
   selectedCategory.value = category;
 };
 
+// 用於滾動到特定卡片的函數
 const navigateToCard = (groupName: string) => {{
-      // 切換到 "all" 類別
-      selectedCategory.value = "all";
+  // 切換到 "all" 類別
+  selectedCategory.value = "all";
 
-// 等待畫面更新後滾動
-setTimeout(() => {
-  // 將 groupName 中的空白移除以匹配新的 ID 格式
-  const targetId = 'card-' + groupName.replace(/\s+/g, '');
-  const targetCard = document.getElementById(targetId);
-  if (targetCard) {
-    targetCard.scrollIntoView({ behavior: "smooth" });
-  }
-}, 0);
-    };
+  // 等待畫面更新後滾動
+  setTimeout(() => {
+    // 將 groupName 中的空白移除以匹配新的 ID 格式
+    const targetId = 'card-' + groupName.replace(/\s+/g, '');
+    const targetCard = document.getElementById(targetId);
+    if (targetCard) {
+      targetCard.scrollIntoView({ behavior: "smooth" });
+    }
+  }, 0);
+};
 
-    return {
-      pages,
-      categories,
-      selectedCategory,
-      filteredPages,
-      filterCategory,
-      navigateToCard,
-    };
-  };
+return {
+  pages,
+  categories,
+  selectedCategory,
+  filteredPages,
+  filterCategory,
+  navigateToCard,
+};};
 
-//Click
+//CLICK
 const click= ref([
 {
   image: new URL('@/assets/img/1.png', import.meta.url).href,
-  groupName: "可立可Click",
+  groupName: "可立可CLICK",
   description: "多媒體的多樣性和創新性，源自於那一瞬間的「點擊」。從鍵盤上按下的瞬間開始了所有的創意旅程。\n可力可（CLICK）是一座由鍵盤構築而成的水族館，每個鍵帽中都住著各式各樣的生物。這些生物隨意穿梭於各個連通的鍵帽之間，也會不時化身成鍵帽本體。\n生物們的跨界合作激盪出無盡的靈感與創意◝★\n本次展覽中，「CLICK」象徵著每一個作品的誕生與演進，也提醒著我們在每一個設計的背後都源自於最初那一瞬間的靈感碰撞。"
 },
 ]);
@@ -404,7 +408,7 @@ const pages = ref([
   },
   {
     majorCategory: "game",
-    image: new URL('@/assets/img/12.jpg', import.meta.url).href,
+    image: new URL('@/assets/img/12.png', import.meta.url).href,
     groupName: "苜隆車站",
     category: "3D｜遊戲",
     categoryEnglish: "3D｜Game",
