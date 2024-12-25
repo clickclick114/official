@@ -2,7 +2,7 @@
       <!--CLICK-->
       <v-container>
         <v-row no-gutters>
-    <!-- 正確使用 click -->
+    <!--click -->
     <v-col id="click" v-for="(item, index) in click" :key="index" cols="12">
       <v-card class="mx-auto group-vcard" :style="[cardStyles, { padding: '2px', paddingTop: '10px', paddingBottom: '10px'}]">
         <!-- 上方區域 -->
@@ -106,17 +106,18 @@
 
 <!--海報跑馬燈-->
 <div class="marquee-container" :style="{ paddingBottom: paddingBottom }">
-  <div class="marquee-images">
-    <img 
-      v-for="(page, index) in pages" 
-      :key="index" 
-      :src="page.image" 
-      alt="image" 
-      class="marquee-image" 
-      :style="{ width: imageWidth}" 
-    />
+    <div class="marquee-images" :style="{ animationDuration: marqueeSpeed }">
+      <img 
+        v-for="(page, index) in pages" 
+        :key="index" 
+        :src="page.image" 
+        alt="image" 
+        class="marquee-image" 
+        :style="{ width: imageWidth}" 
+        @click="navigateToCard(page.groupName)"
+      />
+    </div>
   </div>
-</div>
 
 
   <!-- 組別介紹 -->
@@ -234,6 +235,15 @@ const delimiterIconSize = computed(() => (mdAndDown.value ? '5px' : '30px'));
 //圖片跑馬燈
 const imageWidth = computed(() => (mdAndDown.value ? '60%' : '20%'));
 const paddingBottom = computed(() => (mdAndDown.value ? '40px' : '20px'));
+const marqueeSpeed = computed(() => {
+  return mdAndDown.value ? '20s' : '40s'; // 小螢幕 20s，大螢幕40s
+});
+
+// 監控 marqueeSpeed 並更新 CSS 變數
+watch(marqueeSpeed, (newSpeed) => {
+  document.documentElement.style.setProperty('--marquee-speed', newSpeed);
+});
+
 
 //v-card
 // 設定卡片的樣式
@@ -262,7 +272,7 @@ const cardTextStyles = computed(() => ({
 const buttonRow = computed(() => ({
   fontSize: mdAndDown.value ? '8px' : '18px',
   paddingBottom: mdAndDown.value ? '3px' : '8px',
-  width: mdAndDown.value ? '75px' : '180px',
+  width: mdAndDown.value ? '70px' : '180px',
   height: mdAndDown.value ? '40px' : '80px',
   margin: mdAndDown.value ? '3px' : '20px', // 增加按鈕間距
 }));
@@ -291,29 +301,21 @@ const filterCategory = (category: string) => {
 };
 
 // 用於滾動到特定卡片的函數
-const navigateToCard = (groupName: string) => {{
+const navigateToCard = (groupName: string) => {
   // 切換到 "all" 類別
   selectedCategory.value = "all";
 
-  // 等待畫面更新後滾動
-  setTimeout(() => {
-    // 將 groupName 中的空白移除以匹配新的 ID 格式
-    const targetId = 'card-' + groupName.replace(/\s+/g, '');
+  // 使用 Vue 的 nextTick 確保畫面更新後再執行滾動
+  nextTick(() => {
+    const targetId = 'card-' + groupName.replace(/\s+/g, '');  // 移除空白以匹配 ID
     const targetCard = document.getElementById(targetId);
     if (targetCard) {
       targetCard.scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.error(`無法找到目標卡片: ${targetId}`);
     }
-  }, 0);
+  });
 };
-
-return {
-  pages,
-  categories,
-  selectedCategory,
-  filteredPages,
-  filterCategory,
-  navigateToCard,
-};};
 
 //CLICK
 const click= ref([
@@ -438,40 +440,37 @@ function replaceNewlines(text: string) {
 </script>
 
 
-
 <style scoped>
 .group {
-  background-color: transparent !important;/*容器透明背景*/
+  background-color: transparent; /*容器透明背景*/
   margin-top: 80px;    /* 設定頂部外邊距 */
   margin-bottom: 80px; /* 設定底部外邊距 */
 }
 
 .group-title {
-  background-color: transparent !important; /* 容器透明背景 */
-  background-image: url('@/assets/button_blue.png'); /* 替換為你的圖片路徑 */
-  background-size: 100% 100%; /* 拉伸圖片以完全填滿按鈕 */
-  background-repeat: no-repeat; /* 防止圖片重複 */
-  border-radius: 10%; /* 圓角按鈕 */
-  display: flex; /* 使用 Flex 排列內容 */
-  align-items: center; /* 垂直置中圖片和文字 */
-  justify-content: center; /* 文字水平居中 */
-  color: white; /* 文字顏色 */
-  font-weight: 600; /* 文字權重 */
-  width: 100%; /* 填滿父容器寬度 */
-  height: 100%; /* 填滿父容器高度 */
-  padding: 0; /* 移除多餘內邊距 */
-  overflow: hidden; /* 確保內容不會超出按鈕邊界 */
+  background-color: transparent;
+  background-image: url('@/assets/button_blue.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
 }
-
 
 .group-vcard {
-  background-color: rgba(255, 255, 255, 0.4) !important;
-  width: 100%;  /* 確保卡片佔滿全寬 */
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 100%;
   height: 100%;
-  box-shadow: none !important; /* 移除陰影 */
+  box-shadow: none; /* 移除陰影 */
 }
 
-/* 響應式調整箭頭圖標大小 */
 .v-carousel .v-carousel-control__prev,
 .v-carousel .v-carousel-control__next {
   font-size: 24px; /* 預設大小 */
@@ -484,47 +483,39 @@ function replaceNewlines(text: string) {
   }
 }
 
-.marquee{
-  background-color: transparent !important;/*容器透明背景*/
-  width: 100%;  /* 確保卡片佔滿全寬 */
-  height: 100%;
-}
-
-
-
 .button-row {
-  background-color: transparent !important; /* 容器透明背景 */
-  background-image: url('@/assets/button_blue.png'); /* 替換為你的圖片路徑 */
-  background-size: 100% 100%; /* 拉伸圖片以完全填滿按鈕 */
-  background-repeat: no-repeat; /* 防止圖片重複 */
-  background-position: center; /* 圖片置中 */
-  border-radius: 10%; /* 圓角按鈕 */
-  display: flex; /* 使用 Flex 排列內容 */
-  justify-content: center; /* 文字水平居中 */
-  align-items: center; /* 文字垂直居中 */
-  color: white; /* 文字顏色 */
-  font-weight: 600; /* 文字權重 */
-  width: 100%; /* 填滿父容器寬度 */
-  height: 100%; /* 填滿父容器高度 */
-  padding: 0; /* 移除多餘內邊距 */
-  overflow: hidden; /* 確保內容不會超出按鈕邊界 */
+  background-color: transparent;
+  background-image: url('@/assets/button_blue.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
 }
 
 .marquee-container {
   display: flex;
   overflow: hidden;
-  width: 100%;  /* 容器寬度 */
+  width: 100%;
 }
 
 .marquee-images {
   display: flex;
-  animation: marquee 30s linear infinite;  /* 播放速度 */
+  animation: marquee var(--marquee-speed) linear infinite;
 }
 
 .marquee-image {
-  width: 20%;  /* 每張圖片佔容器的 20% */
-  object-fit: cover;  /* 保持圖片比例並裁切 */
-  margin-right: 1%;  /* 每張圖片之間的間距 */
+  width: 20%;
+  object-fit: cover;
+  margin-right: 1%;
 }
 
 @keyframes marquee {
@@ -532,7 +523,12 @@ function replaceNewlines(text: string) {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%); /* 滾動到最後一張圖片的寬度 */
+    transform: translateX(-100%);
   }
+}
+
+/* 動態設定 CSS 變數 */
+:root {
+  --marquee-speed: 30s; /* 預設播放速度 */
 }
 </style>
