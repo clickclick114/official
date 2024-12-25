@@ -121,7 +121,7 @@
 
 
   <!-- 組別介紹 -->
-  <v-container id="all" cols="12" style="color: red;">
+  <v-container id="all" cols="12" style="width: 100%;">
   <!-- 顯示分類按鈕 -->
   <v-row cols="12" no-wrap justify="center" style="width: 100%;">
     <v-btn v-for="category in categories" :key="category" @click="filterCategory(category)" class="button-row" :style="buttonRow">
@@ -249,7 +249,6 @@ watch(marqueeSpeed, (newSpeed) => {
 // 設定卡片的樣式
 const cardStyles = computed(() => ({
   maxWidth: mdAndDown.value ? '100%' : '80%', // 手機版顯示 100% 寬度，桌面顯示 800px
-  backgroundColor: 'rgba(0, 0, 0, 0.5)', // 設定背景色
 }));
 
 // 設定卡片文字樣式

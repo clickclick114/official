@@ -1,20 +1,29 @@
 <template>
-    <v-container class="image-container" >
+    <v-container class="image-container" :style="container">
       <div class="image-overlay">
         <v-img src="@/assets/coral.png" />
       </div>
     </v-container>
   </template>
   
-  <script lang="ts" setup>
-  // 這裡沒有修改，保持原來的結構
+  <script setup lang="ts">
+  import { computed } from 'vue';
+  import { useDisplay } from 'vuetify';
+  
+  
+  // 解構 mdAndDown，偵測螢幕尺寸
+  const { mdAndDown } = useDisplay();
+  
+
+  const container = computed(() => ({
+  height: mdAndDown.value ? '150px' : '350px',
+}));
   </script>
   
   <style scoped>
 /* 父容器設置相對定位 */
 .image-container {
   position: relative; /* 使圖片疊加於容器內 */
-  height: 300px; /* 設置容器高度為100% */
   width: 100%;
   overflow: hidden; /* 隱藏超出容器的圖片部分 */
 }
