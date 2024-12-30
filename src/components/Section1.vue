@@ -186,6 +186,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { computed } from 'vue';
+import { nextTick } from 'vue';
 import { useDisplay } from 'vuetify';
 
 
@@ -244,6 +245,11 @@ watch(marqueeSpeed, (newSpeed) => {
   document.documentElement.style.setProperty('--marquee-speed', newSpeed);
 });
 
+onMounted(() => {
+  nextTick(() => {
+    document.documentElement.style.setProperty('--marquee-speed', marqueeSpeed.value);
+  });
+});
 
 //v-card
 // 設定卡片的樣式
@@ -309,7 +315,7 @@ const navigateToCard = (groupName: string) => {
     const targetId = 'card-' + groupName.replace(/\s+/g, '');  // 移除空白以匹配 ID
     const targetCard = document.getElementById(targetId);
     if (targetCard) {
-      targetCard.scrollIntoView({ behavior: "smooth" });
+      targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
     } else {
       console.error(`無法找到目標卡片: ${targetId}`);
     }

@@ -9,6 +9,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     AboutUs: typeof import('./components/AboutUs.vue')['default']
     AppBar: typeof import('./components/AppBar.vue')['default']
+    AppBarCLICK: typeof import('./components/AppBarCLICK.vue')['default']
+    AppBarPhone: typeof import('./components/AppBarPhone.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     Character: typeof import('./components/Character.vue')['default']
     CharacterPhone: typeof import('./components/CharacterPhone.vue')['default']
@@ -31,6 +33,7 @@ declare module 'vue' {
     RadarChart: typeof import('./components/Charts/RadarChart.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SchoolName: typeof import('./components/SchoolName.vue')['default']
     Section1: typeof import('./components/Section1.vue')['default']
     Section2: typeof import('./components/Section2.vue')['default']
     Stingray: typeof import('./components/Characters/Stingray.vue')['default']
