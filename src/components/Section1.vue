@@ -122,8 +122,8 @@
 
   <!-- 組別介紹 -->
   <v-container id="all" cols="12" style="width: 100%;">
-    <!-- 顯示分類按鈕 -->
-    <v-row no-gutters justify="center" style="width: 100%;" dense>
+    <v-container :style="containerStyle">
+    <v-row no-gutters justify="center" dense>
       <v-col
         v-for="category in categories"
         :key="category"
@@ -139,6 +139,7 @@
         </v-btn>
       </v-col>
     </v-row>
+  </v-container>
 
   <!-- 顯示篩選後的v-card -->
   <v-row>
@@ -283,11 +284,16 @@ const cardTextStyles = computed(() => ({
 
 }));
 
+// 設定容器的樣式
+const containerStyle = computed(() => ({
+  maxWidth: mdAndDown.value ? "100%" : "80%",
+  width: "100%", // 確保容器寬度保持一致
+}));
 
 //分類按鈕
 const buttonRow = computed(() => ({
   fontSize: mdAndDown.value ? '8px' : '18px',
-  paddingBottom: mdAndDown.value ? '3px' : '8px',
+  paddingBottom: mdAndDown.value ? '7px' : '10px',
   width: mdAndDown.value ? '70px' : '180px',
   height: mdAndDown.value ? '40px' : '80px',
   margin: mdAndDown.value ? '3px' : '20px', // 增加按鈕間距
@@ -499,6 +505,13 @@ function replaceNewlines(text: string) {
   }
 }
 
+.button-container {
+  display: flex; /* 啟用彈性佈局 */
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  padding: 0; /* 移除不必要的空間 */
+}
+
 .button-row {
   background-color: transparent;
   background-image: url('@/assets/button_blue.png');
@@ -511,10 +524,12 @@ function replaceNewlines(text: string) {
   align-items: center;
   color: white;
   font-weight: 600;
-  width: 100%;
-  height: 100%;
+  width: 100%; /* 根據 v-col 自適應 */
+  height: 60px; /* 設定按鈕的具體高度 */
   padding: 0;
   overflow: hidden;
+  box-shadow: none; /* 移除陰影 */
+  border: none; /* 可選，移除按鈕的預設邊框 */
 }
 
 .marquee-container {
