@@ -1,8 +1,9 @@
 <template>
-  <!-- 頁腳 -->
   <v-footer
-    class="page-footer"
-    v-show="showFooter"
+    class="custom-footer"
+    app
+    fixed
+    :style="footerStyle"
   >
     <div class="footer-content">
       <!-- 國立臺中科技大學文字 -->
@@ -32,35 +33,40 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useDisplay } from 'vuetify';
 
-// 解構 mdAndDown，偵測螢幕尺寸
 const { mdAndDown } = useDisplay();
-
 const footerText = computed(() => ({
-  fontSize: mdAndDown.value ? '12px' : '16px', // 設定不同尺寸的字體大小
+  fontSize: mdAndDown.value ? '12px' : '16px',
 }));
 
-// 定義 openLink 方法，打開新網址
 const openLink = (url: string) => {
   window.open(url, '_blank');
 };
 
-// 控制頁腳的顯示與隱藏
-const showFooter = ref(true);
-let lastScrollTop = 0;
+const showFooter = ref(false);  // 頁腳是否顯示的狀態
+const footerHeight = 64; // 頁腳高度
+let lastScrollTop = 0; // 上次滾動位置
 
+
+// 滾動事件處理函數
 const handleScroll = () => {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  if (scrollTop > lastScrollTop) {
-    // 向下滾動：隱藏頁腳
+  const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+  const documentHeight = document.documentElement.scrollHeight;
+  const windowHeight = window.innerHeight;
+
+  // 如果滾動到最底部，顯示頁腳
+  if (currentScroll + windowHeight >= documentHeight - footerHeight) {
+    showFooter.value = true;
+  } else if (currentScroll > lastScrollTop) {
+    // 向下滾動，隱藏頁腳
     showFooter.value = false;
   } else {
-    // 向上滾動：顯示頁腳
+    // 向上滾動，顯示頁腳
     showFooter.value = true;
   }
-  lastScrollTop = Math.max(scrollTop, 0); // 避免負值
+
+  lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // 防止滾動值為負
 };
 
-// 綁定滾動事件
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
 });
@@ -68,41 +74,49 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll);
 });
+
+// 動態設定頁腳樣式
+const footerStyle = computed(() => ({
+  transform: showFooter.value ? 'translateY(0)' : `translateY(${footerHeight}px)`,
+  opacity: showFooter.value ? '1' : '0',
+  visibility: showFooter.value ? 'visible' : 'hidden' as 'visible' | 'hidden',  // 強制類型為 'visible' | 'hidden'
+  transition: 'transform 0.3s ease, opacity 0.3s ease, visibility 0.1ms ease',
+}));
+
 </script>
 
 <style scoped>
-.page-footer {
-  background-color: #001ded;
-  bottom: 0;
+.custom-footer {
+  position: fixed;
   left: 0;
   width: 100%;
-  padding: 10px;
+  z-index: 2;
+  background-color: #001ded !important;
   display: flex;
-  justify-content: center; /* 內容水平置中 */
-  align-items: center;     /* 內容垂直置中 */
-  position: fixed;         /* 固定在螢幕底部 */
-  z-index: 2;              /* 確保顯示在頂層 */
-  transition: bottom 0.3s; /* 加入過渡效果 */
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 .footer-content {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .school-logo {
-  width: 24px;  /* 設定圖示大小，與 v-icon 一致 */
-  height: 24px; /* 設定圖示大小，與 v-icon 一致 */
-  margin-right: 8px; /* 圖示與文字之間的間距 */
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
 }
 
 .footer-text {
   color: #ffffff;
   font-size: 16px;
-  margin-right: 10px; /* 文字與圖示之間留一些間距 */
+  margin-right: 10px;
 }
 
 .v-btn {
-  margin-left: 10px; /* 調整圖示之間的間距 */
+  margin-left: 10px;
 }
 </style>

@@ -2,16 +2,16 @@
   <v-app>
     <div>
       <!-- 桌機版 -->
-      <AppBar v-if="!smAndDown" />
+      <AppBar v-if="!mdAndDown" />
       <!-- 手機版 -->
-      <AppBarPhone v-if="smAndDown" />
+      <AppBarPhone v-if="mdAndDown" />
 
       <v-main style="background: linear-gradient(to bottom, #ffffff, #b1dcf9); height: auto; position: relative;">
         <v-container class="d-flex justify-center align-center" style="height: 100%; width: 100%;">
           <v-sheet :height="'95%'" :width="'95%'" color="transparent">
             <VideoContainer />
-            <Character v-if="!smAndDown" />
-            <CharacterPhone v-if="smAndDown" />
+            <Character v-if="!mdAndDown" />
+            <CharacterPhone v-if="mdAndDown" />
             <Section1 />
             <Form />
             <Coral />
@@ -25,6 +25,6 @@
 <script lang="ts" setup>
 import { useDisplay } from "vuetify";
 
-// 從 Vuetify 的 useDisplay 中取得 smAndDown
-const { smAndDown } = useDisplay();
+// 從 Vuetify 的 useDisplay 中取得 mdAndDown
+const { mdAndDown } = useDisplay();
 </script>
