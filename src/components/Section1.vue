@@ -122,12 +122,23 @@
 
   <!-- 組別介紹 -->
   <v-container id="all" cols="12" style="width: 100%;">
-  <!-- 顯示分類按鈕 -->
-  <v-row cols="12" no-wrap justify="center" style="width: 100%;">
-    <v-btn v-for="category in categories" :key="category" @click="filterCategory(category)" class="button-row" :style="buttonRow">
-      {{ category }}
-    </v-btn>
-  </v-row>
+    <!-- 顯示分類按鈕 -->
+    <v-row no-gutters justify="center" style="width: 100%;" dense>
+      <v-col
+        v-for="category in categories"
+        :key="category"
+        cols="3"
+        class="d-flex justify-center align-center"
+      >
+        <v-btn
+          :class="['button-row', { active: category === selectedCategory }]"
+          :style="buttonRow"
+          @click="filterCategory(category)"
+        >
+          {{ category }}
+        </v-btn>
+      </v-col>
+    </v-row>
 
   <!-- 顯示篩選後的v-card -->
   <v-row>

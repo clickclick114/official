@@ -1,16 +1,27 @@
 <template>
   <!-- 頁腳 -->
-  <v-footer class="page-footer">
+  <v-footer
+    class="page-footer"
+    v-show="showFooter"
+  >
     <div class="footer-content">
       <!-- 國立臺中科技大學文字 -->
       <img src="@/assets/logo.png" alt="School Logo" class="school-logo" />
-      <p class="footer-text" :style="footerText">國立臺中科技大學 多媒體設計系 114級</p>
+      <p class="footer-text" :style="footerText">
+        國立臺中科技大學 多媒體設計系 114級
+      </p>
 
       <!-- 社群圖示 -->
-      <v-btn icon @click="openLink('https://www.facebook.com/profile.php?id=61560214634108&locale=zh_TW')">
+      <v-btn
+        icon
+        @click="openLink('https://www.facebook.com/profile.php?id=61560214634108&locale=zh_TW')"
+      >
         <v-icon color="white">mdi-facebook</v-icon>
       </v-btn>
-      <v-btn icon @click="openLink('https://www.instagram.com/click_114nutcmd/')">
+      <v-btn
+        icon
+        @click="openLink('https://www.instagram.com/click_114nutcmd/')"
+      >
         <v-icon color="white">mdi-instagram</v-icon>
       </v-btn>
     </div>
@@ -18,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useDisplay } from 'vuetify';
 
 // 解構 mdAndDown，偵測螢幕尺寸
@@ -32,6 +43,31 @@ const footerText = computed(() => ({
 const openLink = (url: string) => {
   window.open(url, '_blank');
 };
+
+// 控制頁腳的顯示與隱藏
+const showFooter = ref(true);
+let lastScrollTop = 0;
+
+const handleScroll = () => {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  if (scrollTop > lastScrollTop) {
+    // 向下滾動：隱藏頁腳
+    showFooter.value = false;
+  } else {
+    // 向上滾動：顯示頁腳
+    showFooter.value = true;
+  }
+  lastScrollTop = Math.max(scrollTop, 0); // 避免負值
+};
+
+// 綁定滾動事件
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <style scoped>
@@ -44,6 +80,9 @@ const openLink = (url: string) => {
   display: flex;
   justify-content: center; /* 內容水平置中 */
   align-items: center;     /* 內容垂直置中 */
+  position: fixed;         /* 固定在螢幕底部 */
+  z-index: 2;              /* 確保顯示在頂層 */
+  transition: bottom 0.3s; /* 加入過渡效果 */
 }
 
 .footer-content {
