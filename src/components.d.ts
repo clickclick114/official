@@ -30,6 +30,7 @@ declare module 'vue' {
     JoystickJellyfishKeycapModel: typeof import('./components/Models/JoystickJellyfishKeycapModel.vue')['default']
     LensCrab: typeof import('./components/Characters/LensCrab.vue')['default']
     LensCrabModel: typeof import('./components/Models/LensCrabModel.vue')['default']
+    LoadingScreen: typeof import('./components/LoadingScreen.vue')['default']
     RadarChart: typeof import('./components/Charts/RadarChart.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

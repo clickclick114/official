@@ -1,49 +1,42 @@
 <template>
-  <v-app>
+  <!-- 2秒 Loading 畫面 -->
+  <LoadingScreen v-if="isLoading" />
+
+  <!-- 主畫面 -->
+  <v-app v-show="!isLoading">
     <v-main>
       <router-view />
     </v-main>
-    <!-- 根據路由條件渲染頁腳 -->
     <AppFooter v-if="showFooter" />
   </v-app>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, onMounted, nextTick } from 'vue';
 import AppFooter from '@/components/AppFooter.vue';
+import LoadingScreen from '@/components/LoadingScreen.vue';
 
-// 控制頁腳的顯示狀態
-const showFooter = ref(true); // 初始為顯示
-const footerHeight = 64; // 頁腳高度（根據實際需求調整）
-const threshold = 50; // 提前顯示的距離
-
-const route = useRoute(); // 取得當前路由
-const isFooterRoute = computed(() => !['no-footer-route1', 'no-footer-route2'].includes(route.name as string)); // 排除不需要頁腳的路由
-
-// 滾動事件邏輯
-let lastScrollTop = 0;
-const handleScroll = () => {
-  const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-  const documentHeight = document.documentElement.scrollHeight;
-  const windowHeight = window.innerHeight;
-
-  if (currentScroll + windowHeight >= documentHeight - footerHeight - threshold) {
-    showFooter.value = isFooterRoute.value; // 僅在特定路由顯示
-  } else if (currentScroll > lastScrollTop) {
-    showFooter.value = false; // 向下滾動隱藏
-  } else {
-    showFooter.value = isFooterRoute.value; // 向上滾動顯示
-  }
-
-  lastScrollTop = Math.max(0, currentScroll);
-};
+const isLoading = ref(true);
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
+  setTimeout(() => {
+    nextTick(() => {
+      isLoading.value = false;
+    });
+  }, 2000);
 });
 
-onBeforeUnmount(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
+const showFooter = ref(true);
 </script>
+
+<style scoped>
+/* 確保 Loading 畫面顯示時，主畫面不會干擾 */
+.v-app {
+  display: none;
+}
+
+/* 2秒後顯示主畫面 */
+.v-app[data-loaded="true"] {
+  display: block;
+}
+</style>
