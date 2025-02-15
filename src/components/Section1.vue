@@ -302,30 +302,44 @@ const buttonRow = computed(() => ({
 // 定義分類按鈕
 const categories = ['all', 'game', 'animation', 'short film'];
 
-// 設定當前選擇的分類
-const selectedCategory = ref<string>('all'); // 設定頁面載入時的分類
+// 設定當前選擇的分類，預設為空，代表顯示所有卡片
+const selectedCategory = ref<string>('');
 
 // 根據選擇的分類來篩選圖片
 const filteredPages = computed(() => {
   if (!pages.value) {
     console.error("Pages data is not available");
+    return []; // 頁面數據未加載時返回空陣列
+  }
+
+  // 當 selectedCategory 為空時返回空陣列，表示尚未選擇分類
+  if (selectedCategory.value === '') {
     return [];
   }
+
+  // 如果選擇的是 'all'，則返回所有圖片
   if (selectedCategory.value === 'all') {
-    return pages.value; // 顯示所有的 v-card
+    return pages.value;
   }
+
+  // 根據 selectedCategory 篩選圖片
   return pages.value.filter(page => page.majorCategory === selectedCategory.value);
 });
 
+
 // 用於切換分類的函數
 const filterCategory = (category: string) => {
-  selectedCategory.value = category;
+  // 如果再次點擊同一個分類，則收起該分類的選單
+  if (selectedCategory.value === category) {
+    selectedCategory.value = ''; // 收起所有選單
+  } else {
+    selectedCategory.value = category; // 展開對應的分類
+  }
 };
 
 // 用於滾動到特定卡片的函數
 const navigateToCard = (groupName: string) => {
-  // 切換到 "all" 類別
-  selectedCategory.value = "all";
+  selectedCategory.value = "all"; // 切換到 "all" 類別
 
   // 使用 Vue 的 nextTick 確保畫面更新後再執行滾動
   nextTick(() => {

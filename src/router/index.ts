@@ -1,17 +1,26 @@
 /**
  * router/index.ts
  *
- * Automatic routes for `./src/pages/*.vue`
+ * Automatic routes for ./src/pages/*.vue
  */
 
 // Composables
 import { createRouter, createWebHistory } from 'vue-router/auto'
 import { setupLayouts } from 'virtual:generated-layouts'
-import { routes } from 'vue-router/auto-routes'
+import { routes as autoRoutes } from 'vue-router/auto-routes' // 這裡改為 autoRoutes，避免衝突
+
+const customRoutes = [
+  {
+    path: '/form',
+    name: 'FormPage',
+    component: () => import('@/pages/FormPage.vue'), // 根據你的頁面文件
+  },
+  // 其他路由
+];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: setupLayouts(routes),
+  routes: setupLayouts([...autoRoutes, ...customRoutes]), // 合併自動路由和自定義路由
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
       return {

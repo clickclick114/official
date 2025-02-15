@@ -3,7 +3,7 @@
   <LoadingScreen v-if="isLoading" />
 
   <!-- 主畫面 -->
-  <v-app v-show="!isLoading">
+  <v-app v-show="!isLoading" :data-loaded="!isLoading">
     <v-main>
       <router-view />
     </v-main>
@@ -38,13 +38,5 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* 確保 Loading 畫面顯示時，主畫面不會干擾 */
-.v-app {
-  display: none;
-}
-
-/* 2秒後顯示主畫面 */
-.v-app[data-loaded="true"] {
-  display: block;
-}
+/* 移除 display: none，改用 v-show 控制顯示 */
 </style>

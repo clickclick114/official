@@ -1,14 +1,6 @@
 <template>
   <v-app>
-    <!-- 3 秒 Loading 畫面 -->
-    <v-overlay v-if="loading" class="loading-overlay" persistent>
-      <v-container class="fill-height d-flex justify-center align-center">
-        <v-progress-circular indeterminate size="64" color="white"></v-progress-circular>
-      </v-container>
-    </v-overlay>
-
-    <!-- 主內容 -->
-    <div v-show="!loading">
+    <div>
       <!-- 桌機版 -->
       <AppBar v-if="!mdAndDown" />
       <!-- 手機版 -->
@@ -18,10 +10,9 @@
         <v-container class="d-flex justify-center align-center" style="height: 100%; width: 100%;">
           <v-sheet :height="'95%'" :width="'95%'" color="transparent">
             <VideoContainer />
+            <Section1 />
             <Character v-if="!mdAndDown" />
             <CharacterPhone v-if="mdAndDown" />
-            <Section1 />
-            <Form />
             <Coral />
           </v-sheet>
         </v-container>
@@ -31,26 +22,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
 import { useDisplay } from "vuetify";
 
-// 控制 Loading 畫面的變數
-const loading = ref(true);
+// 從 Vuetify 的 useDisplay 中取得 mdAndDown
 const { mdAndDown } = useDisplay();
-
-onMounted(() => {
-  // 3 秒後隱藏 Loading 畫面
-  setTimeout(() => {
-    loading.value = false;
-  }, 3000);
-});
 </script>
-
-<style scoped>
-.loading-overlay {
-  background-color: #001F3F !important; /* 深藍色背景 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>

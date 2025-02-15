@@ -32,6 +32,7 @@ declare module 'vue' {
     LensCrab: typeof import('./components/Characters/LensCrab.vue')['default']
     LensCrabModel: typeof import('./components/Models/LensCrabModel.vue')['default']
     LoadingScreen: typeof import('./components/LoadingScreen.vue')['default']
+    Question: typeof import('./components/Question.vue')['default']
     RadarChart: typeof import('./components/Charts/RadarChart.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

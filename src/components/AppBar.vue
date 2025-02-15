@@ -20,32 +20,26 @@
       </div>
       <template v-slot:append style="background: yellow; width: 100%;">
         <v-row class="button-row" no-wrap justify="start">
-          <!-- 角色履歷選單 -->
+          <!-- 心理測驗按鈕，點擊後跳轉 -->
+          <v-btn class="custom-button" size="x-large" @click="redirectToTest">
+            心理測驗
+          </v-btn>
+
+          <!-- 展場問卷按鈕 -->
           <v-menu transition="scroll-y-transition" open-on-hover>
             <template v-slot:activator="{ props }">
               <v-col cols="12">
                 <v-btn v-bind="props" class="custom-button" size="x-large">
-                  角色履歷
+                  展場問卷
                 </v-btn>
               </v-col>
             </template>
           </v-menu>
 
-          <!-- 各組介紹選單 -->
-          <v-menu transition="scroll-y-transition" open-on-hover>
-            <template v-slot:activator="{ props }">
-              <v-col cols="12">
-                <v-btn v-bind="props" class="custom-button" size="x-large">
-                  各組介紹
-                </v-btn>
-              </v-col>
-            </template>
-            <v-list>
-              <v-list-item v-for="(item, index) in groupItems" :key="index">
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+          <!-- 回饋問卷按鈕，點擊後跳轉 -->
+          <v-btn class="custom-button" size="x-large" @click="redirectToFeedback">
+            回饋問卷
+          </v-btn>
 
           <!-- 關於我們選單 -->
           <v-menu transition="scroll-y-reverse-transition" open-on-hover>
@@ -70,16 +64,21 @@
 
 <script setup lang="ts">
 // 群組項目
-const groupItems = [
-  { title: "GAMES", id: "games", category: "game" },
-  { title: "ANIMATIONS", id: "animations", category: "animation" },
-  { title: "SHORT FILM", id: "short-film", category: "short film" },
-];
-
 const aboutItems = [
   { title: "作品理念", id: "click", category: "click" },
   { title: "聯絡我們" },
+  { title: "回饋問卷"}
 ];
+
+// 跳轉到心理測驗頁面
+const redirectToTest = () => {
+  window.open('https://clickclick114.github.io/official/test/', '_blank');
+};
+
+// 跳轉到回饋問卷頁面
+const redirectToFeedback = () => {
+  window.open('https://clickclick114.github.io/official/form/', '_blank');
+};
 </script>
 
 <style scoped>
