@@ -2,16 +2,11 @@
   <div class="toolbar-div" :style="{ top: showHeader ? '0' : '-64px' }">
     <v-app-bar class="custom-toolbar" density="default" app fixed>
       <div class="custom-title">
-        <!-- 英文標題 -->
+        <!-- 英文標題，位於左側 -->
         <div class="title-english">
-          DEPARTMENT OF MULTIMEDIA DESIGN<br />
+          DEPARTMENT OF<br />
+          MULTIMEDIA DESIGN<br />
           OF NUTC 114TH
-        </div>
-
-        <!-- 中文標題 -->
-        <div class="title-chinese">
-          國立臺中科技大學 多媒體設計系<br />
-          114級畢業製作
         </div>
       </div>
 
@@ -19,93 +14,19 @@
         <v-img src="@/assets/click_title.png" height="80%" />
       </div>
 
-      <template v-slot:append>
-        <div class="button-row">
-          <v-menu transition="scroll-y-reverse-transition" offset-y>
-            <template v-slot:activator="{ props }">
-              <v-icon v-bind="props" style="cursor: pointer;">mdi-menu</v-icon>
-            </template>
-            <v-list>
-              <v-list-item
-                v-for="(item, index) in mainMenuItems"
-                :key="index"
-                @mouseenter="handleMouseEnter(item.type)"
-              >
-                <v-list-item-title class="d-flex align-center">
-                  {{ item.title }}
-                  <v-icon
-                    v-if="item.type === 'group' || item.type === 'about'"
-                    class="ml-2"
-                  >
-                    mdi-chevron-right
-                  </v-icon>
-                </v-list-item-title>
-                <v-menu
-                  v-if="item.type === 'group' || item.type === 'about'"
-                  offset-x
-                  transition="scroll-y-reverse-transition"
-                >
-                  <template v-slot:activator="{ props }">
-                    <v-icon v-bind="props" style="cursor: pointer;">mdi-chevron-right</v-icon>
-                  </template>
-                  <v-list>
-                    <v-list-item
-                      v-for="(subItem, subIndex) in getSubmenuItems(item.type)"
-                      :key="subIndex"
-                    >
-                      <v-list-item-title>{{ subItem.title }}</v-list-item-title>
-                    </v-list-item>
-                  </v-list>
-                </v-menu>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+      <div class="custom-title">
+        <!-- 中文標題，位於右側 -->
+        <div class="title-chinese">
+          國立臺中科技大學 多媒體設計系<br />
+          114級畢業製作
         </div>
-      </template>
+      </div>
     </v-app-bar>
   </div>
 </template>
 
-
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
-
-// 定義主選單類型
-type MenuType = "group" | "none" | "about";
-
-interface MainMenuItem {
-  title: string;
-  type: MenuType;
-}
-
-// 主選單項目
-const mainMenuItems: MainMenuItem[] = [
-  { title: "角色履歷", type: "none" },
-  { title: "各組介紹", type: "group" },
-  { title: "關於我們", type: "about" },
-];
-
-// 子選單項目
-const groupItems = [
-  { title: "GAMES", id: "games", category: "game" },
-  { title: "ANIMATIONS", id: "animations", category: "animation" },
-  { title: "SHORT FILM", id: "short-film", category: "short film" },
-];
-
-const aboutItems = [
-  { title: "作品理念", id: "click", category: "click" },
-  { title: "聯絡我們" },
-];
-
-const getSubmenuItems = (type: MenuType) => {
-  if (type === "group") return groupItems;
-  if (type === "about") return aboutItems;
-  return [];
-};
-
-const handleMouseEnter = (type: MenuType) => {
-  if (type === "none") return;
-};
 
 // 控制 AppBar 顯示與隱藏
 const showHeader = ref(true);
@@ -131,7 +52,6 @@ onBeforeUnmount(() => {
 });
 </script>
 
-
 <style scoped>
 .toolbar-div {
   position: fixed;
@@ -146,7 +66,7 @@ onBeforeUnmount(() => {
 
 .custom-title {
   font-weight: normal;
-  text-align: left;
+  text-align: center;
   color: white;
   height: 100%;
   min-width: 33%;
@@ -154,19 +74,22 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 1%;
-  padding-left: 1%;
+  padding-top: 0;
+  padding-left: 3%;
+  padding-right: 3%;
   gap: 5px;
 }
 
 .title-english {
-  font-size: 0.4rem;
+  font-size: 0.5rem;
   line-height: 1.5;
+  text-align: left;
 }
 
 .title-chinese {
   font-size: 0.4rem;
-  line-height: 1.6;
+  line-height: 1.8;
+  text-align: right;
 }
 
 .image-container {
@@ -177,15 +100,4 @@ onBeforeUnmount(() => {
   min-width: 33%;
   max-width: 33%;
 }
-
-.button-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: nowrap;
-  min-width: 33%;
-  max-width: 33%;
-}
 </style>
-
-
