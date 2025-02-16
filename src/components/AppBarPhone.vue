@@ -87,7 +87,7 @@ onBeforeUnmount(() => {
 }
 
 .title-chinese {
-  font-size: 0.4rem;
+  font-size: 0.45rem;
   line-height: 1.8;
   text-align: right;
 }

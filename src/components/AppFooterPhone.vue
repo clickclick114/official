@@ -1,15 +1,11 @@
 <template>
-  <v-footer
-    class="custom-footer"
-    app
-    fixed
-    :style="footerStyle"
-  >
+  <v-footer class="custom-footer" app fixed :style="footerStyle">
     <v-container class="footer-container">
       <v-row dense justify="center" align="center">
         <v-col v-for="(item, index) in menuItems" :key="index" cols="2" class="footer-item" @click="handleClick(item)">
           <v-btn icon>
-            <v-icon size="32" color="white">{{ item.icon }}</v-icon>
+            <v-img v-if="item.image" :src="item.image" alt="icon" class="footer-icon"/>
+            <v-icon v-else size="32" color="white">{{ item.icon }}</v-icon>
           </v-btn>
           <p class="footer-text">{{ item.text }}</p>
         </v-col>
@@ -18,15 +14,21 @@
   </v-footer>
 </template>
 
+
+
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 
+import testIcon from '@/assets/icons/test.png';
+import feedbackIcon from '@/assets/icons/feedback.png';
+import aboutIcon from '@/assets/icons/CLICK.png';
+
 const menuItems = [
-  { icon: 'mdi-brain', text: '心理測驗', link: 'https://clickclick114.github.io/official/test/' },
+  { image: testIcon, text: '心理測驗', link: 'https://clickclick114.github.io/official/test/' },
   { icon: 'mdi-instagram', text: 'Instagram', link: 'https://www.instagram.com/click_114nutcmd/' },
   { icon: 'mdi-file-document-edit', text: '展場問卷', link: '#' },
-  { icon: 'mdi-form-select', text: '回饋問卷', link: 'https://clickclick114.github.io/official/test/' },
-  { icon: 'mdi-information', text: '關於我們', expandable: true }
+  { image: feedbackIcon, text: '回饋問卷', link: 'https://clickclick114.github.io/official/test/' },
+  { image: aboutIcon, text: '關於我們', expandable: true }
 ];
 
 const showFooter = ref(false);  // 控制頁腳顯示
@@ -104,6 +106,12 @@ const footerStyle = computed(() => ({
   text-align: center;
   color: white;
 }
+
+.footer-icon {
+  width: 32px;
+  height: 32px;
+}
+
 
 .footer-text {
   font-size: 12px;
