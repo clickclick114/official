@@ -15,6 +15,11 @@ const customRoutes = [
     name: 'FormPage',
     component: () => import('@/pages/FormPage.vue'), // 根據你的頁面文件
   },
+  {
+    path: '/test',
+    name: 'Test',
+    component: () => import('@/pages/Tests.vue'),
+  },
   // 其他路由
 ];
 
