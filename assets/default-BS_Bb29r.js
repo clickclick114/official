@@ -1,0 +1,1 @@
+import{an as o,ah as n,ab as e,ao as r,ap as s,a8 as _,e as a,aj as p}from"./index-CCDsXa9C.js";const i=o({__name:"default",setup(c){return(l,u)=>{const t=s("router-view");return _(),n(r,null,{default:e(()=>[a(p,null,{default:e(()=>[a(t)]),_:1})]),_:1})}}});export{i as default};
