@@ -23,6 +23,13 @@
       />
       <TresAmbientLight :intensity="2" />
     </TresCanvas>
+    <div class="model-hint">
+      <v-icon
+        icon="mdi-gesture-tap-hold"
+        class="me-0"
+      />
+      <!-- 拖曳以檢視模型 -->
+    </div>
   </div>
 </template>
   
@@ -52,5 +59,25 @@ const gl = {
   width: 100% !important;
   height: 100% !important;
   border-radius: 8px;
+}
+
+.model-hint {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  transition: opacity 0.3s ease;
+  opacity: 0.8;
+}
+
+.model-hint:hover {
+  opacity: 1;
 }
 </style> 
