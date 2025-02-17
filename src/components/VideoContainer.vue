@@ -31,7 +31,7 @@ const Video = computed(() => ({
   height: mdAndDown.value ? '100%' : '80%',
 }));
 const videos = ref([
-  "https://www.youtube.com/embed/xWKHN5Rf838?si=n2gEaq_iiGY5pamw",
+  "https://www.youtube.com/embed/eoyfCs8BNZE",
 ]);
 </script>
 
@@ -44,6 +44,7 @@ const videos = ref([
   width: 100%;        /* 設置容器寬度為 100% */
   padding-top: 56.25%; /* 16:9比例 (9/16 = 0.5625) */
   overflow: hidden;   /* 確保內容不會溢出容器 */
+  border-radius: 10px; /* 圓角效果 (可選) */
 }
 
 .responsive-video {
