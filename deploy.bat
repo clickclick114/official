@@ -24,6 +24,9 @@ call npm run build
 :: Copy version file to dist
 copy version.txt dist\
 
+:: Copy 404.html to dist
+copy 404.html dist\
+
 :: Navigate to build directory
 cd dist
 

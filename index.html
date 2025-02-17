@@ -6,6 +6,22 @@
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Click</title>
+    <script>
+        // Handle redirect from 404.html
+        (function() {
+            const redirect = localStorage.getItem('redirect');
+            const repo = localStorage.getItem('repo');
+            if (redirect && repo) {
+                localStorage.removeItem('redirect');
+                localStorage.removeItem('repo');
+                const cleanRedirect = redirect.replace(/^\/+/, '');
+                const basePath = '/' + repo + '/';
+                if (cleanRedirect !== location.pathname.slice(basePath.length)) {
+                    window.history.replaceState(null, null, basePath + cleanRedirect);
+                }
+            }
+        })();
+    </script>
 </head>
 
 <body>
