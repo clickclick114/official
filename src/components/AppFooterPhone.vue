@@ -28,7 +28,7 @@ const menuItems = [
   { icon: 'mdi-instagram', text: 'Instagram', link: 'https://www.instagram.com/click_114nutcmd/' },
   { icon: 'mdi-file-document-edit', text: '展場問卷', link: '#' },
   { image: feedbackIcon, text: '回饋問卷', link: 'https://clickclick114.github.io/official/test/' },
-  { image: aboutIcon, text: '關於我們', expandable: true }
+  { image: aboutIcon, text: '可立可', expandable: true }
 ];
 
 const showFooter = ref(false);  // 控制頁腳顯示

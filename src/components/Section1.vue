@@ -121,7 +121,8 @@
 
 
 <!-- 組別介紹 -->
-<v-container id="all" cols="12" style="width: 100%;">
+<v-container id="all" cols="12" 
+  style="width: 100%; color: #001ded; background-color: rgba(255, 255, 255, 0.4); border-radius: 16px; padding: 16px;padding-bottom: 40px;">
 <v-container :style="containerStyle">
 <v-row no-gutters justify="center" dense>
   <v-col
@@ -542,7 +543,6 @@ width: 100%; /* 根據 v-col 自適應 */
 height: 60px; /* 設定按鈕的具體高度 */
 padding: 0;
 overflow: hidden;
-box-shadow: none; /* 移除陰影 */
 border: none; /* 可選，移除按鈕的預設邊框 */
 }
 

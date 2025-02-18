@@ -18,7 +18,7 @@
       <v-img src="@/assets/click_title.png" height="80%" />
     </div>
 
-    <template v-slot:append style="background: yellow; width: 100%;">
+    <template v-slot:append>
       <v-row class="button-row" no-wrap justify="start">
         <!-- 心理測驗按鈕，點擊後跳轉 -->
         <v-btn class="custom-button" size="x-large" @click="redirectToTest">
@@ -46,16 +46,8 @@
             </v-col>
           </template>
           <v-list>
-            <v-list-item
-              v-for="(item, index) in aboutItems"
-              :key="index"
-              @click="handleItemClick(item)"
-            >
+            <v-list-item v-for="item in aboutItems" :key="item.title" @click="handleItemClick(item)">
               <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item>
-            <!-- 回饋問卷 -->
-            <v-list-item @click="redirectToFeedback">
-              <v-list-item-title>回饋問卷</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -65,37 +57,28 @@
 </template>
 
 <script setup lang="ts">
-// 定義 AboutItem 介面
+// 定義關於我們選單項目
 interface AboutItem {
   title: string;
-  id?: string;
-  category?: string;
-  click?: string;
+  url: string;
 }
 
-// 群組項目
 const aboutItems: AboutItem[] = [
-  { title: "作品理念", id: "click", category: "click" },
-  { title: "聯絡我們" },
+  { title: "作品理念", url: "https://clickclick114.github.io/official/#click" },
+  { title: "回饋問卷", url: "https://clickclick114.github.io/official/form/" }
 ];
+
+// 處理點擊事件，跳轉到指定網址
+const handleItemClick = (item: AboutItem) => {
+  window.location.href = item.url;
+};
 
 // 跳轉到心理測驗頁面
 const redirectToTest = () => {
   window.open('https://clickclick114.github.io/official/test/', '_blank');
 };
-
-// 跳轉到回饋問卷頁面
-const redirectToFeedback = () => {
-  window.open('https://clickclick114.github.io/official/form/', '_blank');
-};
-
-// 處理點擊事件
-const handleItemClick = (item: AboutItem) => {
-  if (item.click && typeof (window as any)[item.click] === 'function') {
-    (window as any)[item.click](); // 顯式類型斷言
-  }
-};
 </script>
+
 
 <style scoped>
 .v-app-bar {
