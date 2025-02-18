@@ -1,1 +1,0 @@
-import{ak as o,ah as n,ab as e,al as r,am as s,a8 as _,e as a,aj as l}from"./index-BKm75uZ9.js";const f=o({__name:"default",setup(c){return(p,u)=>{const t=s("router-view");return _(),n(r,null,{default:e(()=>[a(l,null,{default:e(()=>[a(t)]),_:1})]),_:1})}}});export{f as default};
