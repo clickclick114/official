@@ -1,5 +1,10 @@
 <template>
-  <v-app-bar class="custom-toolbar" density="prominent" app fixed>
+  <v-app-bar
+    class="custom-toolbar"
+    density="prominent"
+    app
+    fixed
+  >
     <div class="custom-title">
       <!-- 英文標題 -->
       <div class="title-english">
@@ -15,21 +20,43 @@
     </div>
 
     <div class="image-container">
-      <v-img src="@/assets/click_title.png" height="80%" />
+      <v-img
+        src="@/assets/click_title.png"
+        height="80%"
+      />
     </div>
 
     <template v-slot:append>
+<<<<<<< HEAD
       <v-row class="button-row" no-wrap justify="start">
+=======
+      <v-row
+        class="button-row"
+        no-wrap
+        justify="start"
+      >
+>>>>>>> ee723b45f8f213d876c38205a03a4d16833f7fb3
         <!-- 心理測驗按鈕，點擊後跳轉 -->
-        <v-btn class="custom-button" size="x-large" @click="redirectToTest">
+        <v-btn
+          class="custom-button"
+          size="x-large"
+          @click="redirectToTest"
+        >
           心理測驗
         </v-btn>
 
         <!-- 展場問卷按鈕 -->
-        <v-menu transition="scroll-y-transition" open-on-hover>
+        <v-menu
+          transition="scroll-y-transition"
+          open-on-hover
+        >
           <template v-slot:activator="{ props }">
             <v-col cols="12">
-              <v-btn v-bind="props" class="custom-button" size="x-large">
+              <v-btn
+                v-bind="props"
+                class="custom-button"
+                size="x-large"
+              >
                 展場問卷
               </v-btn>
             </v-col>
@@ -37,10 +64,17 @@
         </v-menu>
 
         <!-- 關於我們選單 -->
-        <v-menu transition="scroll-y-reverse-transition" open-on-hover>
+        <v-menu
+          transition="scroll-y-reverse-transition"
+          open-on-hover
+        >
           <template v-slot:activator="{ props }">
             <v-col cols="12">
-              <v-btn v-bind="props" class="custom-button" size="x-large">
+              <v-btn
+                v-bind="props"
+                class="custom-button"
+                size="x-large"
+              >
                 關於我們
               </v-btn>
             </v-col>
@@ -57,7 +91,16 @@
 </template>
 
 <script setup lang="ts">
+<<<<<<< HEAD
 // 定義關於我們選單項目
+=======
+import { useRouter } from "vue-router";
+
+// 取得 Vue Router 實例
+const router = useRouter();
+
+// 定義 AboutItem 介面
+>>>>>>> ee723b45f8f213d876c38205a03a4d16833f7fb3
 interface AboutItem {
   title: string;
   url: string;
@@ -68,15 +111,35 @@ const aboutItems: AboutItem[] = [
   { title: "回饋問卷", url: "https://clickclick114.github.io/official/form/" }
 ];
 
+<<<<<<< HEAD
 // 處理點擊事件，跳轉到指定網址
 const handleItemClick = (item: AboutItem) => {
   window.location.href = item.url;
 };
 
 // 跳轉到心理測驗頁面
+=======
+// 使用 router.push 進行內部路由跳轉
+>>>>>>> ee723b45f8f213d876c38205a03a4d16833f7fb3
 const redirectToTest = () => {
-  window.open('https://clickclick114.github.io/official/test/', '_blank');
+  // 跳轉至心理測驗頁面（對應路由 /test）
+  router.push("/test");
 };
+<<<<<<< HEAD
+=======
+
+const redirectToFeedback = () => {
+  // 跳轉至回饋問卷頁面（對應路由 /form）
+  router.push("/form");
+};
+
+// 處理關於我們清單中的項目點擊（根據需求，可加入其他邏輯）
+const handleItemClick = (item: AboutItem) => {
+  if (item.click && typeof (window as any)[item.click] === "function") {
+    (window as any)[item.click](); // 顯式類型斷言
+  }
+};
+>>>>>>> ee723b45f8f213d876c38205a03a4d16833f7fb3
 </script>
 
 
@@ -135,7 +198,7 @@ const redirectToTest = () => {
 }
 
 .custom-button {
-  background-image: url('@/assets/button.png');
+  background-image: url("@/assets/button.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

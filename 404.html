@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+        // Get the repository name from the pathname (e.g., /official/)
+        const repo = location.pathname.split('/')[1];
+        // Get the remaining path after the repo name
+        const segment = location.pathname.slice(('/' + repo + '/').length) + location.search + location.hash;
+        // Store both the repo name and the path
+        localStorage.setItem('redirect', segment);
+        localStorage.setItem('repo', repo);
+        // Redirect to the index page in the correct subdirectory
+        window.location.href = '/' + repo + '/index.html';
+    </script>
+</head>
+<body>
+    Redirecting...
+</body>
+</html> 
