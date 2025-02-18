@@ -51,27 +51,11 @@ import aboutIcon from "@/assets/icons/CLICK.png";
 const router = useRouter();
 
 const menuItems = [
-<<<<<<< HEAD
   { image: testIcon, text: '心理測驗', link: 'https://clickclick114.github.io/official/test/' },
   { icon: 'mdi-instagram', text: 'Instagram', link: 'https://www.instagram.com/click_114nutcmd/' },
   { icon: 'mdi-file-document-edit', text: '展場問卷', link: '#' },
   { image: feedbackIcon, text: '回饋問卷', link: 'https://clickclick114.github.io/official/test/' },
   { image: aboutIcon, text: '可立可', expandable: true }
-=======
-  { image: testIcon, text: "心理測驗", link: "./test/" },
-  {
-    icon: "mdi-instagram",
-    text: "Instagram",
-    link: "https://www.instagram.com/click_114nutcmd/",
-  },
-  { icon: "mdi-file-document-edit", text: "展場問卷", link: "#" },
-  {
-    image: feedbackIcon,
-    text: "回饋問卷",
-    link: "./form/",
-  },
-  { image: aboutIcon, text: "關於我們", expandable: true },
->>>>>>> ee723b45f8f213d876c38205a03a4d16833f7fb3
 ];
 
 const showFooter = ref(false); // 控制頁腳顯示

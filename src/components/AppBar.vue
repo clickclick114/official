@@ -27,15 +27,7 @@
     </div>
 
     <template v-slot:append>
-<<<<<<< HEAD
       <v-row class="button-row" no-wrap justify="start">
-=======
-      <v-row
-        class="button-row"
-        no-wrap
-        justify="start"
-      >
->>>>>>> ee723b45f8f213d876c38205a03a4d16833f7fb3
         <!-- 心理測驗按鈕，點擊後跳轉 -->
         <v-btn
           class="custom-button"
@@ -91,16 +83,9 @@
 </template>
 
 <script setup lang="ts">
-<<<<<<< HEAD
+import router from '@/router';
+
 // 定義關於我們選單項目
-=======
-import { useRouter } from "vue-router";
-
-// 取得 Vue Router 實例
-const router = useRouter();
-
-// 定義 AboutItem 介面
->>>>>>> ee723b45f8f213d876c38205a03a4d16833f7fb3
 interface AboutItem {
   title: string;
   url: string;
@@ -111,35 +96,16 @@ const aboutItems: AboutItem[] = [
   { title: "回饋問卷", url: "https://clickclick114.github.io/official/form/" }
 ];
 
-<<<<<<< HEAD
 // 處理點擊事件，跳轉到指定網址
 const handleItemClick = (item: AboutItem) => {
   window.location.href = item.url;
 };
 
 // 跳轉到心理測驗頁面
-=======
-// 使用 router.push 進行內部路由跳轉
->>>>>>> ee723b45f8f213d876c38205a03a4d16833f7fb3
 const redirectToTest = () => {
   // 跳轉至心理測驗頁面（對應路由 /test）
   router.push("/test");
 };
-<<<<<<< HEAD
-=======
-
-const redirectToFeedback = () => {
-  // 跳轉至回饋問卷頁面（對應路由 /form）
-  router.push("/form");
-};
-
-// 處理關於我們清單中的項目點擊（根據需求，可加入其他邏輯）
-const handleItemClick = (item: AboutItem) => {
-  if (item.click && typeof (window as any)[item.click] === "function") {
-    (window as any)[item.click](); // 顯式類型斷言
-  }
-};
->>>>>>> ee723b45f8f213d876c38205a03a4d16833f7fb3
 </script>
 
 
