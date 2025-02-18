@@ -65,9 +65,13 @@ let lastScrollTop = 0;
 // 處理點擊事件
 const handleClick = (item: any) => {
   if (item.expandable) {
-    router.push("https://clickclick114.github.io/official/");
+    router.push("/"); // 正確的 Vue Router 路由跳轉
   } else if (item.link) {
-    router.push(item.link);
+    if (item.link.startsWith("http")) {
+      window.location.href = item.link; // 外部網址用 window.location.href
+    } else {
+      router.push(item.link); // 內部路由正常使用 Vue Router
+    }
   }
 };
 
