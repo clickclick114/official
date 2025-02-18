@@ -5,8 +5,8 @@
         <!-- 英文標題，位於左側 -->
         <div class="title-english">
           DEPARTMENT OF<br />
-          MULTIMEDIA DESIGN<br />
-          OF NUTC 114TH
+          MULTIMEDIA DESIGN OF<br />
+          NUTC 114TH
         </div>
       </div>
 
@@ -87,8 +87,8 @@ onBeforeUnmount(() => {
 }
 
 .title-chinese {
-  font-size: 0.45rem;
-  line-height: 1.8;
+  font-size: 0.5rem;
+  line-height: 1.9;
   text-align: right;
 }
 

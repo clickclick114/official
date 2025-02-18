@@ -3,7 +3,12 @@
   <LoadingScreen v-if="isLoading" />
 
   <!-- 主畫面 -->
-  <v-app v-show="!isLoading" :data-loaded="!isLoading">
+  <v-app v-show="!isLoading" :data-loaded="!isLoading" style="background-color: #b1dcf9; color: #FFFFFF;">
+
+    <!-- 響應式導航列 -->
+    <AppBar v-if="!mdAndDown" />
+    <AppBarPhone v-if="mdAndDown" />
+
     <v-main>
       <router-view />
     </v-main>
@@ -17,6 +22,8 @@
 <script lang="ts" setup>
 import { ref, onMounted, nextTick } from 'vue';
 import { useDisplay } from 'vuetify';
+import AppBar from '@/components/AppBar.vue';
+import AppBarPhone from '@/components/AppBarPhone.vue';
 import AppFooter from '@/components/AppFooter.vue';
 import AppFooterPhone from '@/components/AppFooterPhone.vue';
 import LoadingScreen from '@/components/LoadingScreen.vue';

@@ -43,10 +43,10 @@
   
   
   
-  <script setup>
-  import { ref, onMounted } from 'vue';
-  
-  const questions = ref([
+<script setup>
+import { ref, onMounted } from 'vue';
+
+const questions = ref([
   { id: 1, text: '當面對挑戰時，你的直覺反應是？', options: { A: { text: '堅持自己的立場並勇敢面對', type: 8 }, B: { text: '嘗試與對方溝通，找到雙方都能接受的方式', type: 9 }, C: { text: '先冷靜分析，再做出理性決策', type: 5 }, D: { text: '保持彈性，尋找最有趣的解法', type: 7 } } },
   { id: 2, text: '你如何定義成功？', options: { A: { text: '達成目標，獲得他人認可', type: 3 }, B: { text: '能夠幫助他人，帶來正面影響', type: 2 }, C: { text: '保持內心的平靜與和諧', type: 9 }, D: { text: '有穩定可靠的關係和安全感', type: 6 } } },
   { id: 3, text: '當你獨處時，你通常在想什麼？', options: { A: { text: '反思自己是否可以做得更好', type: 1 }, B: { text: '想著如何讓別人開心', type: 2 }, C: { text: '規劃未來，考慮如何突破現狀', type: 7 }, D: { text: '構思自己獨特的想法與創意', type: 4 } } },
@@ -58,52 +58,53 @@
   { id: 9, text: '你最希望別人怎麼形容你？', options: { A: { text: '負責任、有原則', type: 1 }, B: { text: '善解人意、樂於助人', type: 2 }, C: { text: '聰明、有遠見', type: 5 }, D: { text: '自信、充滿魅力', type: 8 } } }
 ]);
 
-  
-  const answers = ref(Object.fromEntries([...Array(9)].map((_, i) => [i + 1, 0])));
-  const currentQuestion = ref(0);
-  const extraQuestion = ref(null);
-  const finished = ref(false);
-  const resultType = ref(null);
-  
-  const selectAnswer = (choice) => {
-    const question = questions.value[currentQuestion.value];
-    if (!question) return;
-  
-    const type = question.options[choice]?.type;
-    if (type === undefined) return;
-  
-    answers.value[type] += 1;
-  
-    if (currentQuestion.value < questions.value.length - 1) {
-      currentQuestion.value += 1;
-    } else {
-      checkResult();
-    }
-  };
-  
-  const checkResult = () => {
-    const maxScore = Math.max(...Object.values(answers.value));
-    const topTypes = Object.keys(answers.value).filter((key) => answers.value[key] === maxScore);
-  
-    if (topTypes.length > 1) {
-      extraQuestion.value = {
-        text: '額外決勝題目...',
-        options: {
-          A: { text: '...', type: Number(topTypes[0]) },
-          B: { text: '...', type: Number(topTypes[1]) },
-        },
-      };
-    } else {
-      resultType.value = topTypes[0];
-      finished.value = true;
-    }
-  };
-  
-  onMounted(() => {
-    console.log("questions:", questions.value);
-    console.log("currentQuestion:", currentQuestion.value);
-  });
+const answers = ref(Object.fromEntries([...Array(9)].map((_, i) => [i + 1, 0])));
+const currentQuestion = ref(0);
+const extraQuestion = ref(null);
+const finished = ref(false);
+const resultType = ref(null);
+
+const selectAnswer = (choice) => {
+  const question = questions.value[currentQuestion.value];
+  if (!question) return;
+
+  const type = question.options[choice]?.type;
+  if (type === undefined) return;
+
+  answers.value[type] += 1;
+
+  if (currentQuestion.value < questions.value.length - 1) {
+    currentQuestion.value += 1;
+  } else {
+    checkResult();
+  }
+};
+
+const checkResult = () => {
+  const maxScore = Math.max(...Object.values(answers.value));
+  const topTypes = Object.keys(answers.value).filter((key) => answers.value[key] === maxScore);
+
+  // 當分數平分且超過一個類型時顯示決勝題
+  if (topTypes.length > 1) {
+    extraQuestion.value = {
+      text: '額外決勝題目...',
+      options: {
+        A: { text: '...', type: Number(topTypes[0]) },
+        B: { text: '...', type: Number(topTypes[1]) },
+      },
+    };
+  } else {
+    resultType.value = topTypes[0];
+    finished.value = true;
+  }
+};
+
+onMounted(() => {
+  console.log("questions:", questions.value);
+  console.log("currentQuestion:", currentQuestion.value);
+});
 </script>
+
   
 <style scoped>
 .v-main {
@@ -127,14 +128,14 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 /* 讓 v-container 撐滿 */
 .content-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   height: 100%;
 }
@@ -142,7 +143,7 @@
 /* 主要框架 */
 .quiz-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: flex-start;
   align-items: center;
   width: 90%;
   max-width: 500px;
@@ -156,6 +157,7 @@
   width: 100%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden; /* 防止邊角問題 */
+  margin-top: 20%;
 }
 
 /* 標題靠左 */
@@ -200,6 +202,7 @@
   font-size: 20px;
   font-weight: bold;
   margin-top: 50px;
+  color: #001ded;
 }
 </style>
   
