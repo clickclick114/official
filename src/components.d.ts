@@ -13,6 +13,8 @@ declare module 'vue' {
     AppBarPhone: typeof import('./components/AppBarPhone.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppFooterPhone: typeof import('./components/AppFooterPhone.vue')['default']
+    Bugoctopus: typeof import('./components/Characters/Bugoctopus.vue')['default']
+    BugoctopusModel: typeof import('./components/Models/BugoctopusModel.vue')['default']
     Character: typeof import('./components/Character.vue')['default']
     CharacterPhone: typeof import('./components/CharacterPhone.vue')['default']
     CircuitCoral: typeof import('./components/Characters/CircuitCoral.vue')['default']

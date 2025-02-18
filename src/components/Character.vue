@@ -121,6 +121,7 @@ import CodeGardenEel from "./Characters/CodeGardenEel.vue";
 import CircuitCoral from "./Characters/CircuitCoral.vue";
 import Stingraycap from "./Characters/Stingraycap.vue";
 import LensCrab from "./Characters/LensCrab.vue";
+import Bugoctopus from "./Characters/Bugoctopus.vue";
 import RadarChart from "./Charts/RadarChart.vue";
 
 // Import thumbnails
@@ -133,6 +134,7 @@ import codeGardenEelThumb from "@/assets/thumbnails/codegardeneel.png";
 import circuitCoralThumb from "@/assets/thumbnails/circuitcoral.png";
 import lensCrabThumb from "@/assets/thumbnails/lenscrab.png";
 import stingraycapThumb from "@/assets/thumbnails/stingraycap.png";
+import bugoctopusThumb from "@/assets/thumbnails/bugoctopus.png";
 
 // Thumbnail mapping
 const thumbnailMap = {
@@ -145,6 +147,7 @@ const thumbnailMap = {
   CircuitCoral: circuitCoralThumb,
   LensCrab: lensCrabThumb,
   Stingraycap: stingraycapThumb,
+  Bugoctopus: bugoctopusThumb,
 };
 
 // Function to get thumbnail
@@ -162,6 +165,7 @@ const characters = [
   Stingraycap,
   FountainPenSquid,
   CircuitCoral,
+  Bugoctopus,
 ];
 const currentIndex = ref(0);
 const currentCharacter = computed(() => characters[currentIndex.value]);
@@ -300,6 +304,21 @@ const characterStats = {
         pointBackgroundColor: "rgba(255, 102, 102, 1)",
         pointBorderColor: "#fff",
         description: "鍵帽版本電繪魟魚",
+      },
+    ],
+  },
+  Bugoctopus: {
+    labels: statsLabels,
+    datasets: [
+      {
+        label: "BUG章魚",
+        data: [90, 85, 75, 70, 80, 75],
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        pointBackgroundColor: "rgba(255, 99, 132, 1)",
+        pointBorderColor: "#fff",
+        description:
+          "。",
       },
     ],
   },
