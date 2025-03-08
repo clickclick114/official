@@ -17,7 +17,8 @@
       <div class="custom-title">
         <!-- 中文標題，位於右側 -->
         <div class="title-chinese">
-          國立臺中科技大學 多媒體設計系<br />
+          國立臺中科技大學<br />
+          多媒體設計系<br />
           114級畢業製作
         </div>
       </div>
@@ -88,7 +89,8 @@ onBeforeUnmount(() => {
 
 .title-chinese {
   font-size: 0.5rem;
-  line-height: 1.9;
+  line-height: 1.5;
+  font-weight: 350;
   text-align: right;
 }
 
