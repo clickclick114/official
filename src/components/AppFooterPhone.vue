@@ -5,11 +5,13 @@
     fixed
     :style="footerStyle"
   >
-    <v-container class="footer-container">
+    <v-container class="footer-container pa-0">
       <v-row
         dense
-        justify="center"
+        justify="space-between"
         align="center"
+        class="mx-0"
+        no-gutters
       >
         <v-col
           v-for="(item, index) in menuItems"
@@ -18,7 +20,11 @@
           class="footer-item"
           @click="handleClick(item)"
         >
-          <v-btn icon>
+          <v-btn
+            icon
+            class="footer-btn"
+            elevation="0"
+          >
             <v-img
               v-if="item.image"
               :src="item.image"
@@ -51,11 +57,23 @@ import aboutIcon from "@/assets/icons/CLICK.png";
 const router = useRouter();
 
 const menuItems = [
-  { image: testIcon, text: '心理測驗', link: 'https://clickclick114.github.io/official/test/' },
-  { icon: 'mdi-instagram', text: 'Instagram', link: 'https://www.instagram.com/click_114nutcmd/' },
-  { icon: 'mdi-file-document-edit', text: '展場問卷', link: '#' },
-  { image: feedbackIcon, text: '回饋問卷', link: 'https://clickclick114.github.io/official/test/' },
-  { image: aboutIcon, text: '可立可', expandable: true }
+  {
+    image: testIcon,
+    text: "心理測驗",
+    link: "https://clickclick114.github.io/official/test/",
+  },
+  {
+    icon: "mdi-instagram",
+    text: "Instagram",
+    link: "https://www.instagram.com/click_114nutcmd/",
+  },
+  { icon: "mdi-file-document-edit", text: "展場問卷", link: "#" },
+  {
+    image: feedbackIcon,
+    text: "回饋問卷",
+    link: "https://clickclick114.github.io/official/test/",
+  },
+  { image: aboutIcon, text: "可立可", expandable: true },
 ];
 
 const showFooter = ref(false); // 控制頁腳顯示
@@ -127,9 +145,11 @@ const footerStyle = computed(() => ({
 
 .footer-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 100%; /* 確保容器寬度填滿 */
+  width: 100%;
+  max-width: 100% !important;
+  padding: 0 16px !important; /* Add padding on both sides */
 }
 
 .footer-item {
@@ -139,6 +159,8 @@ const footerStyle = computed(() => ({
   justify-content: center;
   text-align: center;
   color: white;
+  width: 15%; /* Slightly reduced to account for padding */
+  padding: 0;
 }
 
 .footer-icon {
@@ -149,5 +171,9 @@ const footerStyle = computed(() => ({
 .footer-text {
   font-size: 12px;
   margin-top: 4px;
+}
+
+.footer-btn {
+  background-color: #001ded !important;
 }
 </style>

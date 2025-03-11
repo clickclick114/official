@@ -93,10 +93,11 @@ import CodeGardenEel from "./Characters/CodeGardenEel.vue";
 import CircuitCoral from "./Characters/CircuitCoral.vue";
 import Stingraycap from "./Characters/Stingraycap.vue";
 import LensCrab from "./Characters/LensCrab.vue";
+import Bugoctopus from "./Characters/Bugoctopus.vue";
 import RadarChart from "./Charts/RadarChart.vue";
 
 const characters = [
-  JellyFish,
+JellyFish,
   Stingray,
   FilmCrab,
   LensCrab,
@@ -105,6 +106,7 @@ const characters = [
   Stingraycap,
   FountainPenSquid,
   CircuitCoral,
+  Bugoctopus,
 ];
 const currentIndex = ref(0);
 const currentCharacter = computed(() => characters[currentIndex.value]);
@@ -243,6 +245,21 @@ const characterStats = {
         pointBackgroundColor: "rgba(255, 102, 102, 1)",
         pointBorderColor: "#fff",
         description: "鍵帽版本電繪魟魚",
+      },
+    ],
+  },
+  Bugoctopus: {
+    labels: statsLabels,
+    datasets: [
+      {
+        label: "BUG章魚",
+        data: [90, 85, 75, 70, 80, 75],
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        pointBackgroundColor: "rgba(255, 99, 132, 1)",
+        pointBorderColor: "#fff",
+        description:
+          "他並非純粹的破壞者，而是測試系統極限的專家。他和搖桿水母是死對頭，總是想辦法找出遊戲裡的漏洞來作弊，但也會因為太過放肆而被程式花園鰻們修補。儘管他經常讓電路珊瑚頭痛，但兩人其實是一種微妙的「競爭夥伴」關係。",
       },
     ],
   },
