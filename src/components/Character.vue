@@ -318,7 +318,7 @@ const characterStats = {
         pointBackgroundColor: "rgba(255, 99, 132, 1)",
         pointBorderColor: "#fff",
         description:
-          "。",
+          "他並非純粹的破壞者，而是測試系統極限的專家。他和搖桿水母是死對頭，總是想辦法找出遊戲裡的漏洞來作弊，但也會因為太過放肆而被程式花園鰻們修補。儘管他經常讓電路珊瑚頭痛，但兩人其實是一種微妙的「競爭夥伴」關係。",
       },
     ],
   },

@@ -2,7 +2,7 @@
   <div class="canvas-container">
     <TresCanvas v-bind="gl">
       <TresPerspectiveCamera
-        :position="[0, 0, 9]"
+        :position="[0, 2, 10]"
         :look-at="[0, 0, 0]"
       />
       <OrbitControls
@@ -12,8 +12,8 @@
       />
       <Suspense>
         <BugoctopusModel
-          :position="[0, 0, 0]"
-          scale="2"
+          :position="[0, 0.5, 0]"
+          scale="3"
         />
       </Suspense>
       <TresDirectionalLight
