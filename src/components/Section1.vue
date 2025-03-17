@@ -359,7 +359,7 @@ const click= ref([
 {
 image: new URL('@/assets/img/1.png', import.meta.url).href,
 groupName: "可立可CLICK",
-description: "多媒體的多樣性和創新性，源自於那一瞬間的「點擊」。從鍵盤上按下的瞬間開始了所有的創意旅程。\n可力可（CLICK）是一座由鍵盤構築而成的水族館，每個鍵帽中都住著各式各樣的生物。這些生物隨意穿梭於各個連通的鍵帽之間，也會不時化身成鍵帽本體。\n生物們的跨界合作激盪出無盡的靈感與創意◝★\n本次展覽中，「CLICK」象徵著每一個作品的誕生與演進，也提醒著我們在每一個設計的背後都源自於最初那一瞬間的靈感碰撞。"
+description: "多媒體的多樣性和創新性,源自於那一瞬間的「點擊」。從鍵盤上按下的瞬間開始了所有的創意旅程。\n可立可 CLICK 是一座由鍵帽構築而成的世界,每個鍵帽中都住著各式各樣的生物。這些生物隨意穿梭於各個連通的鍵帽之間,也會不時化身成鍵帽本體。\n生物們的跨界合作激盪出無盡的靈感與創意ヽ★\n本次展覽中,「CLICK」象徵著每一個作品的誕生與演進,也提醒著我們在每一個設計的背後都源自於最初那一瞬間的靈感碰撞。"
 },
 ]);
 
@@ -367,7 +367,7 @@ description: "多媒體的多樣性和創新性，源自於那一瞬間的「點
 const pages = ref([
 {
 majorCategory: "animation",  // 更新類別
-image: new URL('@/assets/img/2.jpg', import.meta.url).href,
+image: new URL('@/assets/img/2.png', import.meta.url).href,
 groupName: "沼",
 category: "2D｜動畫影片",
 categoryEnglish: "2D｜Animation Film",
@@ -379,7 +379,7 @@ image: new URL('@/assets/img/3.png', import.meta.url).href,
 groupName: "靜默",
 category: "2D｜動畫影片",
 categoryEnglish: "2D｜Animation Film",
-description: "本次展覽探討「不當旁觀者」，揭示社會霸凌的陰暗面及其影響，強調面對不正義時勇氣與同理心的重要性。\n此作品以第一視角呈現主角們從融洽相處到因退縮導致不可挽回的過程，促使觀眾反思旁觀者角色可能帶來的傷害。\n我們透過動畫激勵人們挺身對抗不正義，關懷弱者，共同促進包容社會，拒絕冷漠旁觀。"
+description: "本次展覽探討「不當旁觀者」，揭示社會霸凌的陰暗面及其影響，強調面對不正義時勇氣與同理心的重要性。\n故事中呈現主角們從融洽相處到因現實退縮導致不可挽回的過程，促使觀眾反思旁觀者可能帶來的傷害。\n我們透過動畫激勵人們挺身對抗不正義，關懷弱者，共同促進包容社會，拒絕冷漠旁觀。"
 },
 {
 majorCategory: "animation",
@@ -395,23 +395,15 @@ image: new URL('@/assets/img/5.png', import.meta.url).href,
 groupName: "那個留學生",
 category: "微電影動畫",
 categoryEnglish: "Short Film Animation",
-description: "故事講述一位馬來西亞男生-“阿布”在台留學的故事。從小喜歡攝影的他，因爲馬來西亞攝影行業風氣不景氣，加上媽媽的建議，因此念多媒體設計想成爲遊戲程式設計師。\n縱然剛開始的留學生活充滿驚喜，面對學業的期待落差，背負著家庭期望，遇到了前所未有的困境。"
+description: "故事是講述一位馬來西亞男生-阿布在台留學的故事。\n從小喜歡攝影的他，因爲馬來西亞攝影行業風氣不景氣，加上媽媽的建議，因此念多媒體設計想成爲遊戲程式設計師。\n縱然剛開始的留學生活充滿驚喜，面對學業的期待落差，背負著家庭期望，遇到了前所未有的困境。"
 },
 {
 majorCategory: "game",
-image: new URL('@/assets/img/14.PNG', import.meta.url).href,
-groupName: "元素：面與避",
-category: "2D｜遊戲",
-categoryEnglish: "2D｜Game",
-description: "是一款緊張刺激的2D橫向動作遊戲，玩家需透過靈活操作和快速反應來躲避不斷來襲的怪物與陷阱。遊戲設計強調快節奏和挑戰性，隨著關卡的進展，玩家需運用策略和敏捷來克服各種困境。這款遊戲讓玩家在每次驚險的閃避中體驗腎上腺素飆升的快感，挑戰自我極限，沉浸於無盡的冒險之中。"
-},
-{
-majorCategory: "game",
-image: new URL('@/assets/img/11.jpg', import.meta.url).href,
-groupName: "裘斯choose",
-category: "2D｜遊戲",
-categoryEnglish: "2D｜Game",
-description: "「艾勒柏斯」是一座生機盎然的植物城邦，曾經美麗而讓人嚮往，但現今卻是一片腐敗不堪的景象，主角裘斯身為光輝族的一員，收到了一封求救信，提到只有他能夠拯救這座城市。\n如今抵達「艾勒柏斯」的裘斯，該如何拯救這座已經腐敗的城市呢? 而在旅途的過程中，他又會發現哪些秘密，為什麼只有他，才能拯救這座城市呢?"
+image: new URL('@/assets/img/6.png', import.meta.url).href,
+groupName: "亂巷",
+category: "3D｜遊戲",
+categoryEnglish: "3D｜Game",
+description: "台灣的街道展現著獨特的混亂與雜亂，從路、街、巷到弄，處處可見。在這款遊戲中，玩家將化身為機車騎士，穿梭在繁忙城市的巷弄間。\n面對道路上的各種障礙，讓玩家當自以為的正義使者。\n遊戲中的道路環境不僅模擬了台灣的交通情況與各種危險路況，更讓玩家在體驗本土交通文化時，學習如何成為一位懂得防衛的騎士。"
 },
 {
 majorCategory: "game",
@@ -419,7 +411,7 @@ image: new URL('@/assets/img/7.png', import.meta.url).href,
 groupName: "Sweet Dreams",
 category: "2.5D｜遊戲",
 categoryEnglish: "2.5D｜Game",
-description: "Sweet Dreams 是一款 2.5D 的 Rougelike 戰鬥動作遊戲。\n主角田曦然在森林中醒來，身上只有一本無名日記，魔法師救她回家休養的不久後，寧靜的日常被怪異的黑暗詛咒打破。\n為了重回和平的生活，一路擊退受詛咒的生物前往城堡，在路途中，田曦然逐步揭開日記與詛咒背後的秘密。"
+description: "主角田曦然在森林中醒來，身上只有一本沒有署名的神秘日記，路過的魔法師剛好救她回家休養，一段時間後，寧靜的日常突然遭到怪異的黑暗詛咒襲擊。\n為了重回和平的生活，田曦然將踏上旅程，一路擊退受詛咒的生物往城堡前進。在這場冒險中，逐步揭開日記謎團與詛咒背後的秘密，尋找真正的救贖。"
 },
 {
 majorCategory: "game",
@@ -427,7 +419,16 @@ image: new URL('@/assets/img/8.png', import.meta.url).href,
 groupName: "觀光課",
 category: "3D｜遊戲",
 categoryEnglish: "3D｜Game",
-description: "主角淑芬與家豪是一組愛翹課的小拍檔，某天卻意外進入一個充滿光影奇幻世界裡。在這裡怪物會四處遊蕩，謎題會隱藏在每個角落。淑芬力氣大能推重物，家豪嬌小靈活，兩人必須合力破解光影謎題、躲避怪物的追擊，才能找到回家的路。每個場景都有神奇的光影機關等著他們來挑戰—你能幫他們闖過難關，揭開這個奇幻世界的秘密嗎？ "
+description: "《觀光課》是一款3D冒險解謎遊戲，講述愛翹課的淑芬與家豪意外闖入奇幻光影世界。在這裡，怪物四處遊蕩，謎題隱藏於各處。淑芬力氣大能推動重物，家豪嬌小靈活，兩人需攜手破解光影謎題、躲避怪物追擊，才能找到回家的路。每個場景皆充滿光影的機關等著他們挑戰——你能助他們闖關，揭開這個世界的秘密嗎？"
+},
+
+{
+majorCategory: "game",
+image: new URL('@/assets/img/9.png', import.meta.url).href,
+groupName: "變異武裝",
+category: "3D｜遊戲",
+categoryEnglish: "3D｜Game",
+description: "變異武裝是一款3D第三人稱射擊遊戲。\n遊戲背景發生在一個研究武器科技與生物的特殊機構。玩家操控的是一位來這裡實習不久的實習生。\n而有一天，還在房間睡覺的主角，被突然的災害警報給吵醒，其他人也都不知道跑哪裡去了，為了釐清整件事情的真相和逃出去，玩家將配合電腦小助手的指示展開危機重重的冒險。"
 },
 {
 majorCategory: "game",
@@ -439,11 +440,11 @@ description: "主角在回憶小時候最愛的節目 - 閃電跳跳糖超人，
 },
 {
 majorCategory: "game",
-image: new URL('@/assets/img/9.png', import.meta.url).href,
-groupName: "變異武裝",
-category: "3D｜遊戲",
-categoryEnglish: "3D｜Game",
-description: "變異武裝是一款3D第三人稱射擊遊戲。\n遊戲背景發生在一個研究武器科技與生物的特殊機構。玩家操控的是一位來這裡實習不久的實習生。\n而有一天，還在房間睡覺的主角，被突然的災害警報給吵醒，其他人也都不知道跑哪裡去了，為了釐清整件事情的真相和逃出去，玩家將配合電腦小助手的指示展開危機重重的冒險。"
+image: new URL('@/assets/img/11.png', import.meta.url).href,
+groupName: "裘斯choose",
+category: "2D｜遊戲",
+categoryEnglish: "2D｜Game",
+description: "「艾勒柏斯」是一座生機盎然的植物城邦，曾經美麗而讓人嚮往，但現今卻是一片腐敗不堪的景象，主角裘斯身為光輝族的一員，收到了一封求救信，提到只有他能夠拯救這座城市。如今抵達「艾勒柏斯」的裘斯，該如何拯救這座已經腐敗的城市呢? 而在旅途的過程中，他又會發現哪些秘密，為什麼只有他，才能拯救這座城市呢?"
 },
 {
 majorCategory: "game",
@@ -451,7 +452,7 @@ image: new URL('@/assets/img/12.png', import.meta.url).href,
 groupName: "苜隆車站",
 category: "3D｜遊戲",
 categoryEnglish: "3D｜Game",
-description: "苜隆車站(3D遊戲)苜隆車站在幾年前曾經發生過一起嚴重的火災事故，造成多名人員傷亡，而在重建後，有關靈異事件的傳聞，卻從未停下。\n玩家將扮演一名道士，在接收到站長委託後，前來處理發生的靈異事件，而在此期間，發現了許多與當年火災相關的線索，似乎在暗示著，當年的事件還隱藏了些什麼。"
+description: "苜隆車站是一款 3D 第一人稱恐怖解謎遊戲。車站在幾年前曾經發生過一起嚴重的火災事故，造成多名人員傷亡，而在重建後，有關靈異事件的傳聞卻從未停下。層出不窮的靈異事件使得車站人心惶惶，作為道士的我們被請來驅除車站內的異常現象。隨著越來越深入的探索，逐一浮出當年火災相關的線索，似乎都指向了這場悲劇並非表面那麼單純。 "
 },
 {
 majorCategory: "game",
@@ -461,13 +462,14 @@ category: "3D｜遊戲",
 categoryEnglish: "3D｜Game",
 description: "未來發生了一場災難，調查發現跟500年前動物滅絕似乎有關係。主角阿波前往調查後不小心掉到了沒有見過的地方.......相機也發生了一些異變，有著特殊的功能。這裡有以前已經滅絕的動物們，了解牠們與未來的關聯幫助他們解決他們的問題。阿波決定利用手上的相機解決問題，但如果解決的方式不同，或許會造成未來有不同的變化?"
 },
+
 {
 majorCategory: "game",
-image: new URL('@/assets/img/6.png', import.meta.url).href,
-groupName: "亂巷",
-category: "3D｜遊戲",
-categoryEnglish: "3D｜Game",
-description: "台灣的街道展現著獨特的混亂與雜亂，從路、街、巷到弄，處處可見。在這款遊戲中，玩家將化身為機車騎士，穿梭在繁忙城市的巷弄間。\n面對道路上的各種障礙，讓玩家當自以為的正義使者。\n遊戲中的道路環境不僅模擬了台灣的交通情況與各種危險路況，更讓玩家在體驗本土交通文化時，學習如何成為一位懂得防衛的騎士。"
+image: new URL('@/assets/img/14.png', import.meta.url).href,
+groupName: "元素：奔",
+category: "2D｜遊戲",
+categoryEnglish: "2D｜Game",
+description: "是一款緊張刺激的2D橫向動作遊戲，玩家需透過靈活操作和快速反應來躲避不斷來襲的怪物與陷阱。遊戲設計強調快節奏和挑戰性，隨著關卡的進展，玩家需運用策略和敏捷來克服各種困境。這款遊戲讓玩家在每次驚險的閃避中體驗腎上腺素飆升的快感，挑戰自我極限，沉浸於無盡的冒險之中。"
 },
 ]);
 function replaceNewlines(text: string) {

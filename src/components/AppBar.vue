@@ -9,7 +9,7 @@
       <!-- 英文標題 -->
       <div class="title-english">
         DEPARTMENT OF MULTIMEDIA DESIGN<br>
-        OF NUTC 114TH
+        NUTC 114TH
       </div>
 
       <!-- 中文標題 -->
@@ -20,11 +20,15 @@
     </div>
 
     <div class="image-container">
-      <v-img
-        src="@/assets/click_title.png"
-        height="80%"
-      />
+      <a href="https://clickclick114.github.io/official/" target="_blank" class="image-link">
+        <v-img
+          src="@/assets/click_title.png"
+          height="80%"
+          contain
+        />
+      </a>
     </div>
+
 
     <template v-slot:append>
       <v-row class="button-row" no-wrap justify="start">
@@ -132,7 +136,7 @@ const redirectToTest = () => {
   flex-direction: column;
   justify-content: center;
   padding-left: 1%;
-  gap: 16px; /* 調整中英間距 */
+  gap: 12px; /* 調整中英間距 */
 }
 
 .title-english {
@@ -153,6 +157,19 @@ const redirectToTest = () => {
   min-width: 33%;
   max-width: 33%;
 }
+
+.image-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.image-link v-img {
+  cursor: pointer;
+}
+
 
 .button-row {
   display: flex;

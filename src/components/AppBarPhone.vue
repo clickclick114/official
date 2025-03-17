@@ -5,13 +5,19 @@
         <!-- 英文標題，位於左側 -->
         <div class="title-english">
           DEPARTMENT OF<br />
-          MULTIMEDIA DESIGN OF<br />
+          MULTIMEDIA DESIGN<br />
           NUTC 114TH
         </div>
       </div>
 
       <div class="image-container">
-        <v-img src="@/assets/click_title.png" height="80%" />
+        <a href="https://clickclick114.github.io/official/" target="_blank" class="image-link">
+          <v-img
+          src="@/assets/click_title.png"
+          height="80%"
+          contain
+          />
+        </a>
       </div>
 
       <div class="custom-title">
@@ -101,5 +107,17 @@ onBeforeUnmount(() => {
   height: 100%;
   min-width: 33%;
   max-width: 33%;
+}
+
+.image-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.image-link v-img {
+  cursor: pointer;
 }
 </style>
