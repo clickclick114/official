@@ -7,24 +7,37 @@
   <v-card class="mx-auto group-vcard" :style="[cardStyles, { padding: '2px', paddingTop: '10px', paddingBottom: '10px'}]">
     <!-- 上方區域 -->
     <v-row no-gutters class="d-flex align-center">
-      <v-col cols="2">
-        <!-- 左側空著，可以將空白部分放在這 -->
-      </v-col>
-      <v-col cols="10">
-        <div style="position: absolute; top: 0; right: 0; padding-top: 12px; padding-right: 8px; display: flex; align-items: flex-end; gap: 10px;">
-          <!-- 組別名稱 -->
-          <span :style="{ fontSize: '26px', color: '#001ded',fontWeight: '500'}">{{ item.groupName }}</span>
+  <v-col cols="6" v-if="$vuetify.display.smAndDown">
+    <div style="padding-left: 8px; display: flex; align-items: center;">
+      <span :style="{ fontSize: '22px', color: '#001ded', fontWeight: '600', paddingTop: '10px', paddingLeft: '2px' }">{{ item.groupName }}</span>
+    </div>
+  </v-col>
 
-          <!-- 藍色方塊 -->
-          <div :style="{ backgroundColor: '#001ded', width: '15px', height: '40px' }"></div>
-        </div>
-      </v-col>
-    </v-row>
+  <v-col cols="2" v-else>
+  </v-col>
+
+  <v-col cols="10">
+    <div style="position: absolute; top: 0; right: 0; padding-top: 12px; padding-right: 8px; display: flex; align-items: flex-end; gap: 10px;">
+
+      <span v-if="!$vuetify.display.smAndDown"
+        :style="{
+          fontSize: '26px',
+          color: '#001ded',
+          fontWeight: '500',
+        }"
+      >
+        {{ item.groupName }}
+      </span>
+
+      <div v-if="!$vuetify.display.smAndDown" :style="{ backgroundColor: '#001ded', width: '15px', height: '40px' }"></div>
+    </div>
+  </v-col>
+</v-row>
 
     <!-- 下方區域 -->
     <v-row no-gutters>
       <!-- 左側圖片，讓圖片垂直置中 -->
-      <v-col cols="12" sm="4" class="d-flex justify-center align-start" :style="cardImgStyles">
+      <v-col cols="12" md="4" class="d-flex justify-center align-start" :style="cardImgStyles">
         <v-container>
           <v-row justify="center" align="center" style="height: 100%;">
             <v-img :src="item.image" :aspect-ratio="1" max-height="200px" contain></v-img>
@@ -33,7 +46,7 @@
       </v-col>
 
       <!-- 右側描述文字 -->
-      <v-col cols="12" sm="8" class="text-left" :style="cardTextStyles">
+      <v-col cols="12" md="8" class="text-left" :style="cardTextStyles">
         <p v-html="replaceNewlines(item.description)"></p>
       </v-col>
     </v-row>
@@ -59,43 +72,47 @@
   :delimiter-icon-size="delimiterIconSize"
   >
     <v-carousel-item v-for="(item, index) in pages" :key="index">
-      <v-card class="mx-auto group-vcard" :style="[cardStyles, { padding: '2px',paddingTop:'10px',paddingBottom:'10px'}]">
-      <!-- 上方區域 -->
-      <v-row no-gutters class="d-flex align-center" >
-        <!-- 右上角內容 -->
-        <v-col cols="2">
-          <!-- 左側空著，可以將空白部分放在這 -->
-        </v-col>
-        <v-col cols="10">
-          <div style="position: absolute; top: 0; right: 0; padding-top: 12px; padding-right: 8px; display: flex; align-items: flex-end; gap: 10px;">
-            <!-- 組別名稱 -->
-            <span :style="{ fontSize: '26px', color: '#001ded',fontWeight: '500'}">{{ item.groupName }}</span>
+      <v-card class="mx-auto group-vcard"
+      :id="'card-' + item.groupName.replace(/\s+/g, '')"
+      :style="[cardStyles, { padding: '2px', paddingTop: '10px', paddingBottom: '10px', width: '100%'}]"
+    >
+    <!-- 上方區域 -->
+    <!-- 組別名稱 -->
+    <v-row no-gutters class="d-flex align-center">
+      <v-col cols="6" v-if="$vuetify.display.smAndDown">
+        <div style="padding-left: 8px; display: flex; align-items: center;">
+          <span :style="{ fontSize: '22px', color: '#001ded', fontWeight: '600', paddingTop: '10px', paddingLeft: '2px' }">{{ item.groupName }}</span>
+        </div>
+      </v-col>
 
-            <!-- 作品分類 -->
-            <div style="display: flex; flex-direction: column; text-align: right;">
-              <span :style="{ fontSize: '12px', color: '#001ded' }">{{ item.category }}</span>
-              <span :style="{ fontSize: '10px', color: '#001ded' }">{{ item.categoryEnglish }}</span>
-            </div>
+      <v-col cols="2" v-else>
+      </v-col>
 
-            <!-- 藍色方塊 -->
-            <div :style="{ backgroundColor: '#001ded', width: '15px', height: '40px' }"></div>
+      <v-col cols="10">
+        <div style="position: absolute; top: 0; right: 0; padding-top: 12px; padding-right: 8px; display: flex; align-items: flex-end; gap: 10px;">
+          <span v-if="!$vuetify.display.smAndDown" :style="{ fontSize: '26px', color: '#001ded', fontWeight: '500' }">{{ item.groupName }}</span>
+          <!-- 作品分類 -->
+          <div style="display: flex; flex-direction: column; text-align: right;">
+            <span :style="{ fontSize: '12px', color: '#001ded' }">{{ item.category }}</span>
+            <span :style="{ fontSize: '10px', color: '#001ded' }">{{ item.categoryEnglish }}</span>
           </div>
-        </v-col>
-      </v-row>
-
+          <!-- 藍色方塊 -->
+          <div :style="{ backgroundColor: '#001ded', width: '15px', height: '40px' }"></div>
+        </div>
+      </v-col>
+    </v-row>
       <!-- 下方區域 -->
       <v-row no-gutters>
         <!-- 左側圖片，讓圖片垂直置中 -->
-        <v-col cols="12" sm="4" class="d-flex justify-center align-start" :style="cardImgStyles">
+        <v-col cols="12" md="4" class="d-flex justify-center align-start" :style="cardImgStyles">
           <v-container>
             <v-row justify="center" align="center" style="height: 100%;">
               <v-img :src="item.image" :aspect-ratio="1" max-height="200px" contain></v-img>
             </v-row>
           </v-container>
         </v-col>
-
         <!-- 右側描述文字 -->
-        <v-col cols="12" sm="8" class="text-left" :style="cardTextStyles">
+        <v-col cols="12" md="8" class="text-left" :style="cardTextStyles">
           <p v-html="replaceNewlines(item.description)"></p>
         </v-col>
       </v-row>
@@ -120,76 +137,80 @@
 </div>
 
 
-<!-- 組別介紹 -->
-<v-container id="all" cols="12" 
-  style="width: 100%; color: #001ded; background-color: rgba(255, 255, 255, 0.4); border-radius: 16px; padding: 16px;padding-bottom: 40px;">
-<v-container :style="containerStyle">
-<v-row no-gutters justify="center" dense>
-  <v-col
-    v-for="category in categories"
-    :key="category"
-    cols="3"
-    class="d-flex justify-center align-center"
-  >
-    <v-btn
-      :class="['button-row', { active: category === selectedCategory }]"
-      :style="buttonRow"
-      @click="filterCategory(category)"
-    >
-      {{ category }}
-    </v-btn>
-  </v-col>
-</v-row>
-</v-container>
+<!-- 組別介紹Button -->
+<v-container id="all" cols="12" :style="buttonContainer">
+    <v-container :style="containerStyle">
+      <v-row no-gutters justify="center" dense>
+        <v-col
+          v-for="category in categories"
+          :key="category"
+          cols="6"
+          xs="6"
+          sm="3"
+          md="3"
+          lg="3"
+          class="d-flex justify-center align-center"
+        >
+          <v-btn
+            :class="['button-row', { active: category === selectedCategory }]"
+            :style="buttonRow"
+            @click="filterCategory(category)"
+          >
+            {{ category }}
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
 
 <!-- 顯示篩選後的v-card -->
 <v-row>
-<v-col v-for="(page, index) in filteredPages" :key="index" cols="12" class="d-flex justify-center">
-  <v-card class="mx-auto group-vcard"
-          :id="'card-' + page.groupName.replace(/\s+/g, '')"
-          :style="[cardStyles, { padding: '2px', paddingTop: '10px', paddingBottom: '10px', width: '100%'}]"
-  >
+  <v-col v-for="(page, index) in filteredPages" :key="index" cols="12" class="d-flex justify-center">
+    <v-card class="mx-auto group-vcard"
+      :id="'card-' + page.groupName.replace(/\s+/g, '')"
+      :style="[cardStyles, { padding: '2px', paddingTop: '10px', paddingBottom: '10px', width: '100%'}]"
+    >
     <!-- 上方區域 -->
+    <!-- 組別名稱 -->
     <v-row no-gutters class="d-flex align-center">
-      <!-- 右上角內容 -->
-      <v-col cols="2">
-        <!-- 左側空著，可以將空白部分放在這 -->
+      <v-col cols="6" v-if="$vuetify.display.smAndDown">
+        <div style="padding-left: 8px; display: flex; align-items: center;">
+          <span :style="{ fontSize: '22px', color: '#001ded', fontWeight: '600', paddingTop: '10px', paddingLeft: '2px' }">{{ page.groupName }}</span>
+        </div>
       </v-col>
+
+      <v-col cols="2" v-else>
+      </v-col>
+
       <v-col cols="10">
         <div style="position: absolute; top: 0; right: 0; padding-top: 12px; padding-right: 8px; display: flex; align-items: flex-end; gap: 10px;">
-          <!-- 組別名稱 -->
-          <span :style="{ fontSize: '26px', color: '#001ded', fontWeight: '500'}">{{ page.groupName }}</span>
-
+          <span v-if="!$vuetify.display.smAndDown" :style="{ fontSize: '26px', color: '#001ded', fontWeight: '500' }">{{ page.groupName }}</span>
           <!-- 作品分類 -->
           <div style="display: flex; flex-direction: column; text-align: right;">
             <span :style="{ fontSize: '12px', color: '#001ded' }">{{ page.category }}</span>
             <span :style="{ fontSize: '10px', color: '#001ded' }">{{ page.categoryEnglish }}</span>
           </div>
-
           <!-- 藍色方塊 -->
           <div :style="{ backgroundColor: '#001ded', width: '15px', height: '40px' }"></div>
         </div>
       </v-col>
     </v-row>
-
-    <!-- 下方區域 -->
-    <v-row no-gutters>
-      <!-- 左側圖片，讓圖片垂直置中 -->
-      <v-col cols="12" sm="4" class="d-flex justify-center align-start" :style="cardImgStyles">
-        <v-container>
-          <v-row justify="center" align="center" style="height: 100%;">
-            <v-img :src="page.image" :aspect-ratio="1" max-height="200px" contain></v-img>
-          </v-row>
-        </v-container>
-      </v-col>
-
-      <!-- 右側描述文字 -->
-      <v-col cols="12" sm="8" class="text-left" :style="cardTextStyles">
-        <p v-html="replaceNewlines(page.description)"></p>
-      </v-col>
-    </v-row>
-  </v-card>
-</v-col>
+      <!-- 下方區域 -->
+      <v-row no-gutters>
+        <!-- 左側圖片，讓圖片垂直置中 -->
+        <v-col cols="12" md="4" class="d-flex justify-center align-start" :style="cardImgStyles">
+          <v-container>
+            <v-row justify="center" align="center" style="height: 100%;">
+              <v-img :src="page.image" :aspect-ratio="1" max-height="200px" contain></v-img>
+            </v-row>
+          </v-container>
+        </v-col>
+        <!-- 右側描述文字 -->
+        <v-col cols="12" md="8" class="text-left" :style="cardTextStyles">
+          <p v-html="replaceNewlines(page.description)"></p>
+        </v-col>
+      </v-row>
+    </v-card>
+  </v-col>
 </v-row>
 </v-container>
 </template>
@@ -197,14 +218,13 @@
 
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { computed } from 'vue';
-import { nextTick } from 'vue';
 import { useDisplay } from 'vuetify';
+import { ref, computed, watch, onMounted, nextTick } from 'vue';
 
 
 // 解構 mdAndDown，偵測螢幕尺寸
 const { mdAndDown } = useDisplay();
+const { smAndDown } = useDisplay();
 
 //各組介紹title
 const grouptitlebutton = computed(() => ({
@@ -217,7 +237,7 @@ margin: mdAndDown.value ? '1% 0' : '1% 10%',
 
 // 計算響應式的 carousel 高度(輪播模組)
 const carouselHeight = computed(() => {
-return mdAndDown.value ? '600px' : '350px';  // 小螢幕設定 300px，高螢幕設定 400px
+return smAndDown.value ? '600px' : '350px';  // 小螢幕設定 600px，高螢幕設定 350px
 });
 
 // 設定 carousel 的寬度(輪播模組)
@@ -267,22 +287,32 @@ document.documentElement.style.setProperty('--marquee-speed', marqueeSpeed.value
 //v-card
 // 設定卡片的樣式
 const cardStyles = computed(() => ({
-maxWidth: mdAndDown.value ? '100%' : '80%', // 手機版顯示 100% 寬度，桌面顯示 800px
+maxWidth: smAndDown.value ? '100%' : '80%', // 手機版顯示 100% 寬度，桌面顯示 800px
 }));
 
 // 設定卡片文字樣式
 const cardTextStyles = computed(() => ({
-  marginTop: mdAndDown.value ? '50px' : '70px', // 
-  fontSize: mdAndDown.value ? '0.8rem' : '1.1rem',
-  lineHeight: mdAndDown.value ? '1.8' : '2.2',
-  paddingRight: mdAndDown.value ? '5px' : '20px',
-  paddingLeft: mdAndDown.value ? '10px' : '0px',
+  marginTop: smAndDown.value ? '30px' : '70px',
+  fontSize: smAndDown.value ? '0.8rem' : '1.1rem',
+  lineHeight: smAndDown.value ? '1.8' : '2.2',
+  paddingRight: smAndDown.value ? '5px' : '20px',
+  paddingLeft: smAndDown.value ? '10px' : '0px',
   color: '#000000',
 }));
-
+// 設定卡片圖片樣式
 const cardImgStyles = computed(() => ({
-marginTop: mdAndDown.value ? '80px' : '60px',
+marginTop: smAndDown.value ? '40px' : '60px',
+}));
 
+const buttonContainer = computed(() => ({
+  borderRadius: smAndDown.value ? '14px' : '20px',
+  padding: smAndDown.value ? '2px' : '16px',
+  paddingBottom: smAndDown.value ? '20px' : '40px',
+  color: '#001ded',
+  width: '100%',
+  backgroundColor: 'rgba(255, 255, 255, 0.4)',
+  marginTop: smAndDown.value ? '10px' : '100px',
+  marginBottom: smAndDown.value ? '10px' : '100px',
 }));
 
 // 設定容器的樣式
@@ -293,11 +323,13 @@ width: "100%", // 確保容器寬度保持一致
 
 //分類按鈕
 const buttonRow = computed(() => ({
-fontSize: mdAndDown.value ? '8px' : '18px',
-paddingBottom: mdAndDown.value ? '7px' : '10px',
-width: mdAndDown.value ? '70px' : '180px',
-height: mdAndDown.value ? '40px' : '80px',
-margin: mdAndDown.value ? '3px' : '20px', // 增加按鈕間距
+fontSize: smAndDown.value ? '0.65rem' : '18px',
+paddingBottom: smAndDown.value ? '7px' : '10px',
+width: smAndDown.value ? '120px' : '180px',
+height: smAndDown.value ? '60px' : '90px',
+margin: smAndDown.value ? '10px' : '20px', // 增加按鈕間距
+whiteSpace: 'nowrap',
+borderRadius: smAndDown.value ? '14px' : '20px',//圓角
 }));
 
 // 定義分類按鈕
@@ -535,7 +567,6 @@ background-image: url('@/assets/button_blue.png');
 background-size: 100% 100%;
 background-repeat: no-repeat;
 background-position: center;
-border-radius: 10%;
 display: flex;
 justify-content: center;
 align-items: center;
