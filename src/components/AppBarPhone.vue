@@ -6,7 +6,7 @@
         <div class="title-english">
           DEPARTMENT OF<br />
           MULTIMEDIA DESIGN<br />
-          NUTC 114TH
+          THE 114TH OF NUTC
         </div>
       </div>
 

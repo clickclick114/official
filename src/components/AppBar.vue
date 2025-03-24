@@ -9,7 +9,7 @@
       <!-- 英文標題 -->
       <div class="title-english">
         DEPARTMENT OF MULTIMEDIA DESIGN<br>
-        NUTC 114TH
+        tHE 114TH OF NUTC
       </div>
 
       <!-- 中文標題 -->

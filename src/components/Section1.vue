@@ -424,7 +424,7 @@ description: "講述海龜生活的環境，聚焦於人類對自然環境的破
 {
 majorCategory: "short film",
 image: new URL('@/assets/img/5.png', import.meta.url).href,
-groupName: "那個留學生",
+groupName: "在喬的路上",
 category: "微電影動畫",
 categoryEnglish: "Short Film Animation",
 description: "故事是講述一位馬來西亞男生-阿布在台留學的故事。\n從小喜歡攝影的他，因爲馬來西亞攝影行業風氣不景氣，加上媽媽的建議，因此念多媒體設計想成爲遊戲程式設計師。\n縱然剛開始的留學生活充滿驚喜，面對學業的期待落差，背負著家庭期望，遇到了前所未有的困境。"
