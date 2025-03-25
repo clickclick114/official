@@ -1,38 +1,16 @@
 <template>
-  <v-app>
-    <div>
-      <v-main style="background: linear-gradient(to bottom, #ffffff, #b1dcf9); height: auto; position: relative;">
-        <canvas ref="canvas" class="bubble-canvas"></canvas>
-
-        <v-container class="d-flex justify-center align-center" style="height: 100%; width: 100%;">
-          <v-sheet :height="'95%'" :width="'95%'" color="transparent">
-            <SchoolName />
-            <VideoContainer />
-            <Section1 />
-            <Character v-if="!mdAndDown" />
-            <CharacterPhone v-if="mdAndDown" />
-            <Coral />
-          </v-sheet>
-        </v-container>
-      </v-main>
-    </div>
-  </v-app>
+  <canvas ref="canvas" class="bubble-canvas"></canvas>
 </template>
 
 <script setup lang="ts">
-import { useDisplay } from "vuetify";
 import { onMounted, onBeforeUnmount, ref } from "vue";
-import SchoolName from "../components/SchoolName.vue";
 
-const { mdAndDown } = useDisplay();
-
-// 泡泡相關的程式碼
 const canvas = ref<HTMLCanvasElement | null>(null);
 let ctx: CanvasRenderingContext2D | null = null;
 let bubbles: Bubble[] = [];
+let animationFrameId: number;
 let canvasWidth = window.innerWidth;
 let canvasHeight = window.innerHeight;
-let animationFrameId: number;
 
 class Bubble {
   x: number;
@@ -85,6 +63,11 @@ const animate = () => {
 
   ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
 
+  // 確保 canvas 依照其寬高比進行縮放
+  const scaleX = canvas.value.width / canvasWidth;
+  const scaleY = canvas.value.height / canvasHeight;
+  ctx.setTransform(scaleX, 0, 0, scaleY, 0, 0);
+
   bubbles.forEach((bubble) => {
     bubble.update();
     bubble.draw(ctx!);
@@ -105,19 +88,30 @@ onMounted(() => {
     animate();
   }
 
-  const mainElement = document.querySelector("v-main");
+  window.addEventListener("resize", () => {
+    if (canvas.value) {
+      canvasWidth = window.innerWidth;
+      canvasHeight = window.innerHeight;
+      canvas.value.width = canvasWidth;
+      canvas.value.height = canvasHeight;
+      if(ctx){
+        ctx.setTransform(1,0,0,1,0,0);//重置轉換矩陣
+      }
+    }
+    initBubbles();
+  });
+
+
+const mainElement = document.querySelector("v-main");
   if (mainElement) {
     const resizeObserver = new ResizeObserver(() => {
       if (canvas.value) {
-        // 更新 canvas 尺寸
         canvasWidth = mainElement.clientWidth;
         canvasHeight = mainElement.clientHeight;
         canvas.value.width = canvasWidth;
         canvas.value.height = canvasHeight;
-
-        // 重新初始化泡泡，確保它們的位置正確
-        initBubbles();
       }
+      initBubbles();
     });
     resizeObserver.observe(mainElement);
 
@@ -125,10 +119,6 @@ onMounted(() => {
       resizeObserver.disconnect();
     });
   }
-});
-
-onBeforeUnmount(() => {
-  cancelAnimationFrame(animationFrameId);
 });
 </script>
 
@@ -139,6 +129,7 @@ onBeforeUnmount(() => {
   left: 0;
   width: 100%;
   height: 100%;
+  aspect-ratio: 1 / 1; /* 保持 1:1 的寬高比 */
   pointer-events: none;
 }
 </style>
