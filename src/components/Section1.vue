@@ -196,14 +196,18 @@
     </v-row>
       <!-- 下方區域 -->
       <v-row no-gutters>
-        <!-- 左側圖片，讓圖片垂直置中 -->
-        <v-col cols="12" md="4" class="d-flex justify-center align-start" :style="cardImgStyles">
-          <v-container>
-            <v-row justify="center" align="center" style="height: 100%;">
-              <v-img :src="page.image" :aspect-ratio="1" max-height="200px" contain></v-img>
-            </v-row>
-          </v-container>
-        </v-col>
+        <!-- 左側影片，讓圖片垂直置中 -->
+        <v-col cols="12" md="4" :style="cardVidStyles">
+  <div style="width: 100%; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden;">
+    <iframe 
+      :src="page.video"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="width: 100%; height: 100%; border: none;">
+    </iframe>
+  </div>
+</v-col>
         <!-- 右側描述文字 -->
         <v-col cols="12" md="8" class="text-left" :style="cardTextStyles">
           <p v-html="replaceNewlines(page.description)"></p>
@@ -219,7 +223,7 @@
 
 <script setup lang="ts">
 import { useDisplay } from 'vuetify';
-import { ref, computed, watch, onMounted, nextTick } from 'vue';
+import { ref, computed, watch, onMounted, nextTick , CSSProperties} from 'vue';
 
 
 // 解構 mdAndDown，偵測螢幕尺寸
@@ -302,6 +306,19 @@ const cardTextStyles = computed(() => ({
 // 設定卡片圖片樣式
 const cardImgStyles = computed(() => ({
 marginTop: smAndDown.value ? '40px' : '60px',
+}));
+// 設定卡片影片樣式
+const cardVidStyles = computed<CSSProperties>(() => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: smAndDown.value ? "30px" : "80px",
+  paddingLeft: "10px",
+  paddingRight: "10px",
+  height: "100%",
+  position: "relative" as "relative", // 確保類型正確
+  borderRadius: "10px",
+  overflow: "hidden",
 }));
 
 const buttonContainer = computed(() => ({
@@ -400,6 +417,7 @@ const pages = ref([
 {
 majorCategory: "animation",  // 更新類別
 image: new URL('@/assets/img/2.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/D5pOaeZ3mag",
 groupName: "沼",
 category: "2D｜動畫影片",
 categoryEnglish: "2D｜Animation Film",
@@ -408,6 +426,7 @@ description: "本作品以「長照監獄」為發想，針對照顧者的視角
 {
 majorCategory: "animation",
 image: new URL('@/assets/img/3.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/Epx01XeuWA0",
 groupName: "靜默",
 category: "2D｜動畫影片",
 categoryEnglish: "2D｜Animation Film",
@@ -416,6 +435,7 @@ description: "本次展覽探討「不當旁觀者」，揭示社會霸凌的陰
 {
 majorCategory: "animation",
 image: new URL('@/assets/img/4.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/trNvoZk6QC8",
 groupName: "與海",
 category: "定格動畫",
 categoryEnglish: "Stop Motion Animation",
@@ -424,6 +444,7 @@ description: "講述海龜生活的環境，聚焦於人類對自然環境的破
 {
 majorCategory: "short film",
 image: new URL('@/assets/img/5.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/zy6TJ7gD1ug",
 groupName: "在喬的路上",
 category: "微電影動畫",
 categoryEnglish: "Short Film Animation",
@@ -432,6 +453,7 @@ description: "故事是講述一位馬來西亞男生-阿布在台留學的故�
 {
 majorCategory: "game",
 image: new URL('@/assets/img/6.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/O0vHClDHIG4",
 groupName: "亂巷",
 category: "3D｜遊戲",
 categoryEnglish: "3D｜Game",
@@ -440,6 +462,7 @@ description: "台灣的街道展現著獨特的混亂與雜亂，從路、街、
 {
 majorCategory: "game",
 image: new URL('@/assets/img/7.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/TuMJvLwJUMw",
 groupName: "Sweet Dreams",
 category: "2.5D｜遊戲",
 categoryEnglish: "2.5D｜Game",
@@ -448,6 +471,7 @@ description: "主角田曦然在森林中醒來，身上只有一本沒有署名
 {
 majorCategory: "game",
 image: new URL('@/assets/img/8.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/27Amlf44eaY",
 groupName: "觀光課",
 category: "3D｜遊戲",
 categoryEnglish: "3D｜Game",
@@ -457,6 +481,7 @@ description: "《觀光課》是一款3D冒險解謎遊戲，講述愛翹課的�
 {
 majorCategory: "game",
 image: new URL('@/assets/img/9.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/jT5by38ldxY",
 groupName: "變異武裝",
 category: "3D｜遊戲",
 categoryEnglish: "3D｜Game",
@@ -465,6 +490,7 @@ description: "變異武裝是一款3D第三人稱射擊遊戲。\n遊戲背景�
 {
 majorCategory: "game",
 image: new URL('@/assets/img/10.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/Q5U-OmoUrW0",
 groupName: "孩玩仔",
 category: "3D｜遊戲",
 categoryEnglish: "3D｜Game",
@@ -473,6 +499,7 @@ description: "主角在回憶小時候最愛的節目 - 閃電跳跳糖超人，
 {
 majorCategory: "game",
 image: new URL('@/assets/img/11.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/cq_ZtjAdClk",
 groupName: "裘斯choose",
 category: "2D｜遊戲",
 categoryEnglish: "2D｜Game",
@@ -481,6 +508,7 @@ description: "「艾勒柏斯」是一座生機盎然的植物城邦，曾經美
 {
 majorCategory: "game",
 image: new URL('@/assets/img/12.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/7oD4Sq56zRc",
 groupName: "苜隆車站",
 category: "3D｜遊戲",
 categoryEnglish: "3D｜Game",
@@ -489,6 +517,7 @@ description: "苜隆車站是一款 3D 第一人稱恐怖解謎遊戲。車站�
 {
 majorCategory: "game",
 image: new URL('@/assets/img/13.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/992vt5Bzjf4",
 groupName: "翠翠島嶼",
 category: "3D｜遊戲",
 categoryEnglish: "3D｜Game",
@@ -498,6 +527,7 @@ description: "未來發生了一場災難，調查發現跟500年前動物滅絕
 {
 majorCategory: "game",
 image: new URL('@/assets/img/14.png', import.meta.url).href,
+video: "https://www.youtube.com/embed/Gxt0bChZuBw",
 groupName: "元素：奔",
 category: "2D｜遊戲",
 categoryEnglish: "2D｜Game",
