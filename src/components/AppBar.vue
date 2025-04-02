@@ -52,8 +52,9 @@
                 v-bind="props"
                 class="custom-button"
                 size="x-large"
+                @click= "group"
               >
-                展場問卷
+                各組介紹
               </v-btn>
             </v-col>
           </template>
@@ -87,7 +88,6 @@
 </template>
 
 <script setup lang="ts">
-import router from '@/router';
 
 // 定義關於我們選單項目
 interface AboutItem {
@@ -97,7 +97,8 @@ interface AboutItem {
 
 const aboutItems: AboutItem[] = [
   { title: "作品理念", url: "https://clickclick114.github.io/official/#click" },
-  { title: "回饋問卷", url: "https://clickclick114.github.io/official/form/" }
+  { title: "回饋問卷", url: "https://clickclick114.github.io/official/form/" },
+  { title: "展場問卷", url: "" }
 ];
 
 // 處理點擊事件，跳轉到指定網址
@@ -107,8 +108,12 @@ const handleItemClick = (item: AboutItem) => {
 
 // 跳轉到心理測驗頁面
 const redirectToTest = () => {
-  // 跳轉至心理測驗頁面（對應路由 /test）
-  router.push("/test");
+  window.open("https://clickclick114.github.io/official/test");
+};
+
+// 跳轉到各組介紹頁面
+const group = () => {
+  window.open("https://clickclick114.github.io/official/#group");
 };
 </script>
 
@@ -136,7 +141,7 @@ const redirectToTest = () => {
   flex-direction: column;
   justify-content: center;
   padding-left: 1%;
-  gap: 12px; /* 調整中英間距 */
+  gap: 8px; /* 調整中英間距 */
 }
 
 .title-english {
@@ -191,6 +196,7 @@ const redirectToTest = () => {
   align-items: center;
   color: white;
   font-weight: normal;
-  padding-bottom: 10%;
+  font-size: 1.15rem;
+  padding-bottom: 12%;
 }
 </style>

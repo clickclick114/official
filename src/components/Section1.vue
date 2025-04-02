@@ -9,7 +9,7 @@
     <v-row no-gutters class="d-flex align-center">
   <v-col cols="6" v-if="$vuetify.display.smAndDown">
     <div style="padding-left: 8px; display: flex; align-items: center;">
-      <span :style="{ fontSize: '22px', color: '#001ded', fontWeight: '600', paddingTop: '10px', paddingLeft: '2px' }">{{ item.groupName }}</span>
+      <span :style="{ fontSize: '24px', color: '#001ded', fontWeight: 'Bold', paddingTop: '8px', paddingLeft: '2px' }">{{ item.groupName }}</span>
     </div>
   </v-col>
 
@@ -21,7 +21,7 @@
 
       <span v-if="!$vuetify.display.smAndDown"
         :style="{
-          fontSize: '26px',
+          fontSize: '28px',
           color: '#001ded',
           fontWeight: '500',
         }"
@@ -57,7 +57,7 @@
 <!-- 組別輪播項目 -->
 <v-container class="group">
   <!--各組介紹title-->
-  <v-row class="group-title" no-gutters align="center" :style="grouptitlebutton">
+  <v-row id="group" class="group-title" no-gutters align="center" :style="grouptitlebutton">
     <span>各組介紹</span>
   </v-row>
   <!--輪播項目-->
@@ -81,7 +81,7 @@
     <v-row no-gutters class="d-flex align-center">
       <v-col cols="6" v-if="$vuetify.display.smAndDown">
         <div style="padding-left: 8px; display: flex; align-items: center;">
-          <span :style="{ fontSize: '22px', color: '#001ded', fontWeight: '600', paddingTop: '10px', paddingLeft: '2px' }">{{ item.groupName }}</span>
+          <span :style="{ fontSize: '24px', color: '#001ded', fontWeight: '600', paddingTop: '8px', paddingLeft: '2px' }">{{ item.groupName }}</span>
         </div>
       </v-col>
 
@@ -174,7 +174,7 @@
     <v-row no-gutters class="d-flex align-center">
       <v-col cols="6" v-if="$vuetify.display.smAndDown">
         <div style="padding-left: 8px; display: flex; align-items: center;">
-          <span :style="{ fontSize: '22px', color: '#001ded', fontWeight: '600', paddingTop: '10px', paddingLeft: '2px' }">{{ page.groupName }}</span>
+          <span :style="{ fontSize: '24px', color: '#001ded', fontWeight: '600', paddingTop: '8px', paddingLeft: '2px' }">{{ page.groupName }}</span>
         </div>
       </v-col>
 
@@ -297,8 +297,8 @@ maxWidth: smAndDown.value ? '100%' : '80%', // 手機版顯示 100% 寬度，桌
 // 設定卡片文字樣式
 const cardTextStyles = computed(() => ({
   marginTop: smAndDown.value ? '30px' : '70px',
-  fontSize: smAndDown.value ? '0.8rem' : '1.1rem',
-  lineHeight: smAndDown.value ? '1.8' : '2.2',
+  fontSize: smAndDown.value ? '0.9rem' : '1.1rem',
+  lineHeight: smAndDown.value ? '1.8' : '2.1',
   paddingRight: smAndDown.value ? '5px' : '20px',
   paddingLeft: smAndDown.value ? '10px' : '0px',
   color: '#000000',

@@ -44,6 +44,14 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-/* 移除 display: none，改用 v-show 控制顯示 */
+<style>
+/* 字體全域設定 */
+@font-face {
+  font-family: 'jf-openhuninn';
+  src:url('@/assets/fonts/jf-openhuninn-2.1.ttf') format('truetype');
+}
+
+body {
+  font-family: 'jf-openhuninn', sans-serif;
+}
 </style>

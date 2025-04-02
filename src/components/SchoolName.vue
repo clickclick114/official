@@ -3,8 +3,7 @@
   <p class="schoolname" :style="schoolName">
     <span class="exhibition-title">展覽資訊</span><br>
     <br>
-    WHAT
-    校內展𓂃中科大中商大樓𝟮𝟬𝟮𝟱.𝟬𝟰.𝟭𝟰 ⇢ 𝟭𝟴<br>
+    校內展𓂃中科大中商大樓𝟮𝟬𝟮𝟱.𝟬𝟰.𝟭5 ⇢ 𝟭𝟴<br>
     新一代設計展𓂃南港展覽館4樓 𝟮𝟬𝟮𝟱.𝟬𝟱.𝟬𝟵 ⇢ 𝟭𝟮<br>
     放視大賞𓂃高雄展覽館𝟮𝟬𝟮𝟱.𝟬𝟱.𝟭𝟱 ⇢ 𝟭𝟳
   </p>

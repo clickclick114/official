@@ -347,7 +347,7 @@ const selectCharacter = (index) => {
 };
 </script>
 
-<style scoped>
+<style>
 .character-section {
   height: 100vh;
   position: relative;
@@ -440,5 +440,12 @@ const selectCharacter = (index) => {
     padding: 15px 0;
   }
 }
-</style>
 
+.text-h6, 
+.text-body-1, 
+.font-weight-bold, 
+.v-card-text {
+  font-family: 'jf-openhuninn', sans-serif !important;
+}
+
+</style>
