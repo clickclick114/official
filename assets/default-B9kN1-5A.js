@@ -1,0 +1,1 @@
+import{d as o,r as n,c as r,o as s,w as e,a as t,V as _,b as c}from"./index-WS7AnCck.js";const f=o({__name:"default",setup(l){return(p,u)=>{const a=n("router-view");return s(),r(c,null,{default:e(()=>[t(_,null,{default:e(()=>[t(a)]),_:1})]),_:1})}}});export{f as default};
