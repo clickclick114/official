@@ -57,11 +57,12 @@
 <!-- 組別輪播項目 -->
 <v-container class="group">
   <!--各組介紹title-->
-  <v-row id="group" class="group-title" no-gutters align="center" :style="grouptitlebutton">
+  <v-row class="group-title" no-gutters align="center" :style="grouptitlebutton">
     <span>各組介紹</span>
   </v-row>
   <!--輪播項目-->
   <v-carousel
+  id="group"
   :style="carouselStyles"
   :height="carouselHeight"
   :show-arrows="showArrows"

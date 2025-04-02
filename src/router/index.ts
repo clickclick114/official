@@ -28,14 +28,20 @@ export const router = createRouter({
   routes: setupLayouts([...autoRoutes, ...customRoutes]), // 合併自動路由和自定義路由
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: 'smooth', // 平滑滾動效果
+      const element = document.querySelector(to.hash);
+      if (element) {
+        setTimeout(() => {
+          const elementRect = element.getBoundingClientRect();
+          const absoluteElementTop = elementRect.top + window.scrollY;
+          const middleOfScreen = absoluteElementTop - (window.innerHeight / 2) + (elementRect.height / 2);
+          window.scrollTo({ top: middleOfScreen, behavior: 'smooth' });
+        }, 100);
+        return false; // 避免 Vue Router 預設滾動行為
       }
     }
-    return savedPosition || { top: 0 } // 回到儲存位置或頂部
+    return savedPosition || { top: 0 }; // 預設行為
   },
-})
+});
 
 // Workaround for https://github.com/vitejs/vite/issues/11804
 router.onError((err, to) => {
@@ -50,10 +56,10 @@ router.onError((err, to) => {
   } else {
     console.error(err)
   }
-})
+});
 
 router.isReady().then(() => {
   localStorage.removeItem('vuetify:dynamic-reload')
-})
+});
 
 export default router

@@ -113,7 +113,7 @@ const redirectToTest = () => {
 
 // 跳轉到各組介紹頁面
 const group = () => {
-  window.open("https://clickclick114.github.io/official/#group");
+  window.location.href = "https://clickclick114.github.io/official/#group";
 };
 </script>
 
