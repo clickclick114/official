@@ -98,7 +98,7 @@ interface AboutItem {
 const aboutItems: AboutItem[] = [
   { title: "作品理念", url: "https://clickclick114.github.io/official/#click" },
   { title: "回饋問卷", url: "https://clickclick114.github.io/official/form/" },
-  { title: "展場問卷", url: "" }
+  { title: "展場測驗", url: "https://forms.gle/vSqitadHuPu1Kb3x9" }
 ];
 
 // 處理點擊事件，跳轉到指定網址

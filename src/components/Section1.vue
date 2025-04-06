@@ -7,7 +7,7 @@
   <v-card class="mx-auto group-vcard" :style="[cardStyles, { padding: '2px', paddingTop: '10px', paddingBottom: '10px'}]">
     <!-- 上方區域 -->
     <v-row no-gutters class="d-flex align-center">
-  <v-col cols="6" v-if="$vuetify.display.smAndDown">
+  <v-col cols="8" v-if="$vuetify.display.smAndDown">
     <div style="padding-left: 8px; display: flex; align-items: center;">
       <span :style="{ fontSize: '24px', color: '#001ded', fontWeight: 'Bold', paddingTop: '8px', paddingLeft: '2px' }">{{ item.groupName }}</span>
     </div>
@@ -80,7 +80,7 @@
     <!-- 上方區域 -->
     <!-- 組別名稱 -->
     <v-row no-gutters class="d-flex align-center">
-      <v-col cols="6" v-if="$vuetify.display.smAndDown">
+      <v-col cols="8" v-if="$vuetify.display.smAndDown">
         <div style="padding-left: 8px; display: flex; align-items: center;">
           <span :style="{ fontSize: '24px', color: '#001ded', fontWeight: '600', paddingTop: '8px', paddingLeft: '2px' }">{{ item.groupName }}</span>
         </div>
@@ -173,7 +173,7 @@
     <!-- 上方區域 -->
     <!-- 組別名稱 -->
     <v-row no-gutters class="d-flex align-center">
-      <v-col cols="6" v-if="$vuetify.display.smAndDown">
+      <v-col cols="8" v-if="$vuetify.display.smAndDown">
         <div style="padding-left: 8px; display: flex; align-items: center;">
           <span :style="{ fontSize: '24px', color: '#001ded', fontWeight: '600', paddingTop: '8px', paddingLeft: '2px' }">{{ page.groupName }}</span>
         </div>

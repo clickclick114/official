@@ -67,11 +67,11 @@ const menuItems = [
     text: "Instagram",
     link: "https://www.instagram.com/click_114nutcmd/",
   },
-  { icon: "mdi-file-document-edit", text: "展場問卷", link: "#" },
+  { icon: "mdi-file-document-edit", text: "展場測驗", link: "https://forms.gle/vSqitadHuPu1Kb3x9" },
   {
     image: feedbackIcon,
     text: "回饋問卷",
-    link: "https://clickclick114.github.io/official/test/",
+    link: "https://clickclick114.github.io/official/form/",
   },
   { image: aboutIcon, text: "可立可", expandable: true },
 ];
