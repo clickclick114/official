@@ -31,7 +31,7 @@ const Video = computed(() => ({
   height: mdAndDown.value ? '100%' : '80%',
 }));
 const videos = ref([
-  "https://www.youtube.com/embed/BBYxK-LN0do",
+  "https://www.youtube.com/embed/d9NyJuUUY_k",
 ]);
 </script>
 
