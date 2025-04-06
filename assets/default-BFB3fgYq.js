@@ -1,1 +1,0 @@
-import{ap as o,at as n,am as r,ae as s,ag as e,d as a,ao as _,au as p}from"./index-Cgnug2Ly.js";const d=o({__name:"default",setup(u){return(c,l)=>{const t=n("router-view");return s(),r(p,null,{default:e(()=>[a(_,null,{default:e(()=>[a(t)]),_:1})]),_:1})}}});export{d as default};
