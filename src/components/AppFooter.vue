@@ -15,12 +15,16 @@
       <!-- 社群圖示 -->
       <v-btn
         icon
+        class="footer-btn"
+            elevation="0"
         @click="openLink('https://www.facebook.com/profile.php?id=61560214634108&locale=zh_TW')"
       >
         <v-icon color="white">mdi-facebook</v-icon>
       </v-btn>
       <v-btn
         icon
+        class="footer-btn"
+            elevation="0"
         @click="openLink('https://www.instagram.com/click_114nutcmd/')"
       >
         <v-icon color="white">mdi-instagram</v-icon>
@@ -118,5 +122,9 @@ const footerStyle = computed(() => ({
 
 .v-btn {
   margin-left: 10px;
+}
+
+.footer-btn {
+  background-color: #001ded !important;
 }
 </style>
