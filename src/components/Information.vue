@@ -1,7 +1,7 @@
 <template>
     <v-container class="image-container" :style="container">
       <div class="image-overlay">
-        <v-img src="@/assets/information.jpg" />
+        <v-img src="@/assets/time.png" />
       </div>
     </v-container>
   </template>
@@ -16,8 +16,10 @@
   
 
   const container = computed(() => ({
-    height: mdAndDown.value ? '150px' : '300px',
+    height: mdAndDown.value ? '50px' : '125px',
     width:"100%",
+    marginTop:  mdAndDown.value ? '0px' : '40px',
+    marginBottom:  mdAndDown.value ? '0px' : '0px',
 }));
 
   </script>
@@ -28,8 +30,7 @@
   position: relative; /* 使圖片疊加於容器內 */
   width: 100%;
   overflow: hidden; /* 隱藏超出容器的圖片部分 */
-  margin-top: 30px;
-  margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 /* 透明 PNG 圖片疊加 */

@@ -29,6 +29,14 @@
       >
         <v-icon color="white">mdi-instagram</v-icon>
       </v-btn>
+      <v-btn
+  icon
+  class="footer-btn"
+  elevation="0"
+  @click="openLink('https://www.youtube.com/@CLICK_nutcmd114')"
+>
+  <v-icon color="white">mdi-youtube</v-icon>
+</v-btn>
     </div>
   </v-footer>
 </template>
