@@ -171,7 +171,7 @@ const currentIndex = ref(0);
 const currentCharacter = computed(() => characters[currentIndex.value]);
 
 // Shared labels for all characters
-const statsLabels = ["適應性", "美感", "智慧", "速度", "防禦力", "獨特性"];
+const statsLabels = ["創造力", "理性", "情感", "社交", "穩定", "執行"];
 
 // Character stats data
 const characterStats = {
@@ -180,7 +180,7 @@ const characterStats = {
     datasets: [
       {
         label: "搖桿水母",
-        data: [80, 60, 70, 90, 85, 75],
+        data: [75, 65, 90, 80, 85, 60],
         backgroundColor: "rgba(54, 162, 235, 0.2)",
         borderColor: "rgba(54, 162, 235, 1)",
         pointBackgroundColor: "rgba(54, 162, 235, 1)",
@@ -195,7 +195,7 @@ const characterStats = {
     datasets: [
       {
         label: "電繪魟",
-        data: [90, 85, 75, 70, 80, 75],
+        data: [80, 60, 95, 90, 75, 70],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         pointBackgroundColor: "rgba(255, 99, 132, 1)",
@@ -210,7 +210,7 @@ const characterStats = {
     datasets: [
       {
         label: "搖桿水母(鍵帽)",
-        data: [85, 70, 75, 80, 90, 80],
+        data: [80, 60, 95, 90, 75, 70],
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         borderColor: "rgba(75, 192, 192, 1)",
         pointBackgroundColor: "rgba(75, 192, 192, 1)",
@@ -224,7 +224,7 @@ const characterStats = {
     datasets: [
       {
         label: "底片蟹",
-        data: [70, 80, 85, 75, 80, 75],
+        data: [95, 50, 85, 55, 60, 70],
         backgroundColor: "rgba(255, 206, 86, 0.2)",
         borderColor: "rgba(255, 206, 86, 1)",
         pointBackgroundColor: "rgba(255, 206, 86, 1)",
@@ -239,7 +239,7 @@ const characterStats = {
     datasets: [
       {
         label: "鋼筆烏賊",
-        data: [85, 90, 70, 75, 80, 80],
+        data: [85, 90, 65, 55, 80, 95],
         backgroundColor: "rgba(255, 159, 64, 0.2)",
         borderColor: "rgba(255, 159, 64, 1)",
         pointBackgroundColor: "rgba(255, 159, 64, 1)",
@@ -254,7 +254,7 @@ const characterStats = {
     datasets: [
       {
         label: "程式花園鰻",
-        data: [80, 75, 90, 85, 75, 85],
+        data: [95, 65, 70, 90, 50, 85],
         backgroundColor: "rgba(54, 235, 162, 0.2)",
         borderColor: "rgba(54, 235, 162, 1)",
         pointBackgroundColor: "rgba(54, 235, 162, 1)",
@@ -269,7 +269,7 @@ const characterStats = {
     datasets: [
       {
         label: "電路珊瑚",
-        data: [75, 85, 80, 80, 85, 90],
+        data: [80, 85, 65, 75, 70, 95],
         backgroundColor: "rgba(255, 99, 255, 0.2)",
         borderColor: "rgba(255, 99, 255, 1)",
         pointBackgroundColor: "rgba(255, 99, 255, 1)",
@@ -284,7 +284,7 @@ const characterStats = {
     datasets: [
       {
         label: "鏡頭蟹",
-        data: [90, 85, 75, 85, 80, 85],
+        data: [70, 95, 55, 50, 80, 75],
         backgroundColor: "rgba(255, 102, 102, 0.2)",
         borderColor: "rgba(255, 102, 102, 1)",
         pointBackgroundColor: "rgba(255, 102, 102, 1)",
@@ -298,7 +298,7 @@ const characterStats = {
     datasets: [
       {
         label: "電繪魟魚(鍵帽)",
-        data: [90, 85, 75, 85, 80, 85],
+        data: [80, 60, 95, 90, 75, 70],
         backgroundColor: "rgba(255, 102, 102, 0.2)",
         borderColor: "rgba(255, 102, 102, 1)",
         pointBackgroundColor: "rgba(255, 102, 102, 1)",
@@ -312,7 +312,7 @@ const characterStats = {
     datasets: [
       {
         label: "BUG章魚",
-        data: [90, 85, 75, 70, 80, 75],
+        data: [75, 60, 60, 85, 50, 90],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         pointBackgroundColor: "rgba(255, 99, 132, 1)",
