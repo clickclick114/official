@@ -1,257 +1,254 @@
 <template>
-  <v-main class="main-container">
-    <v-container class="content-wrapper">
-      <v-sheet class="quiz-container">
-        <div v-if="!quizStarted" class="intro-box">
-          <p class="intro-text">
-            緩緩睜開眼，發現自己正漂浮在一片遼闊而神秘的海域之中。<br /><br />
-            水流輕輕推動著你，一群獨特的生物悄悄聚攏，好奇地打量著這位新來的訪客。<br /><br />
-            光芒閃爍，像是在邀請你踏上一場未知的探索——<br />
-            這座水族館不僅藏著無數奇妙的景色，你的選擇，將決定未來的方向。
-          </p>
-          <v-btn class="start-btn" @click="startQuiz">準備好了嗎？讓我們出發吧！</v-btn>
-        </div>
+  <div class="main-container">
+    <!-- 背景圖 -->
+    <img
+      v-if="currentBackgroundImage"
+      :src="currentBackgroundImage"
+      alt="背景圖"
+      class="question-background"
+    />
 
-        <div v-if="quizStarted && !finished" class="question-box" :key="currentQuestion.id">
-          <div class="question-text">
-            {{ currentQuestion.text }}
-          </div>
+    <!-- 開始畫面 -->
+    <div v-if="showStartScreen" class="start-screen">
+      <img
+        src="@/assets/questions/startbutton.png"
+        alt="開始按鈕"
+        class="start-btn-image"
+        @click="startQuiz"
+      />
+    </div>
 
-          <div class="options">
-            <button
-              v-for="option in currentQuestion.options"
-              :key="option.type"
-              @click="selectAnswer(option.type)"
-              class="answer-btn"
-            >
-              {{ option.text }}
-            </button>
-          </div>
-        </div>
+    <!-- 題目畫面 -->
+    <div
+      v-if="questions[currentQuestionIndex] && !showResult"
+      class="question-section"
+    >
+      <h2>{{ questions[currentQuestionIndex].question }}</h2>
+            <div class="option-container">
+      <div
+        v-for="(option, index) in questions[currentQuestionIndex].options"
+        :key="index"
+        class="option-wrapper"
+      >
 
-        <div v-if="quizStarted && finished" class="result">
-          <div class="result-text">你的結果是：{{ resultType }}</div>
+        <button @click="selectOption(option.type)" class="option-button" v-if="isTestStarted">
+          <img
+            :src="chooseImage"
+            alt="選項圖"
+            class="option-image"
+          />
+          <span class="option-text">{{ option.text }}</span>
+        </button>
         </div>
-      </v-sheet>
-    </v-container>
-  </v-main>
+      </div>
+    </div>
+
+    <div v-if="showResult && resultImage" class="result-image-wrapper">
+  <img :src="resultImage" alt="結果圖" class="result-image" />
+
+  <!-- 新增提示文字 -->
+  <p class="download-hint">→長按圖片下載</p>
+
+  <!-- Instagram 分享按鈕 -->
+  <div class="share-instagram">
+    <a
+      href="https://www.instagram.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      🔗 分享到 Instagram
+    </a>
+  </div>
+</div>
+
+</div>
 </template>
 
+
+
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed } from 'vue'
 
-const quizStarted = ref(false);
-const currentQuestionIndex = ref(0);
-const scores = ref({});
-const finished = ref(false);
-const resultType = ref(null);
-const showTenthQuestion = ref(false);
-  
+// 控制狀態
+const showStartScreen = ref(true)
+const showResult = ref(false)
+const currentQuestionIndex = ref(0)
+const selectedTypes = ref([])
+const resultImage = ref('')
+const isTestStarted = ref(false)
 
-
-// 題目與邏輯
+// 題目資料
 const questions = ref([
   {
     id: 1,
-    text: "噗嚕噗嚕🫧 你環顧四周，發現水流悄然分成四個方向，每條通道的盡頭都閃爍著獨特的光芒……你會選擇哪一條？",
+    image: 'q1.jpg',
     options: [
-      { text: "鋼鐵色的通道——隱約傳來低沉而穩定的震動聲，像是某種強大能量在深處蓄勢待發。", type: 8 },
-      { text: "柔和藍色的通道——空氣中瀰漫著輕柔的旋律，彷彿每一步都與周圍的流動節奏相呼應。", type: 9 },
-      { text: "深邃銀白的通道——牆面刻滿了古老的符號與結構，靜待有心人去發掘其中隱藏的秘密。", type: 5 },
-      { text: "霓虹色的通道——跳躍的光點在水中閃爍，每一次變化都像是訴說著新的故事與可能。", type: 7 },
+      { text: "銀色的通道，隱約傳來低沉的震動聲，深處似乎潛藏著某種力量。", type: 8 },
+      { text: "藍色的通道，瀰漫著輕柔的旋律，讓人想與四周的空氣共舞。", type: 9 },
+      { text: "白色的通道，牆面刻滿了古老的符號，靜待有人去發掘其中奧秘。", type: 5 },
+      { text: "彩色的通道，跳躍的光點在水中閃爍，每顆光點都訴說著新的故事。", type: 7 },
     ],
   },
   {
     id: 2,
-    text: "進到通道後，發現這片遼闊又錯綜複雜的海域原來是一座水族館，四周遍布著蜿蜒的水道與奇特的建築。你想先往哪個方向逛呢？",
+    image: 'q2.jpg',
     options: [
-      { text: "朝向閃耀著鎂光燈的展演區，那裡總是充滿精彩的發表與掌聲。", type: 3 },
-      { text: "走向熱鬧的交流廣場，許多夥伴正在分享彼此的創意與故事。", type: 2 },
-      { text: "漫步至靜謐的觀景區，欣賞緩緩流動的水光與悠遊的生物們。", type: 9 },
-      { text: "穩步前往資料館，那裡收藏著歷代水族館的結構設計與安全系統。", type: 6 },
+      { text: "充滿掌聲與燈光齊聚的展演區。", type: 3 },
+      { text: "創意與靈感碰撞熱烈的交流廣場。", type: 2 },
+      { text: "水光照耀並有生物陪伴的休息區。", type: 9 },
+      { text: "悠久歷史與資料靜候翻閱的資料館。", type: 6 },
     ],
   },
   {
     id: 3,
-    text: "在探索水族館的途中，你發現了一條隱秘的小徑，盡頭有一座神秘的光影裝置，似乎會根據你的內心想法變化出不同的景象。當你靠近時，你希望它展現出什麼？",
+    image: 'q3.jpg',
     options: [
-      { text: "一個充滿秩序與細節的世界，每個元素都被完美地安排。", type: 1 },
-      { text: "溫暖的回憶畫面，映照出你曾經幫助過的重要夥伴們。", type: 2 },
-      { text: "千變萬化的奇幻景象，讓你能夠隨時找到新的靈感與樂趣。", type: 7 },
-      { text: "一個獨特而充滿個人風格的場景，能讓你展現出與眾不同的存在。", type: 4 },
+      { text: "所有事物都非常完美，井然有序、細節滿滿的世界。", type: 1 },
+      { text: "夥伴的笑容歷歷在目，充滿溫暖的回憶畫面。", type: 2 },
+      { text: "靈感與樂趣不斷湧現，千變萬化的奇幻景象。", type: 7 },
+      { text: "你從未看過，充滿個人風格的浩瀚宇宙。", type: 4 },
     ],
   },
   {
     id: 4,
-    text: "噼啪⚡️ 正當你沉浸在探索的樂趣中，水族箱深處突然傳來異響——某顆鍵帽出現破孔，水流開始洶湧湧出！眼看情況越來越緊急，你會怎麼做？",
+    image: 'q4.jpg',
     options: [
-      { text: "冷靜觀察水流的方向與破損程度，迅速計算出最精確的補救方法。", type: 5 },
-      { text: "立刻尋找值得信賴的夥伴，一起合作修補破口，確保安全。", type: 6 },
-      { text: "相信自己的直覺，順勢而為，或許這場突如其來的變化會帶來意想不到的機會！", type: 4 },
-      { text: "毫不猶豫地行動，不管多困難，都會拼盡全力阻止水族箱崩壞！", type: 1 },
+      { text: "冷靜觀察並分析損壞狀況，迅速想出補救方法。", type: 5 },
+      { text: "立刻尋找夥伴們，一起合作修補破損，確保安全", type: 6 },
+      { text: "觀察變化後，相信憑直覺能找到突破點。", type: 4 },
+      { text: "毫不遲疑衝上前，立刻動手壓制水流！", type: 1 },
     ],
   },
   {
     id: 5,
-    text: "突然，你身邊多了好多生物，原來是大家看到狀況都來幫忙了！水族館的未來取決於這場合作，你會選擇怎麼幫忙呢？",
+    image: 'q5.jpg',
     options: [
-      { text: "迅速指揮隊伍，分配任務，確保大家有條不紊地行動！", type: 8 },
-      { text: "關心每位夥伴的狀況，確保所有人都能安心投入合作。", type: 2 },
-      { text: "分析問題的核心，提出最有效率的修復計畫，確保大家能在最短時間內完成修復。", type: 3 },
-      { text: "保持冷靜，觀察整體局勢，適時調節人手與資源，讓團隊運作更加流暢。", type: 9 },
+      { text: "大聲指揮並迅速分配任務，用行動帶動全場。", type: 8 },
+      { text: "關心每位夥伴的狀況，安撫情緒、穩定團隊氣氛。", type: 2 },
+      { text: "分析問題核心，提出最有效率的修復計畫。", type: 3 },
+      { text: "先在一旁觀察整體情況，適時補位、及時支援。", type: 9 },
     ],
   },
   {
     id: 6,
-    text: "維修後意外觸發神秘開關，眼前突然出現了一道泛著微光的門，旁邊的鏡頭蟹興奮地說：『這是傳說中的神秘房間！』據說裡面藏著早已失傳的重要技術……你決定怎麼辦？",
+    image: 'q6.jpg',
     options: [
-      { text: "仔細檢查門上的符號與機關，推理出最符合邏輯的開啟方式，以免破壞這項失傳的技術。", type: 5 },
-      { text: "先與夥伴討論，確認安全無虞後再決定是否進入，畢竟傳說中的事物往往伴隨著風險。", type: 6 },
-      { text: "帶著滿滿的好奇心，毫不猶豫地推開門，畢竟如果不親眼看看，怎麼知道傳說是真是假！", type: 7 },
-      { text: "凝視門上的古老紋路，思索它與水族館歷史之間的聯繫，或許這正是揭開失傳技術奧秘的關鍵。", type: 4 },
+      { text: "仔細檢查鍵帽周圍的機關與提示，動手推理破解結構，找出符合邏輯的開啟方式。", type: 5 },
+      { text: "先與夥伴討論，確認安全無虞後再決定是否按下。", type: 6 },
+      { text: "毫不猶豫地按下鍵帽，相信直覺帶來解答。", type: 7 },
+      { text: "凝視鍵帽上細緻的圖案與光紋，思索它背後的歷史與象徵意義，找出其中的謎題。", type: 4 },
     ],
   },
   {
     id: 7,
-    text: "門後的房間內，浮現出一道奇異的光影，似乎在等待你的回應。你會怎麼做？",
+    image: 'q7.jpg',
     options: [
-      { text: "試著與它交流，看看是否能理解它的意圖。", type: 2 },
-      { text: "仔細觀察它的形態與變化，分析它的結構與原理。", type: 5 },
-      { text: "直接伸出手，感受光影的能量，看看會發生什麼。", type: 7 },
-      { text: "向夥伴們請教，集合大家的智慧一起解讀這道光影的秘密。", type: 6 },
+      { text: "旋律精準有序，每個音符都像被精心安排，非常完美的音樂。", type: 2 },
+      { text: "音樂輕柔流動，喚起了你對他人情感的共鳴。", type: 5 },
+      { text: "旋律跳躍激昂，每個音符都出乎意料但又安排得當，讓人想再聽好幾次。", type: 7 },
+      { text: "音樂如潮水般包覆全身，你靜靜享受這份安穩與寧靜", type: 6 },
     ],
   },
   {
     id: 8,
-    text: "夥伴們為了感謝你的努力，準備了各式各樣的禮物，每份禮物都蘊含著他們的心意。你最希望收到什麼呢？",
+    image: 'q8.jpg',
     options: [
-      { text: "一件象徵努力與成果的精美紀念品，代表著這次旅程的收穫。", type: 3 },
-      { text: "一本珍藏的筆記或資料，裡面記錄著水族館的歷史與智慧。", type: 5 },
-      { text: "一幅溫暖的畫作，細膩描繪出這段旅程的點滴與回憶。", type: 4 },
-      { text: "一顆閃耀的和諧之石，象徵著安定與陪伴，願這份連結長存。", type: 9 },
+      { text: "一件象徵成就的限量紀念品，值得珍藏一生。", type: 3 },
+      { text: "一本珍藏的筆記或資料，記載著可立可的歷史與智慧。", type: 5 },
+      { text: "一幅溫暖的畫作，描繪了這段旅程的點滴與回憶。", type: 4 },
+      { text: "一顆閃耀的和諧之石，願這份連結長存。", type: 9 },
     ],
   },
   {
     id: 9,
-    text: "經歷了這段奇妙的旅程，你靜靜地望著眼前的水族館，心中浮現一個想法……",
+    image: 'q9.jpg',
     options: [
-      { text: "這裡還有許多未解的奧秘，我想留下來繼續探索。", type: 1 },
-      { text: "這片海域充滿著美好的夥伴，我願意再多停留一陣子。", type: 2 },
-      { text: "我已經收穫滿滿，是時候帶著這段經驗，踏上新的旅程。", type: 5 },
-      { text: "旅程雖然結束，但這段經歷將伴隨著我，未來還有更多可能等待著我。", type: 8 },
+      { text: "這裡還有許多未解的奧秘，我想留下來繼續探索每個細節的真相。", type: 1 },
+      { text: "有這麼多令人安心與溫暖的夥伴，我想多停留一會兒。", type: 2 },
+      { text: "我已獲得足夠的經驗與靈感，是時候帶著這段歷程，踏上新的旅程。", type: 5 },
+      { text: "這段經歷會成為我心中的燈塔，引領我走向未知的未來。", type: 8 },
     ],
   },
 ]);
-  const tenthQuestion = ref({
-  id: 10,
-  text: "在未來當你回想起這段經歷，你會有什麼啟發呢？",
-  options: [
-    { text: "不斷精進自己，讓下一次旅程更加完美。", type: 1 },
-    { text: "珍惜這份溫暖，未來也要幫助更多人，共創美好回憶。", type: 2 },
-    { text: "總結學習，規劃未來，讓自己更高效、更成功。", type: 3 },
-    { text: "珍藏這段經歷，讓它成為我的靈感與成長的養分。", type: 4 },
-    { text: "持續探索未知，分析每個細節，讓自己更瞭解這個世界。", type: 5 },
-    { text: "珍惜夥伴與團隊合作，與信賴的人一起迎接挑戰。", type: 6 },
-    { text: "充滿期待，準備迎接下一場刺激的冒險！", type: 7 },
-    { text: "堅定信念，勇敢迎接每個挑戰，不讓任何阻礙擋路！", type: 8 },
-    { text: "學會順應變化，以平和心態面對未來的挑戰。", type: 9 },
-  ],
-});
 
-const currentQuestion = computed(() => {
-  if (currentQuestionIndex.value < questions.value.length) {
-    return questions.value[currentQuestionIndex.value];
-  } else if (showTenthQuestion.value) {
-    return {
-      ...tenthQuestion.value,
-      options: filteredTenthOptions.value,
-    };
+// 開始測驗
+function startQuiz() {
+  showStartScreen.value = false
+  isTestStarted.value = true
+}
+
+// 選擇選項
+function selectOption(type) {
+  selectedTypes.value.push(type)
+
+  if (currentQuestionIndex.value < questions.value.length - 1) {
+    currentQuestionIndex.value++
   } else {
-    return null;
+    calculateResult()
   }
-});
+}
 
-const filteredTenthOptions = computed(() => {
-  if (finished.value && Object.keys(scores.value).length > 0) {
-    const maxScore = Math.max(...Object.values(scores.value));
-    const topTypes = Object.keys(scores.value).filter((type) => scores.value[type] === maxScore);
-    return tenthQuestion.value.options.filter((option) => topTypes.includes(String(option.type)));
+// 靜態結果圖片對應表
+const resultImageMap = {
+  1: new URL('@/assets/ans/a1.jpg', import.meta.url).href,
+  2: new URL('@/assets/ans/a2.jpg', import.meta.url).href,
+  3: new URL('@/assets/ans/a3.jpg', import.meta.url).href,
+  4: new URL('@/assets/ans/a4.jpg', import.meta.url).href,
+  5: new URL('@/assets/ans/a5.jpg', import.meta.url).href,
+  6: new URL('@/assets/ans/a6.jpg', import.meta.url).href,
+  7: new URL('@/assets/ans/a7.jpg', import.meta.url).href,
+  8: new URL('@/assets/ans/a8.jpg', import.meta.url).href,
+  9: new URL('@/assets/ans/a9.jpg', import.meta.url).href,
+}
+
+// 靜態題目背景圖對應表（假設每題一張）
+const questionImageMap = {
+  1: new URL('@/assets/questions/q1.jpg', import.meta.url).href,
+  2: new URL('@/assets/questions/q2.jpg', import.meta.url).href,
+  3: new URL('@/assets/questions/q3.jpg', import.meta.url).href,
+  4: new URL('@/assets/questions/q4.jpg', import.meta.url).href,
+  5: new URL('@/assets/questions/q5.jpg', import.meta.url).href,
+  6: new URL('@/assets/questions/q6.jpg', import.meta.url).href,
+  7: new URL('@/assets/questions/q7.jpg', import.meta.url).href,
+  8: new URL('@/assets/questions/q8.jpg', import.meta.url).href,
+  9: new URL('@/assets/questions/q9.jpg', import.meta.url).href,
+}
+
+// 開始畫面圖
+const startBackground = new URL('@/assets/questions/start.jpg', import.meta.url).href
+
+const resultBackground = new URL('@/assets/questions/background.png', import.meta.url).href
+
+const currentBackgroundImage = computed(() => {
+  if (showStartScreen.value) {
+    return startBackground
   }
-  return tenthQuestion.value.options;
-});
-
-const startQuiz = () => {
-  quizStarted.value = true;
-  initializeScores();
-};
-
-const initializeScores = () => {
-  scores.value = {};
-  questions.value.forEach((question) => {
-    if (question && question.options && Array.isArray(question.options)) {
-      question.options.forEach((option) => {
-        scores.value[option.type] = 0;
-      });
-    } else {
-      console.error("Invalid question or options:", question);
-    }
-  });
-  tenthQuestion.value.options.forEach((option) => {
-    scores.value[option.type] = 0;
-  });
-  console.log("scores:", scores.value);
-};
-
-const selectAnswer = (type) => {
-  scores.value[type]++;
-  console.log("scores:", scores.value);
-
-  if (currentQuestionIndex.value < questions.value.length) {
-    currentQuestionIndex.value++;
-  } else {
-    determineResult();
+  if (showResult.value) {
+    return resultBackground
   }
-};
+  return questionImageMap[currentQuestionIndex.value + 1] || ''
+})
 
-const determineResult = () => {
-  const scoreValues = Object.values(scores.value);
-  if (scoreValues.length === 0) {
-    resultType.value = "No scores calculated";
-    finished.value = true;
-    return;
-  }
+const chooseImage = new URL('@/assets/questions/choose.png', import.meta.url).href
 
-  const maxScore = Math.max(...scoreValues);
-  const topTypes = Object.keys(scores.value).filter((type) => scores.value[type] === maxScore);
+// 計算最多次出現的 type 對應結果圖
+function calculateResult() {
+  const typeCounts = {}
+  selectedTypes.value.forEach(type => {
+    typeCounts[type] = (typeCounts[type] || 0) + 1
+  })
 
-  console.log("topTypes:", topTypes); // 添加此行
-  console.log("showTenthQuestion:", showTenthQuestion.value); // 添加此行
-  console.log("finished:", finished.value); // 添加此行
+  const max = Math.max(...Object.values(typeCounts))
+  const topTypes = Object.entries(typeCounts)
+    .filter(([_, count]) => count === max)
+    .map(([type]) => Number(type))
 
-  if (topTypes.length > 1) {
-    showTenthQuestion.value = true;
-  } else {
-    resultType.value = `${topTypes[0]} (${maxScore})`;
-    finished.value = true;
-  }
-};
-
-
-watch(finished, (newValue) => {
-  if (newValue && showTenthQuestion.value) {
-    currentQuestionIndex.value++; // 如果顯示第十題，則遞增 currentQuestionIndex
-  }
-});
-
-watch(currentQuestion, (newValue) => {
-  if (newValue === null && finished.value) {
-    const maxScore = Math.max(...Object.values(scores.value));
-    const topTypes = Object.keys(scores.value).filter((type) => scores.value[type] === maxScore);
-    resultType.value = `${topTypes[0]} (${maxScore})`; // 在選擇第十題的選項後，顯示唯一的最高分
-  }
-});
+  const finalType = topTypes[Math.floor(Math.random() * topTypes.length)]
+  resultImage.value = resultImageMap[finalType] || ''
+  showResult.value = true
+}
 </script>
-  
+
 <style scoped>
 .v-main {
   padding: 0 !important;
@@ -270,11 +267,61 @@ watch(currentQuestion, (newValue) => {
 }
 
 .main-container {
-  background: linear-gradient(to bottom, #ffffff, #b1dcf9);
-  height: 100vh;
+  background-image: url('@/assets/questions/background.png');
+  background-size: cover;        /* 確保圖片填滿整個容器 */
+  background-repeat: no-repeat;  /* 不要重複 */
+  background-position: center;   /* 圖片置中 */
+  height: 100vh;                 /* 改成 100vh 填滿整個視窗高度 */
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.question-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* 讓它在最底層 */
+}
+
+.start-screen,
+.question-container,
+.result-image-wrapper {
+  position: relative; /* 🔸 確保內容不會被背景圖蓋住 */
+  z-index: 1;
+  padding: 2rem;
+  color: white;
+}
+
+.start-screen {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+}
+
+.start-button {
+  padding: 1em 2em;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #444;
+  color: #fff;
+  cursor: pointer;
+}
+
+.start-btn-image {
+  width: 200px; /* 可自行調整按鈕圖的寬度 */
+  height: auto;
 }
 
 /* 讓 v-container 撐滿 */
@@ -285,6 +332,60 @@ watch(currentQuestion, (newValue) => {
   width: 100%;
   height: 100%;
 }
+
+.question-section {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.option-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0.8rem 0;
+  height: 100%;
+}
+
+.option-container{
+  height: 100hv;
+padding-top: 125%;
+}
+
+.option-button {
+  position: relative;
+  background-image: url('@/assets/questions/choose.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  width: 100%;               /* 再縮小一點 */
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.option-text {
+  position: absolute;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  padding: 0 1rem;
+  pointer-events: none;        /* 避免文字阻擋點擊 */
+  line-height: 1.4;
+}
+
+.option-image {
+  width: 100%;       /* 填滿容器寬度 */
+  height: 100%;      /* 填滿容器高度 */
+  object-fit: fill;  /* 強制圖片填滿，可能會變形 */
+}
+
 
 /* 主要框架 */
 .quiz-container {
@@ -306,68 +407,43 @@ watch(currentQuestion, (newValue) => {
   margin-top: 20%;
 }
 
-.intro-box {
-  text-align: center;
-  padding: 20px;
-  padding-top: 20%;
-}
-
-.intro-text {
-  font-size: 18px;
-  margin-bottom: 20px;
-  color:#001ded;
-  font-weight: bold;
-}
-
-.start-btn {
-  font-size: 18px;
-  background-color: #001ded;
-  color: white;
-}
-
-/* 標題靠左 */
-.question-text {
-  font-size: 18px;
-  font-weight: bold;
-  text-align: left;
-  margin-bottom: 10px;
-  color: #001ded;
-}
-
-/* 選項置中 */
-.options {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-/* 按鈕樣式 */
-.answer-btn {
-  background-color: #001ded;
-  color: white;
-  border: none;
-  padding: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
-  transition: background-color 0.3s;
-}
-
-.answer-btn:hover {
-  background-color: #0044cc;
-}
-
 /* 結果畫面 */
-.result {
+.result-image-wrapper {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.result-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: -5% auto 0; /* 使圖片初始大約在畫面中間 */
+}
+
+.share-instagram {
   text-align: center;
-  font-size: 20px;
+  margin-top: 1rem;
+}
+
+.share-instagram a {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #4F4F4F;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
   font-weight: bold;
-  margin-top: 50px;
-  color: #001ded;
+  display: inline-block;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.share-instagram a:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 </style>
+
   
