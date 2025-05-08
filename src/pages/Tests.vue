@@ -114,7 +114,7 @@ const questions = ref([
     image: 'q4.jpg',
     options: [
       { text: "冷靜觀察並分析損壞狀況，迅速想出補救方法。", type: 5 },
-      { text: "立刻尋找夥伴們，一起合作修補破損，確保安全", type: 6 },
+      { text: "立刻尋找夥伴們，一起合作修補破損，確保安全。", type: 6 },
       { text: "觀察變化後，相信憑直覺能找到突破點。", type: 4 },
       { text: "毫不遲疑衝上前，立刻動手壓制水流！", type: 1 },
     ],
@@ -302,7 +302,7 @@ function calculateResult() {
 
 .start-screen {
   position: absolute;
-  top: 65%;
+  top: 66%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
@@ -345,7 +345,7 @@ function calculateResult() {
 .option-wrapper {
   display: flex;
   justify-content: center;
-  margin: 0.8rem 0;
+  margin: 0.7rem 0;
   height: 100%;
 }
 
@@ -361,8 +361,8 @@ padding-top: 125%;
   background-repeat: no-repeat;
   background-position: center;
   border: none;
-  width: 100%;               /* 再縮小一點 */
-  height: 60px;
+  width: 120%;               /* 再縮小一點 */
+  height: 54px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -396,16 +396,6 @@ padding-top: 125%;
   max-width: 600px;
 }
 
-/* 題目 & 選項部分，修正黑邊問題 */
-.question-box {
-  background-color: white;
-  border-radius: 15px;
-  padding: 20px;
-  width: 100%;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* 防止邊角問題 */
-  margin-top: 20%;
-}
 
 /* 結果畫面 */
 .result-image-wrapper {
